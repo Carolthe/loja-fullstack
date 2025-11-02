@@ -8,16 +8,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ✅ Rota de teste do banco de dados
+// Rota de teste do banco de dados
 app.get('/api/testdb', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT NOW() AS data_atual');
     res.json({
-      status: '✅ Conectado ao banco de dados com sucesso!',
+      status: 'Conectado ao banco de dados com sucesso!',
       data_atual: rows[0].data_atual
     });
   } catch (error) {
-    console.error('❌ Erro ao conectar ao banco:', error);
+    console.error('Erro ao conectar ao banco:', error);
     res.status(500).json({
       erro: 'Erro ao conectar ao banco de dados',
       detalhes: error.message
