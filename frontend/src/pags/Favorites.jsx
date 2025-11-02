@@ -1,8 +1,8 @@
 import ProductCard from "../components/ProductCard.jsx";
-import Credibility from "../components/Crediblility";
-import Footer from "../components/Footer";
-import ScrollToTop from "../components/ScrollToTop";
-import ViewProducts from "../components/ViewProducts";
+import Credibility from "../components/Crediblility.jsx";
+import Footer from "../components/Footer.jsx";
+import ScrollToTop from "../components/ScrollToTop.jsx";
+import ViewProducts from "../components/ViewProducts.jsx";
 import api from '../services/api.js'
 import { useState } from "react";
 import { useEffect } from "react";
