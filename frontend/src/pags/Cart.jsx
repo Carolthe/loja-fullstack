@@ -5,15 +5,32 @@ import ScrollToTop from "../components/ScrollToTop";
 import ViewProducts from "../components/ViewProducts";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartProvider";
-
+import { useEffect, useState } from "react";
+import api from "../services/api";
 
 export default function Cart() {
   
-  const { cartItems, removeFromCart, clearCart } = useCart();
+  const [carrinho, setCarrinho] = useState([]);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * (item.quantity || 1), 0
-  )
+  useEffect(()=>{
+    async function carregarCarrinho () {
+      if(!usuario) return
+      try {
+        const res = await api.get(`/carrinho/${usuario.id_usuario}`)
+        setCarrinho(res.data)
+      }catch (error){
+        console.error(error)
+      }
+    }
+    carregarCarrinho()
+  }, [usuario])
+
+  // const { cartItems, removeFromCart, clearCart } = useCart();
+
+  // const total = cartItems.reduce(
+  //   (sum, item) => sum + item.price * (item.quantity || 1), 0
+  // )
 
     return (
     <div className="mt-[30px] ">
@@ -24,8 +41,12 @@ export default function Cart() {
         <p>TOTAL <span>(25.0)</span> </p>
       </div>
       <hr />
-      {cartItems.map(product => (
+      {carrinho.length === 0 ? (
+        <p>Seu carrinho está vazio</p>
+      ) : (
+        carrinho.map((product => (
         <CartCard key={product.id} product={product} removeFromCart={removeFromCart} />
+        ))
       ))}
       <hr />
       <div className="flex flex-col items-center mt-[30px]">

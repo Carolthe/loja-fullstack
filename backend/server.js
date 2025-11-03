@@ -28,10 +28,12 @@ app.get('/api/testdb', async (req, res) => {
 const produtosRoutes = require('./routes/produtos')
 const favoritosRoutes = require('./routes/favoritos')
 const userRoutes = require('./routes/users')
+const carrinhoRoutes = require('./routes/carrinho');
 
 app.use('/api/produtos', produtosRoutes)
 app.use('/api/favoritos', favoritosRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/carrinho', carrinhoRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

@@ -8,7 +8,7 @@ export default function ProductCart({ imgProduct, title, price, evaluation, id }
   const {addToCart} = useCart();
 
 
-  async function  handleFavoritar() {
+  async function handleFavoritar() {
     try {
       await api.post('/favoritos', {
         id_usuario, id_produto
@@ -20,7 +20,24 @@ export default function ProductCart({ imgProduct, title, price, evaluation, id }
     }
   }
 
+  async function adicionarCarrinho() {
+    if(!usuario){
+      alert("Faça login para adicionar produtos ao carrinho")
+      return
+    }
 
+    try{
+      await api.post("/carrinho",{
+        id_usuario: usuario.id_usuario,
+        id_produto,
+        quantidade: 1
+      })
+      alert("Produto adicionado ao carrinho!")
+    } catch (error){
+      console.error(error)
+      alert("Erro ao adicionar produto ao carrinho")
+    }
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
@@ -48,7 +65,7 @@ export default function ProductCart({ imgProduct, title, price, evaluation, id }
           </div>
         </div>
         <button className="mt-[5px] w-full bg-greenMain text-white py-2 rounded-lg transition"
-        onClick={() => addToCart({id, title, price, imgProduct, evaluation})} >
+        onClick={adicionarCarrinho} >
           Add to cart
         </button>
       </div>
