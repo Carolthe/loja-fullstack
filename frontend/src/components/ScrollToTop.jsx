@@ -32,9 +32,7 @@ export default function ScrollToTop() {
           className="
             fixed bottom-6 right-6 z-50
             bg-white text-greenMain p-[10px] rounded-full shadow-lg
-            hover:bg-[#e4e3e3] transition
-          "
-        >
+            hover:bg-[#e4e3e3] transition">
           <FaArrowUp />
         </button>
       )}

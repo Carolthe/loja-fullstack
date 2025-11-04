@@ -21,12 +21,16 @@ export default function Home() {
                 <h3 className="mt-[30px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">Featured Products</h3>
                 <p className=" w-[310px] text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">Buy our best-selling products and be assured of qualuty!</p>
             </div>
-            <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
+            {/* <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
                 {products.map(product => (
-                    <ProductCard key={product.id} id={product.id} imgProduct={product.imgProduct}
-                     title={product.title} price={product.price} evaluation={product.evaluation} />
+                    <ProductCard 
+                    key={product.id} 
+                    id={product.id} 
+                    imgProduct={product.imgProduct}
+                    title={product.title} 
+                    price={product.price} />
                 ))}
-            </div>
+            </div> */}
             <div className="flex justify-center my-[40px]">
                 <button className="border-[1px] font-medium bg-orangeMain text-white rounded-[10px] w-[110px] h-[45px]">Show More</button>
             </div>

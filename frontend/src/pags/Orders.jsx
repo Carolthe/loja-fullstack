@@ -8,13 +8,13 @@ import ViewProducts from "../components/ViewProducts";
 export default function Orders() {
   return (
     <div className="mt-[30px]">
-      <ViewProducts/>
+      <ViewProducts />
       <p className="text-center font-semibold text-[22px] mt-[30px]">My Purchases</p>
-      <CardOrders/>
-      <CardOrders/>
-      <Credibility/>
-      <ScrollToTop/>
-      <Footer/>
+      <CardOrders />
+      <CardOrders />
+      <Credibility />
+      <ScrollToTop />
+      <Footer />
     </div>
   )
 }

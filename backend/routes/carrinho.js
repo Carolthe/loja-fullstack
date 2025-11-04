@@ -53,4 +53,24 @@ router.get('/:id_usuario', async (req, res) => {
   }
 });
 
+//Remover produto do carrinho
+router.delete('/:id_usuario/:id_produto', async(req, res)=> {
+  const {id_usuario, id_produto} = req.params
+
+  try{
+    const [result] = await pool.query(
+      'DELETE FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
+      [id_usuario, id_produto]
+    )
+
+  if (result.affectedRows === 0){
+    return res.status(404).json({error: 'Produto não encontrado no carrinho'})
+  }
+  res.json({message: 'Produto removido do carrinho com sucesso'})
+    } catch (error){
+      console.error('Erro ao remover produto:', error)
+      res.status(500).json({error: 'Erro ao remover produto do carrinho'})
+    }
+})
+
 module.exports = router;

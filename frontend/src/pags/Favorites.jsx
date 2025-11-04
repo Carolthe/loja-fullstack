@@ -4,8 +4,8 @@ import Footer from "../components/Footer.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import ViewProducts from "../components/ViewProducts.jsx";
 import api from '../services/api.js'
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+
 
 export default function Favorites() {
   const [favoritos, setFavoritos] = useState([])
@@ -35,13 +35,13 @@ export default function Favorites() {
           <div className="mt-[20px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
             {favoritos.map((produto) => (
               <ProductCard
-              key={produto.id_produto}
-              id_produto={produto.id_produto}
-              nome={produto.nome}
-              preco={produto.preco}
-              imagem={produto.imagem}
-              id_usuario={id_usuario}
-               />
+                key={produto.id_produto}
+                id_produto={produto.id_produto}
+                nome={produto.nome}
+                preco={produto.preco}
+                imagem={produto.imagem}
+                id_usuario={id_usuario}
+              />
             ))}
           </div>
         )}

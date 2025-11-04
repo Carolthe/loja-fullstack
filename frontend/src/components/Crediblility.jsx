@@ -3,25 +3,25 @@ import { LiaLockSolid, LiaHeadsetSolid, LiaMedalSolid } from "react-icons/lia";
 
 export default function Credibility() {
   const items = [
-    { 
-      icon: <LiaShippingFastSolid className="text-[25px]" />, 
-      title: "Fast Delivery", 
-      desc: "Fast delivery throughout the continent" 
+    {
+      icon: <LiaShippingFastSolid className="text-[25px]" />,
+      title: "Fast Delivery",
+      desc: "Fast delivery throughout the continent"
     },
-    { 
-      icon: <LiaLockSolid className="text-[25px]" />, 
-      title: "Pagamento Seguro", 
-      desc: "100% secure transactions" 
+    {
+      icon: <LiaLockSolid className="text-[25px]" />,
+      title: "Pagamento Seguro",
+      desc: "100% secure transactions"
     },
-    { 
-      icon: <LiaHeadsetSolid className="text-[25px]" />, 
-      title: "24/7 support", 
-      desc: "Customer service always available" 
+    {
+      icon: <LiaHeadsetSolid className="text-[25px]" />,
+      title: "24/7 support",
+      desc: "Customer service always available"
     },
-    { 
-      icon: <LiaMedalSolid className="text-[25px]" />, 
-      title: "Guaranteed quality", 
-      desc: "Quality products" 
+    {
+      icon: <LiaMedalSolid className="text-[25px]" />,
+      title: "Guaranteed quality",
+      desc: "Quality products"
     },
   ];
 
@@ -41,7 +41,7 @@ export default function Credibility() {
           <div
             className=" "
           />
-          
+
           {items.map((it, idx) => (
             <div
               key={idx}
@@ -61,9 +61,8 @@ export default function Credibility() {
                 {items.map((_, j) => (
                   <span
                     key={j}
-                    className={`rounded-full w-[5px] h-[5px] ${
-                      j === idx ? "bg-slate-400" : "bg-slate-200"
-                    }`}
+                    className={`rounded-full w-[5px] h-[5px] ${j === idx ? "bg-slate-400" : "bg-slate-200"
+                      }`}
                   />
                 ))}
               </div>

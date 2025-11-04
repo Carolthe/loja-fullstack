@@ -3,9 +3,8 @@ import Credibility from "../components/Crediblility";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import { FiSearch } from "react-icons/fi";
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
 import api from '../services/api';
-
 
 export default function AllProducts() {
   const [produtos, setProdutos] = useState([])
@@ -21,8 +20,6 @@ export default function AllProducts() {
     }
     carregarProdutos()
   }, []);
-
-  
 
   return (
     <div>

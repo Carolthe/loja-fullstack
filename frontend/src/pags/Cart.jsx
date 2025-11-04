@@ -4,25 +4,26 @@ import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import ViewProducts from "../components/ViewProducts";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartProvider";
+//import { useCart } from "../context/CartProvider";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
 export default function Cart() {
-  
+
   const [carrinho, setCarrinho] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  useEffect(()=>{
-    async function carregarCarrinho () {
-      if(!usuario) return
-      try {
-        const res = await api.get(`/carrinho/${usuario.id_usuario}`)
-        setCarrinho(res.data)
-      }catch (error){
-        console.error(error)
-      }
+  async function carregarCarrinho() {
+    if (!usuario) return
+    try {
+      const res = await api.get(`/carrinho/${usuario.id_usuario}`)
+      setCarrinho(res.data)
+    } catch (error) {
+      console.error(error)
     }
+  }
+
+  useEffect(() => {
     carregarCarrinho()
   }, [usuario])
 
@@ -32,7 +33,7 @@ export default function Cart() {
   //   (sum, item) => sum + item.price * (item.quantity || 1), 0
   // )
 
-    return (
+  return (
     <div className="mt-[30px] ">
       <ViewProducts />
       <p className="text-[23px] text-center font-semibold">Your Products</p>
@@ -45,9 +46,10 @@ export default function Cart() {
         <p>Seu carrinho está vazio</p>
       ) : (
         carrinho.map((product => (
-        <CartCard key={product.id} product={product} removeFromCart={removeFromCart} />
+          <CartCard key={product.id} product={product} removeFromCart={removeFromCart}
+            atualizarCarrinho={carregarCarrinho} />
         ))
-      ))}
+        ))}
       <hr />
       <div className="flex flex-col items-center mt-[30px]">
         <p className="mb-[20px] font-semibold">Total:<span className="text-fontGray ml-[20px]">{total} $</span></p>
@@ -55,7 +57,7 @@ export default function Cart() {
           <button className="w-[310px] h-[50px] text-white bg-highlightGreen">Complete Checkout</button>
         </Link>
         <button className="w-[310px] h-[50px] text-white bg-highlightGreen"
-        onClick={clearCart}>Limpar o Carrinho</button>
+          onClick={clearCart}>Limpar o Carrinho</button>
       </div>
       <Credibility />
       <ScrollToTop />

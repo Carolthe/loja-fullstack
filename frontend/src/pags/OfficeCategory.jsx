@@ -8,8 +8,8 @@ export default function OfficeCategory() {
         <div className="mt-[50px]">
             <img src="" />
             <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
-                <ProductCard  />
-                <ProductCard  />
+                <ProductCard />
+                <ProductCard />
             </div>
             <Credibility />
             <ScrollToTop />

@@ -1,7 +1,7 @@
-export default function FooterDesktop (){
-    return(
+export default function FooterDesktop() {
+    return (
         <div>
-            
+
         </div>
     )
 }
