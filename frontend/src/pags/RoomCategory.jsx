@@ -4,6 +4,8 @@ import Footer from "../components/Footer.jsx"
 import ScrollToTop from "../components/ScrollToTop.jsx"
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import CategoryDescription from "../components/CategoryDescription.jsx";
+import roomLogo from "../logoCategory/roomLogo.jpeg"
 
 export default function RoomCategory() {
     const [produtos, setProdutos] = useState([])
@@ -21,8 +23,8 @@ export default function RoomCategory() {
     }, [])
 
     return (
-        <div className="mt-[50px]">
-            <img src="" />
+        <div className="">
+            <CategoryDescription img={roomLogo} />
 
             {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>

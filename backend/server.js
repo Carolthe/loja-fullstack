@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const pool = require('./models/db'); // Importa o banco
-
 const app = express();
 
 app.use(cors());

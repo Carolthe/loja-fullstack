@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+
 router.get('/', async (req, res)=>{
     try{
         const [rows] = await pool.query('SELECT * FROM produtos ativo = 1')
@@ -6,3 +9,5 @@ router.get('/', async (req, res)=>{
         res.status(500).json({ error: 'Erro ao buscar produtos'})
     }
 })
+
+module.exports = router;
