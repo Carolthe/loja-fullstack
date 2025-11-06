@@ -12,7 +12,7 @@ export default function AllProducts() {
   useEffect(() => {
     async function carregarProdutos() {
       try {
-        const res = await api.get('/produtos')
+        const res = await api.get("http://localhost:3000/api/produtos")
         setProdutos(res.data)
       } catch (error) {
         console.error('Erro ao carregar produtos:', error)
@@ -25,7 +25,7 @@ export default function AllProducts() {
     <div>
       <div className="bg-greenMain w-full h-[75px] flex justify-center items-center">
         <div className="flex items-center justify-between px-[10px] w-[300px]  h-[42px] rounded-[20px] bg-white">
-          <input className="w-full border-none " placeholder="What are you looking for?" />
+          <input className="w-full border-none text-sm " placeholder="What are you looking for?" />
           <FiSearch className="text-greenMain" />
         </div>
       </div>
@@ -44,8 +44,11 @@ export default function AllProducts() {
         <div className="mt-[20px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
           {produtos.map((produto) => (
             <ProductCard
-              key={product.id_produto} id={product.id} imgProduct={product.imgProduct}
-              title={product.title} price={product.price} />
+              key={produto.id_produto}
+              id={produto.id_produto} 
+              imgProduct={produto.imagem}
+              title={produto.nome} 
+              price={parseFloat(produto.preco)}/>
           ))}
         </div>
       )}
