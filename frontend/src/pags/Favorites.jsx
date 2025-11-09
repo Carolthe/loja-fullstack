@@ -6,7 +6,6 @@ import ViewProducts from "../components/ViewProducts.jsx";
 import api from '../services/api.js'
 import { useState, useEffect } from "react";
 
-
 export default function Favorites() {
   const [favoritos, setFavoritos] = useState([])
   const id_usuario = 1

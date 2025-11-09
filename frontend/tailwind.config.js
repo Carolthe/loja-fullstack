@@ -11,6 +11,7 @@ export default {
         orangeMain: '#e36c14',
         highlightGreen: '#3cac8c',
         fontGray: '#6B7280',
+        azulEscuro: '#003F62'
       },
     },
   },

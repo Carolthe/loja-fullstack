@@ -13,13 +13,13 @@ export default function Footer() {
         <>
             <div className="bg-orangeMain text-white leading-[30px]">
                 <div className="flex flex-col items-center pt-[30px]">
-                    <div className="flex items-center ">
-                        <LiaHomeSolid className="text-[22px] ml-[3px] " />
-                        <p className=" font-semibold text-[120%] md:text-[22px]">Homehaven </p>
+                    <div className="flex items-center gap-[3px]">
+                        <LiaHomeSolid className="text-[18px] " />
+                        <p className="text-[15px] md:text-[22px]">HOMEHAVEN</p>
                     </div>
                     <p className=" font-semibold md:text-[17px]">Contact us:</p>
-                    <p className="flex items-center md:text-[15px]"><BsTelephone className="mr-[4px] text-[18px]" />+351 937 628 516</p>
-                    <p className="flex items-center md:text-[15px]"><AiOutlineMail className="mr-[4px] text-[18px]" />homehaven1998@gmail.com</p>
+                    <p className="flex items-center md:text-[15px]"><BsTelephone className="mr-[4px] text-[17px]" />+351 937 628 516</p>
+                    <p className="flex items-center md:text-[15px]"><AiOutlineMail className="mr-[4px] text-[17px]" />homehaven1998@gmail.com</p>
                 </div>
                 <div className="flex justify-around  mt-[20px] md:text-[17px] md:justify-center md:gap-[10%] md:my-[70px]">
                     <a href="#">Home</a>

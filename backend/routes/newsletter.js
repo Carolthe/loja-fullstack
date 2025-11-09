@@ -6,15 +6,18 @@ const pool = require('../models/db')
 router.post('/', async (req, res) => {
     const {nome, email} = req.body
 
-    if (!nome || email) {
+    if (!nome || !email) {
         return res.status(400).json({error: 'Nome e email são obrigatórios'})
     }
 
     try{
 //Verifica se o email já está cadastrado
+
+        const emailLower = email.toLowerCase()
+
         const [existing] = await pool.query(
             'SELECT * FROM newsletter WHERE email = ?',
-            [email]
+            [emailLower]
         )
         if (existing.length > 0) {
             return res.status(400).json({error: 'Email já inscrito na newsletter'})
@@ -22,7 +25,7 @@ router.post('/', async (req, res) => {
 //Insere na base de dados
         await pool.query(
             'INSERT INTO newsletter (nome, email) VALUES (?, ?)',
-            [nome, email]
+            [nome, emailLower]
         )
         res.status(201).json({ message: 'Inscrição realizada com sucesso!'})
     } catch (error){

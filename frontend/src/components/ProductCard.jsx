@@ -47,7 +47,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
         </div>
 
         <button
-          className="mt-[5px] w-full bg-greenMain text-white py-2 rounded-lg transition"
+          className="mt-[5px] w-full bg-azulEscuro text-white py-2 rounded-lg transition"
           onClick={adicionarCarrinho}
         >
           Add to cart

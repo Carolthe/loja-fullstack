@@ -7,6 +7,7 @@ export default function Newsletter() {
 
     async function handleSubmit(e) {
         e.preventDefault()
+        console.log("Handle submit chamado!", { nome, email }); // 👈
 
         if (!nome || !email) {
             alert("Preencha todos os campos")

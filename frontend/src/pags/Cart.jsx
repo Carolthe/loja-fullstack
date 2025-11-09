@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import ViewProducts from "../components/ViewProducts";
 import { Link } from "react-router-dom";
-//import { useCart } from "../context/CartProvider";
+import { useCart } from "../context/CartProvider";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
@@ -27,11 +27,11 @@ export default function Cart() {
     carregarCarrinho()
   }, [usuario])
 
-  // const { cartItems, removeFromCart, clearCart } = useCart();
+  const { cartItems, removeFromCart, clearCart } = useCart();
 
-  // const total = cartItems.reduce(
-  //   (sum, item) => sum + item.price * (item.quantity || 1), 0
-  // )
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1), 0
+  )
 
   return (
     <div className="mt-[30px] ">

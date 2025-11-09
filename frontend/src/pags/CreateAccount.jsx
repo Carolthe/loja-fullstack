@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { useState } from "react";
 import api from "../services/api";
+import { SlArrowLeft } from "react-icons/sl";
 
 export default function CreateAccount() {
   const [nome, setNome] = useState("")
@@ -29,10 +30,13 @@ export default function CreateAccount() {
   return (
     <div>
       <div>
-        <div className="relative bg-greenMain h-[100px] flex flex-col text-center text-white">
-          <div className="absolute bottom-0 left-0 w-full h-[45px] bg-white rounded-tl-[120px]"></div>
+        <div className="relative bg-greenMain h-[160px] flex flex-col text-center text-white">
+          <div className="absolute bottom-0 left-0 w-full h-[45px] bg-white rounded-t-[120px]"></div>
           <div className="relative z-10">
-            <Link to="/login" className="absolute mt-[15px] left-4 text-2xl hover:text-gray-400">←</Link>
+            <Link to="/login" className="absolute mt-[15px] left-4 text-2xl hover:text-gray-400">
+            <SlArrowLeft className="text-[20px]"/>
+            </Link>
+            <p className="mt-[60px]">Crie sua Conta</p>
             <div className="flex justify-center ">
             </div>
           </div>

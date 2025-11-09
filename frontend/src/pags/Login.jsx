@@ -27,10 +27,10 @@ export default function Login() {
     return (
         <div className="h-[100vh]">
             <div>
-                <div className="relative bg-greenMain h-[200px] flex flex-col items-center justify-center text-center">
-                    <div className="absolute bottom-0 left-0 w-full h-[50px] bg-white rounded-tl-[120px]"></div>
+                <div className="relative bg-greenMain h-[210px] flex flex-col items-center justify-center text-center">
+                    <div className="absolute bottom-0 left-0 w-full h-[50px] bg-white rounded-t-[100px]"></div>
                     <div className="relative z-10 flex flex-col items-center justify-center">
-                        <img className="w-[200px] mb-[45px]" src={logotipo} alt="logo" />
+                        <img className="w-[170px] mb-[60px]" src={logotipo} alt="logo" />
                     </div>
                 </div>
                 <form className="flex flex-col items-center pb-6"

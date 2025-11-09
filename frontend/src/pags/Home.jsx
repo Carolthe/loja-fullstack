@@ -7,7 +7,6 @@ import Credibility from "../components/Crediblility";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Newsletter from "../components/Newsletter";
-
 import homeMobile from "../imgMobile/homeMobile.png";
 import categoryLivingRoom from "../imgCategory/categoryLivingRoom.png";
 import livingRoomCategory from "../imgCategory/livingRoomCategory.png";
@@ -17,6 +16,7 @@ import officeCategory from "../imgCategory/officeCategory.png";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
+  
 
   useEffect(() => {
     async function carregarProdutos() {
@@ -55,7 +55,7 @@ export default function Home() {
               id={produto.id_produto}
               imgProduct={produto.imagem}
               title={produto.nome}
-              price={parseFloat(produto.preco)} 
+              price={parseFloat(produto.preco)}
             />
           ))
         )}
