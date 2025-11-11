@@ -88,7 +88,6 @@ export default function Home() {
           <CategoryCard imgCategory={officeCategory} tituloCategory="Office" />
         </Link>
       </div>
-
       <Credibility />
       <Newsletter />
       <ScrollToTop />
