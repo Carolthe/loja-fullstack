@@ -37,14 +37,16 @@ export default function Login() {
                     onSubmit={handleLogin}>
                     <div className="mt-[35px]">
                         <label className="font-semibold">Your E-mail</label>
-                        <Input />
+                        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="mt-[20px]">
                         <label className="font-semibold">Your Password</label>
-                        <Input />
+                        <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
                     <button className="w-[300px] h-[45px] mt-[25px] bg-orangeMain text-white text-[19px] rounded-md">Login</button>
+                    <Link to="/password-recovery">
                     <p className="mt-[15px] text-fontGray">Recover the Password</p>
+                    </Link>
                     <div className="mt-[150px] mb-6">
                         <Link to="/createAccount">
                             <p>Don't have an account?{" "}<span className="text-greenMain font-semibold">Sign up</span></p>

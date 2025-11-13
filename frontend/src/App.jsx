@@ -16,6 +16,7 @@ import LivingRoomCategory from './pags/LivingRoomCategory'
 import KitchenCategory from './pags/KitchenCategory'
 import BathroomCategory from './pags/BathroomCategory'
 import OfficeCategory from './pags/OfficeCategory'
+import PasswordRecovery from './pags/PasswordRecovery'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path='/bathroomCategory' element={<BathroomCategory />} />
           <Route path='/officeCategory' element={<OfficeCategory />} />
           <Route path='/productsDetails' element={<ProductsDetails />} />
+          <Route path='/password-recovery' element={<PasswordRecovery />} />
         </Routes>
       </div>
     </Router>

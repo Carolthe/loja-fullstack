@@ -4,13 +4,11 @@ import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import ViewProducts from "../components/ViewProducts";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartProvider";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
 
 export default function Cart() {
-
   const [carrinho, setCarrinho] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -28,11 +26,21 @@ export default function Cart() {
     carregarCarrinho()
   }, [usuario])
 
-  const { cartItems, removeFromCart, clearCart } = useCart();
+const total = carrinho.reduce((sum, item) => sum + item.preco * item.quantidade, 0);
 
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * (item.quantity || 1), 0
-  )
+async function limparCarrinho() {
+  if (!usuario) return alert("Faça login para limpar o carrinho");
+
+  try {
+    await api.delete(`/carrinho/${usuario.id_usuario}`); // Crie uma rota DELETE no backend para limpar todos
+    setCarrinho([]);
+    alert("Carrinho limpo com sucesso!");
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao limpar carrinho");
+  }
+}
+
 
   return (
     <div className="mt-[30px] ">
@@ -47,8 +55,11 @@ export default function Cart() {
         <p>Seu carrinho está vazio</p>
       ) : (
         carrinho.map((product => (
-          <CartCard key={product.id} product={product} removeFromCart={removeFromCart}
-            atualizarCarrinho={carregarCarrinho} />
+          <CartCard
+            key={product.id_produto}
+            product={product}
+            atualizarCarrinho={carregarCarrinho}
+          />
         ))
         ))}
       <hr />
@@ -58,7 +69,7 @@ export default function Cart() {
           <button className="w-[310px] h-[50px] text-white bg-highlightGreen">Complete Checkout</button>
         </Link>
         <button className="w-[310px] h-[50px] text-white bg-highlightGreen"
-          onClick={clearCart}>Limpar o Carrinho</button>
+          onClick={limparCarrinho}>Limpar o Carrinho</button>
       </div>
       <Credibility />
       <ScrollToTop />

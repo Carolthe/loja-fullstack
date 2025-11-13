@@ -1,22 +1,60 @@
 import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import api from "../services/api";
 
 export default function ProductCard({ id, imgProduct, title, price }) {
   const navigate = useNavigate();
+  const [isFavorited, setIsFavorited] = useState(false);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  // ❤️ Favoritar produto (ainda sem autenticação)
+  // 🔹 Verifica se o produto já está nos favoritos
+  useEffect(() => {
+    async function checkFavorito() {
+      if (!usuario) return;
+      try {
+        const res = await api.get(`/favoritos/${usuario.id_usuario}`);
+        const jaFavoritado = res.data.some(
+          (produto) => produto.id_produto === id
+        );
+        setIsFavorited(jaFavoritado);
+      } catch (error) {
+        console.error("Erro ao verificar favoritos:", error);
+      }
+    }
+    checkFavorito();
+  }, [usuario, id]);
+
+  // ❤️ Alterna o estado do favorito
   async function handleFavoritar() {
-    alert(`${title} foi adicionado aos favoritos!`);
-    // Quando tiver autenticação:
-    // await api.post('/favoritos', { id_usuario, id_produto: id });
+    if (!usuario) {
+      alert("Você precisa estar logado para favoritar produtos!");
+      return navigate("/login");
+    }
+
+    try {
+      if (isFavorited) {
+        // Remover dos favoritos
+        await api.delete(`/favoritos/${usuario.id_usuario}/${id}`);
+        setIsFavorited(false);
+      } else {
+        // Adicionar aos favoritos
+        await api.post("/favoritos", {
+          id_usuario: usuario.id_usuario,
+          id_produto: id,
+        });
+        setIsFavorited(true);
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar favorito:", error);
+      alert("Erro ao atualizar favorito.");
+    }
   }
 
-  // 🛒 Adicionar produto ao carrinho e redirecionar
+  // 🛒 Adicionar ao carrinho
   async function adicionarCarrinho() {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
-
     if (!usuario) {
       alert("Você precisa estar logado para adicionar produtos ao carrinho!");
       return navigate("/login");
@@ -26,38 +64,46 @@ export default function ProductCard({ id, imgProduct, title, price }) {
       await api.post("/carrinho", {
         id_usuario: usuario.id_usuario,
         id_produto: id,
-        quantidade: 1
+        quantidade: 1,
       });
 
-      // ✅ Mensagem + redirecionamento
       alert(`"${title}" foi adicionado ao carrinho!`);
-      navigate("/cart");
+      setTimeout(() => navigate("/carrinho"), 400);
     } catch (error) {
       console.error("Erro ao adicionar produto ao carrinho:", error);
-      alert("Erro ao adicionar produto ao carrinho.");
+      alert(error.response?.data?.error || "Erro ao adicionar produto ao carrinho.");
     }
   }
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
       <div className="relative">
-        <Link to={`/productsDetails/${id}`}>
+        <Link to="/productsDetails">
           <img
             className="w-full h-[180px] object-cover rounded-t-2xl md:h-[280px]"
             src={imgProduct}
             alt={title}
           />
         </Link>
+
+        {/* ❤️ Botão de favoritos */}
         <button
           className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-100 transition"
           onClick={handleFavoritar}
         >
-          <CiHeart className="text-red-500 text-xl" />
+          {isFavorited ? (
+            <FaHeart className="text-red-500 text-xl" />
+          ) : (
+            <CiHeart className="text-red-500 text-xl" />
+          )}
         </button>
       </div>
+
       <div className="pt-[5px] flex flex-col md:pt-[10px]">
         <h2 className="pl-[5px] text-lg font-semibold text-gray-800">{title}</h2>
-        <p className="pl-[5px] text-fontGray text-sm">Breve descrição do produto</p>
+        <p className="pl-[5px] text-fontGray text-sm">
+          Breve descrição do produto
+        </p>
 
         <div className="flex justify-between items-center px-[5px] md:py-[8px]">
           <p className="text-lg font-bold text-gray-900">
@@ -68,6 +114,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
             <p className="text-sm text-fontGray">4.8</p>
           </div>
         </div>
+
         <button
           className="mt-[5px] w-full bg-greenMain text-white py-2 rounded-lg transition hover:bg-green-600"
           onClick={adicionarCarrinho}

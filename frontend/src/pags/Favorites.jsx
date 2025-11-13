@@ -3,43 +3,49 @@ import Credibility from "../components/Crediblility.jsx";
 import Footer from "../components/Footer.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import ViewProducts from "../components/ViewProducts.jsx";
-import api from '../services/api.js'
+import api from "../services/api.js";
 import { useState, useEffect } from "react";
 
 export default function Favorites() {
-  const [favoritos, setFavoritos] = useState([])
-  const id_usuario = 1
+  const [favoritos, setFavoritos] = useState([]);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   useEffect(() => {
     async function carregarFavoritos() {
+      if (!usuario) return;
       try {
-        const res = await api.get(`/favoritos/${id_usuario}`)
-        setFavoritos(res.data)
+        const res = await api.get(`/favoritos/${usuario.id_usuario}`);
+        setFavoritos(res.data);
       } catch (error) {
-        console.error('Erro ao carregar favoritos:', error)
+        console.error("Erro ao carregar favoritos:", error);
       }
     }
-    carregarFavoritos()
-  }, [])
+    carregarFavoritos();
+  }, [usuario]);
 
   return (
     <div className="mt-[30px]">
       <ViewProducts />
       <div className="mt-[25px]">
-        <p className="text-center font-semibold text-[22px]">Your list of favourites</p>
-        <p className="text-center mx-[20px] text-fontGray" >Your time is valuable! Satisfy your desires and feel fulfilled </p>
+        <p className="text-center font-semibold text-[22px]">
+          Seus produtos favoritos ❤️
+        </p>
+        <p className="text-center mx-[20px] text-fontGray">
+          Aqui estão os produtos que você marcou como favoritos.
+        </p>
         {favoritos.length === 0 ? (
-          <p>Nenum favorito ainda.</p>
+          <p className="text-center mt-[20px] text-fontGray">
+            Nenhum favorito ainda.
+          </p>
         ) : (
           <div className="mt-[20px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
             {favoritos.map((produto) => (
               <ProductCard
                 key={produto.id_produto}
-                id_produto={produto.id_produto}
-                nome={produto.nome}
-                preco={produto.preco}
-                imagem={produto.imagem}
-                id_usuario={id_usuario}
+                id={produto.id_produto}
+                imgProduct={produto.imagem}
+                title={produto.nome}
+                price={parseFloat(produto.preco)}
               />
             ))}
           </div>
@@ -49,5 +55,5 @@ export default function Favorites() {
       <ScrollToTop />
       <Footer />
     </div>
-  )
+  );
 }
