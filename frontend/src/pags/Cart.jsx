@@ -65,7 +65,7 @@ async function limparCarrinho() {
       <hr />
       <div className="flex flex-col items-center mt-[30px]">
         <p className="mb-[20px] font-semibold">Total:<span className="text-fontGray ml-[20px]">{total} $</span></p>
-        <Link to="/pagamento" >
+        <Link to="/dadosLocalizacao" >
           <button className="w-[310px] h-[50px] text-white bg-highlightGreen">Complete Checkout</button>
         </Link>
         <button className="w-[310px] h-[50px] text-white bg-highlightGreen"

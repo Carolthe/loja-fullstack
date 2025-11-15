@@ -52,9 +52,15 @@ export default function Header() {
         <p>Contactar</p>
       </div>
       <div className="flex items-center text-[22px]">
-        <Link to="/login">
-          <LiaUserSolid />
-        </Link>
+        {usuario ? (
+          <Link to="/perfil">
+            <LiaUserSolid />
+          </Link>
+        ) : (
+          <Link to="/login">
+            <LiaUserSolid />
+          </Link>
+        )}
         <Link to="/favoritos" className="relative">
           <LiaHeart className="mr-[5px]" />
           {favCount > 0 && (

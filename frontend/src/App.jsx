@@ -17,6 +17,8 @@ import KitchenCategory from './pags/KitchenCategory'
 import BathroomCategory from './pags/BathroomCategory'
 import OfficeCategory from './pags/OfficeCategory'
 import PasswordRecovery from './pags/PasswordRecovery'
+import Perfil from './pags/Perfil'
+import Pagamento from './pags/Pagamento'
 
 function App() {
   return (
@@ -30,7 +32,7 @@ function App() {
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/pedidos" element={<Orders />} />
           <Route path="/contato" element={<Contact />} />
-          <Route path='/pagamento' element={<Payment />} />
+          <Route path='/dadosLocalizacao' element={<Payment />} />
           <Route path='/login' element={<Login />} />
           <Route path='/createAccount' element={<CreateAccount />} />
           <Route path='/roomCategory' element={<RoomCategory />} />
@@ -40,6 +42,8 @@ function App() {
           <Route path='/officeCategory' element={<OfficeCategory />} />
           <Route path='/productsDetails' element={<ProductsDetails />} />
           <Route path='/password-recovery' element={<PasswordRecovery />} />
+          <Route path='/perfil' element={<Perfil/>} />
+          <Route path='/pagamento' element={<Pagamento/>} />
         </Routes>
       </div>
     </Router>
