@@ -9,33 +9,40 @@ import roomLogo from "../logoCategory/roomLogo.jpeg"
 
 export default function RoomCategory() {
     const [produtos, setProdutos] = useState([])
+    const categoriaId = 1;
 
     useEffect(() => {
+        let isMounted = true;
+
         async function carregarProdutos() {
             try {
-                const res = await api.get("/categorias/1/produtos")
-                setProdutos(res.data)
+                const res = await api.get(`/categorias/${categoriaId}/produtos`)
+                if (isMounted) setProdutos(res.data)
             } catch (error) {
-                console.error("Erro ao carregar produtos:", error)
+                console.error(error)
             }
         }
+
         carregarProdutos()
-    }, [])
+
+        return () => { isMounted = false }
+    }, [categoriaId])
+
 
     return (
         <div className="">
             <CategoryDescription img={roomLogo} />
 
-            {produtos.length === 0 ? (
+               {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (
-                <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
+                <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (
-                        <ProductCard
+                        <ProductCard 
                             key={produto.id_produto}
                             id={produto.id_produto}
                             title={produto.nome}
-                            price={produto.preco}
+                            price={parseFloat(produto.preco)}
                             imgProduct={produto.imagem}
                         />
                     ))}

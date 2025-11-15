@@ -2,19 +2,51 @@ import ProductCard from "../components/ProductCard.jsx"
 import Credibility from "../components/Crediblility.jsx"
 import Footer from "../components/Footer.jsx"
 import ScrollToTop from "../components/ScrollToTop.jsx"
+import { useState, useEffect } from "react";
+import api from "../services/api";
+//import CategoryDescription from "../components/CategoryDescription.jsx";
+//import salaLogo from "../logoCategory/salaLogo.jpeg"
 
 export default function LivingRoomCategory() {
+    const [produtos, setProdutos] = useState([])
+    const categoriaId = 2; // Sala
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function carregarProdutos() {
+            try {
+                const res = await api.get(`/categorias/${categoriaId}/produtos`)
+                if (isMounted) setProdutos(res.data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        carregarProdutos()
+
+        return () => { isMounted = false }
+    }, [categoriaId])
+
     return (
-        <div className="mt-[50px]">
-            <img src="" />
-            <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-            </div>
+        <div className="">
+            {/* <CategoryDescription img={salaLogo} /> */}
+
+            {produtos.length === 0 ? (
+                <p>Nenhum produto encontrado.</p>
+            ) : (
+                <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
+                    {produtos.map((produto) => (
+                        <ProductCard 
+                            key={produto.id_produto}
+                            id={produto.id_produto}
+                            title={produto.nome}
+                            price={parseFloat(produto.preco)}
+                            imgProduct={produto.imagem}
+                        />
+                    ))}
+                </div>
+            )}
             <Credibility />
             <ScrollToTop />
             <Footer />
