@@ -11,8 +11,7 @@ router.post('/', async (req, res) => {
     }
 
     try{
-//Verifica se o email já está cadastrado
-
+// Verifica se o email já está cadastrado
         const emailLower = email.toLowerCase()
 
         const [existing] = await pool.query(

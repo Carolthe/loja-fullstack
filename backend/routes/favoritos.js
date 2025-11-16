@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../models/db');
 
-// ➕ Adicionar produto aos favoritos
+// Adiciona produto aos favoritos
 router.post('/', async (req, res) => {
   const { id_usuario, id_produto } = req.body;
 
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// 📋 Buscar favoritos de um usuário
+// Busca favoritos de um usuário
 router.get('/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;
 
@@ -47,7 +47,7 @@ router.get('/:id_usuario', async (req, res) => {
   }
 });
 
-// ❌ Remover produto dos favoritos via URL
+//  Remove produto dos favoritos
 router.delete('/:id_usuario/:id_produto', async (req, res) => {
   const { id_usuario, id_produto } = req.params;
 

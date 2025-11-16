@@ -7,20 +7,20 @@ router.post('/', async (req, res) => {
   const { id_usuario, id_produto, quantidade } = req.body;
 
   try {
-    // Verifica se o produto já está no carrinho
+// Verifica se o produto já está no carrinho
     const [rows] = await pool.query(
       'SELECT * FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
 
     if (rows.length > 0) {
-      // Atualiza quantidade se já existir
+// Atualiza quantidade se já existir
       await pool.query(
         'UPDATE carrinho SET quantidade = quantidade + ? WHERE id_usuario = ? AND id_produto = ?',
         [quantidade || 1, id_usuario, id_produto]
       );
     } else {
-      // Insere novo produto
+// Insere novo produto
       await pool.query(
         'INSERT INTO carrinho (id_usuario, id_produto, quantidade) VALUES (?, ?, ?)',
         [id_usuario, id_produto, quantidade || 1]
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Buscar todos os produtos do carrinho de um usuário
+// Busca todos os produtos do carrinho de um usuário
 router.get('/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;
 
@@ -53,7 +53,7 @@ router.get('/:id_usuario', async (req, res) => {
   }
 });
 
-//Remover produto do carrinho
+//Remove produto do carrinho
 router.delete('/:id_usuario/:id_produto', async(req, res)=> {
   const {id_usuario, id_produto} = req.params
 

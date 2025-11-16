@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../models/db');
 
+// Pega os produtos da base de dados e envia para o front-end
 router.get('/', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM produtos');
@@ -12,7 +13,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Rota 2 - Listar produtos ordenados por preço (crescente)
+// Lista produtos ordenados por preço do menor para o maior
 router.get('/ordenados', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM produtos ORDER BY preco ASC');

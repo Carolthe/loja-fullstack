@@ -5,7 +5,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
-  // Validação básica
+  // Validação
   if (!name || !email || !message) {
     return res.status(400).json({ message: 'Nome, email e mensagem são obrigatórios' });
   }

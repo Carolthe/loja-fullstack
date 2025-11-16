@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Solicitar link de recuperação de senha
+// Solicita link de recuperação de senha
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
@@ -47,7 +47,7 @@ router.post('/forgot-password', async (req, res) => {
         if (rows.length === 0) return res.status(200).json({ message: 'Se o e-mail existir, um link foi enviado.' });
 
         const token = crypto.randomBytes(32).toString('hex');
-const expiry = new Date(Date.now() + 3600000).toISOString().slice(0, 19).replace('T', ' ');
+        const expiry = new Date(Date.now() + 3600000).toISOString().slice(0, 19).replace('T', ' ');
 
         await pool.query('UPDATE usuarios SET reset_token = ?, reset_expires = ? WHERE email = ?', [token, expiry, email]);
 
@@ -79,7 +79,7 @@ const expiry = new Date(Date.now() + 3600000).toISOString().slice(0, 19).replace
     }
 });
 
-// Resetar senha com token
+// Reseta senha com token
 router.post('/reset-password', async (req, res) => {
     const { email, token, senha } = req.body;
     try {

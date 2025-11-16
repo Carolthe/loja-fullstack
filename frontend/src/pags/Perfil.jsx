@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Input from "../components/Input";
 
 export default function Perfil() {
   const navigate = useNavigate();
@@ -13,8 +14,7 @@ export default function Perfil() {
   return (
     <div className="p-4">
       <h1 className="text-xl">Olá, {usuario?.nome}</h1>
-      <p>Email: {usuario?.email}</p>
-
+     <h2>Atualizar localização</h2>
       <button 
         onClick={handleLogout}
         className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
