@@ -4,15 +4,21 @@ const pool = require('../models/db');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
+// -----------------------------
 // Registro de usuário
+// -----------------------------
 router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;
     try {
         const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length > 0) return res.status(400).json({ error: 'Email já cadastrado' });
+
         const senhaHash = await bcrypt.hash(senha, 10);
         await pool.query('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', [nome, email, senhaHash]);
+
         res.status(201).json({ message: 'Usuário registrado com sucesso!' });
     } catch (error) {
         console.error(error);
@@ -20,18 +26,30 @@ router.post('/register', async (req, res) => {
     }
 });
 
+// -----------------------------
 // Login de usuário
+// -----------------------------
 router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
     try {
         const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length === 0) return res.status(401).json({ error: 'Email não encontrado' });
+
         const usuario = rows[0];
         const senhaValida = await bcrypt.compare(senha, usuario.senha);
         if (!senhaValida) return res.status(401).json({ error: 'Senha incorreta' });
+
+        // Gerar token JWT
+        const token = jwt.sign(
+            { id_usuario: usuario.id_usuario, nome: usuario.nome, email: usuario.email },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
         res.json({ 
             message: 'Login realizado com sucesso!',
-            usuario: { id_usuario: usuario.id_usuario, nome: usuario.nome, email: usuario.email }
+            usuario: { id_usuario: usuario.id_usuario, nome: usuario.nome, email: usuario.email },
+            token
         });
     } catch (error) {
         console.error(error);
@@ -39,7 +57,9 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Solicita link de recuperação de senha
+// -----------------------------
+// Solicitar link de recuperação de senha
+// -----------------------------
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
@@ -72,14 +92,15 @@ router.post('/forgot-password', async (req, res) => {
         });
 
         res.json({ message: 'Se o e-mail existir, um link foi enviado.' });
-
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Erro ao processar solicitação' });
     }
 });
 
-// Reseta senha com token
+// -----------------------------
+// Resetar senha com token
+// -----------------------------
 router.post('/reset-password', async (req, res) => {
     const { email, token, senha } = req.body;
     try {
@@ -95,7 +116,6 @@ router.post('/reset-password', async (req, res) => {
         await pool.query('UPDATE usuarios SET senha = ?, reset_token = NULL, reset_expires = NULL WHERE email = ?', [senhaHash, email]);
 
         res.json({ message: 'Senha alterada com sucesso!' });
-
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Erro ao resetar senha' });
