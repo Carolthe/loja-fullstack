@@ -13,12 +13,13 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Lista produtos ordenados por preço do menor para o maior
 router.get('/ordenados', async (req, res) => {
   try {
     const [rows] = await pool.query('SELECT * FROM produtos ORDER BY preco ASC');
     res.json(rows);
-  } catch (err) {
+  } catch (error) {
     console.error('Erro ao buscar produtos ordenados:', err);
     res.status(500).json({ error: 'Erro ao buscar produtos ordenados' });
   }

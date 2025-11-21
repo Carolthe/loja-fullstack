@@ -5,7 +5,7 @@ import Newsletter from "../components/Newsletter";
 import ScrollToTop from "../components/ScrollToTop";
 import { Link } from "react-router-dom";
 
-export default function Payment() {
+export default function Localizacao() {
     return (
         < div className="mt-[0px]">
             <div className=" flex flex-col items-center">

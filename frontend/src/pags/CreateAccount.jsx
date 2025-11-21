@@ -19,7 +19,7 @@ export default function CreateAccount() {
       return
     }
     try {
-      await api.post("/users/register", { nome, email, senha })
+      await api.post("/register", { nome, email, senha })
       alert("Cadastro realizado com sucesso!")
       navigate("/login")
     } catch (error) {

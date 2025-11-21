@@ -7,7 +7,6 @@ import Cart from './pags/Cart'
 import Favorites from './pags/Favorites'
 import Orders from './pags/Orders'
 import Contact from './pags/Contact'
-import Payment from './pags/Payment'
 import ProductsDetails from './pags/ProductsDetails'
 import Login from './pags/Login'
 import CreateAccount from './pags/CreateAccount'
@@ -19,6 +18,7 @@ import OfficeCategory from './pags/OfficeCategory'
 import PasswordRecovery from './pags/PasswordRecovery'
 import Perfil from './pags/Perfil'
 import Pagamento from './pags/Pagamento'
+import Localizacao from './pags/Localizacao'
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           <Route path="/favoritos" element={<Favorites />} />
           <Route path="/pedidos" element={<Orders />} />
           <Route path="/contato" element={<Contact />} />
-          <Route path='/dadosLocalizacao' element={<Payment />} />
+          <Route path='/dadosLocalizacao' element={<Localizacao />} />
           <Route path='/login' element={<Login />} />
           <Route path='/createAccount' element={<CreateAccount />} />
           <Route path='/roomCategory' element={<RoomCategory />} />

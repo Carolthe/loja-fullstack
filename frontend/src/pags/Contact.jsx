@@ -3,6 +3,7 @@ import Credibility from "../components/Crediblility";
 import Footer from "../components/Footer";
 import Input from "../components/Input";
 import ScrollToTop from "../components/ScrollToTop";
+import api from "../services/api";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,36 +15,26 @@ export default function Contact() {
 
   const [status, setStatus] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.message) {
-      setStatus("Por favor, preencha todos os campos obrigatórios!");
-      return;
-    }
+  if (!formData.name || !formData.email || !formData.message) {
+    setStatus("Por favor, preencha todos os campos obrigatórios!");
+    return;
+  }
 
-    try {
-      const response = await fetch("http://localhost:3000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    await api.post("/contact", formData);
 
-      if (response.ok) {
-        setStatus("Mensagem enviada com sucesso!");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setStatus("Falha ao enviar a mensagem. Tente novamente.");
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus("Falha ao enviar a mensagem. Tente novamente.");
-    }
-  };
+    setStatus("Mensagem enviada com sucesso!");
+    setFormData({ name: "", email: "", subject: "", message: "" });
+
+  } catch (error) {
+    console.error(error);
+    setStatus(error.response?.data?.error || "Falha ao enviar a mensagem. Tente novamente.");
+  }
+};
+
 
   return (
     <div className="mt-[30px]">

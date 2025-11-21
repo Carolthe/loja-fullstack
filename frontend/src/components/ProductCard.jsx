@@ -10,7 +10,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
   const [isFavorited, setIsFavorited] = useState(false);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  // 🔹 Verifica se o produto já está nos favoritos
+  // Verifica se o produto já está nos favoritos
   useEffect(() => {
     async function checkFavorito() {
       if (!usuario) return;
@@ -27,7 +27,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
     checkFavorito();
   }, [usuario, id]);
 
-  // ❤️ Alterna o estado do favorito
+  // Alterna o estado do favorito
   async function handleFavoritar() {
     if (!usuario) {
       alert("Você precisa estar logado para favoritar produtos!");
@@ -53,7 +53,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
     }
   }
 
-  // 🛒 Adicionar ao carrinho
+  // Adicionar ao carrinho
   async function adicionarCarrinho() {
     if (!usuario) {
       alert("Você precisa estar logado para adicionar produtos ao carrinho!");
@@ -86,7 +86,7 @@ export default function ProductCard({ id, imgProduct, title, price }) {
           />
         </Link>
 
-        {/* ❤️ Botão de favoritos */}
+        {/* Botão de favoritos */}
         <button
           className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-100 transition"
           onClick={handleFavoritar}

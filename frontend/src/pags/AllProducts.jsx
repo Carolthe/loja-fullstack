@@ -12,7 +12,7 @@ export default function AllProducts() {
   useEffect(() => {
     async function carregarProdutos() {
       try {
-        const res = await api.get("http://localhost:3000/api/produtos")
+        const res = await api.get("/produtos")
         setProdutos(res.data)
       } catch (error) {
         console.error('Erro ao carregar produtos:', error)

@@ -7,9 +7,8 @@ const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// -----------------------------
+
 // Registro de usuário
-// -----------------------------
 router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;
     try {
@@ -26,9 +25,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// -----------------------------
 // Login de usuário
-// -----------------------------
 router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
     try {
@@ -57,9 +54,8 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// -----------------------------
+
 // Solicitar link de recuperação de senha
-// -----------------------------
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
@@ -92,15 +88,13 @@ router.post('/forgot-password', async (req, res) => {
         });
 
         res.json({ message: 'Se o e-mail existir, um link foi enviado.' });
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Erro ao processar solicitação' });
     }
 });
 
-// -----------------------------
 // Resetar senha com token
-// -----------------------------
 router.post('/reset-password', async (req, res) => {
     const { email, token, senha } = req.body;
     try {
@@ -116,8 +110,8 @@ router.post('/reset-password', async (req, res) => {
         await pool.query('UPDATE usuarios SET senha = ?, reset_token = NULL, reset_expires = NULL WHERE email = ?', [senhaHash, email]);
 
         res.json({ message: 'Senha alterada com sucesso!' });
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Erro ao resetar senha' });
     }
 });
