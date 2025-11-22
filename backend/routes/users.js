@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+//variavel de ambiente
 require('dotenv').config();
 
 
