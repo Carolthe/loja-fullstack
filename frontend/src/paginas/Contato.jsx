@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Credibility from "../components/Crediblility";
 import Footer from "../components/Footer";
 import Input from "../components/Input";
 import ScrollToTop from "../components/ScrollToTop";
 import api from "../services/api";
+import Credibilidade from "../components/Credibilidade";
 
-export default function Contact() {
+export default function Contato() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +14,14 @@ export default function Contact() {
   });
 
   const [status, setStatus] = useState("");
+
+  const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+};
+
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -95,7 +103,7 @@ export default function Contact() {
 
       {status && <p className="text-center mt-2">{status}</p>}
 
-      <Credibility />
+      <Credibilidade />
       <ScrollToTop />
       <Footer />
     </div>

@@ -1,14 +1,14 @@
-import CartCard from "../components/CartCard";
-import Credibility from "../components/Crediblility";
+import CardCarrinho from "../components/CardCarrinho";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
-import ViewProducts from "../components/ViewProducts";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import Credibilidade from "../components/Credibilidade";
+import VerProdutos from "../components/VerProdutos";
 
 
-export default function Cart() {
+export default function Carrinho() {
   const [carrinho, setCarrinho] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
@@ -44,10 +44,10 @@ async function limparCarrinho() {
 
   return (
     <div className="mt-[30px] ">
-      <ViewProducts />
-      <p className="text-[23px] text-center font-semibold">Your Products</p>
+      <VerProdutos />
+      <p className="text-[23px] text-center font-semibold">Seus Produtos</p>
       <div className="flex justify-between mx-[20px] my-[15px] text-sm text-fontGray">
-        <p>PRODUCTS <span>(1)</span> </p>
+        <p>PRODUTOS <span>(1)</span> </p>
         <p>TOTAL <span>(25.0)</span> </p>
       </div>
       <hr />
@@ -55,7 +55,7 @@ async function limparCarrinho() {
         <p>Seu carrinho está vazio</p>
       ) : (
         carrinho.map((product => (
-          <CartCard
+          <CardCarrinho
             key={product.id_produto}
             product={product}
             atualizarCarrinho={carregarCarrinho}
@@ -66,12 +66,12 @@ async function limparCarrinho() {
       <div className="flex flex-col items-center mt-[30px]">
         <p className="mb-[20px] font-semibold">Total:<span className="text-fontGray ml-[20px]">{total} $</span></p>
         <Link to="/dadosLocalizacao" >
-          <button className="w-[310px] h-[50px] text-white bg-highlightGreen">Complete Checkout</button>
+          <button className="w-[310px] h-[50px] text-white bg-highlightGreen">Finalizar Compra</button>
         </Link>
         <button className="w-[310px] h-[50px] text-white bg-highlightGreen"
           onClick={limparCarrinho}>Limpar o Carrinho</button>
       </div>
-      <Credibility />
+      <Credibilidade />
       <ScrollToTop />
       <Footer />
     </div>

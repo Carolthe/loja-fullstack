@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
-import CategoryCard from "../components/CategoryCard";
-import ProductCard from "../components/ProductCard";
-import Credibility from "../components/Crediblility";
+import CardCategoria from "../components/CardCategoria";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Newsletter from "../components/Newsletter";
@@ -13,6 +11,8 @@ import livingRoomCategory from "../imgCategory/livingRoomCategory.png";
 import kitchenCategory from "../imgCategory/kitchenCategory.png";
 import bathroomCategory from "../imgCategory/bathroomCategory.png";
 import officeCategory from "../imgCategory/officeCategory.png";
+import CardProduto from "../components/CardProduto";
+import Credibilidade from "../components/Credibilidade";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -21,8 +21,9 @@ export default function Home() {
   useEffect(() => {
     async function carregarProdutos() {
       try {
+    //receber os produtos via requisição axios
         const res = await api.get("/produtos/ordenados")
-        console.log("Produtos recebidos:", res.data)
+    //salvar no state, somente os dados, através da data
         setProdutos(res.data);
       } catch (error) {
         console.error("Erro ao carregar produtos:", error);
@@ -34,13 +35,12 @@ export default function Home() {
   return (
     <div>
       <img src={homeMobile} className="md:hidden" />
-
       <div className="flex flex-col text-center items-center">
         <h3 className="mt-[30px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
-          Featured Products
+          Produtos em Destaque
         </h3>
         <p className="w-[310px] text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
-          Buy our best-selling products and be assured of quality!
+         Compre nossos produtos mais vendidos e tenha certeza de qualidade!
         </p>
       </div>
 
@@ -50,7 +50,7 @@ export default function Home() {
           <p>Nenhum produto encontrado.</p>
         ) : (
           produtos.map((produto) => (
-            <ProductCard
+            <CardProduto
               key={produto.id_produto}
               id={produto.id_produto}
               imgProduct={produto.imagem}
@@ -63,32 +63,30 @@ export default function Home() {
 
       <div className="flex justify-center my-[40px]">
         <button className="border-[1px] font-medium bg-orangeMain text-white rounded-[10px] w-[110px] h-[45px]">
-          Show More
+          Ver Mais
         </button>
       </div>
-
       <p className="mt-[30px] mb-[25px] text-center flex flex-col text-[22px] font-semibold">
-        Available Categories
+        Categorias Disponíveis
       </p>
-
       <div className="flex overflow-x-auto gap-[25px] mx-[20px]">
-        <Link to="/roomCategory">
-          <CategoryCard imgCategory={categoryLivingRoom} tituloCategory="Room" />
+        <Link to="/quarto">
+          <CardCategoria imgCategory={categoryLivingRoom} tituloCategory="Quarto" />
         </Link>
-        <Link to="/livingRoomCategory">
-          <CategoryCard imgCategory={livingRoomCategory} tituloCategory="Living Room" />
+        <Link to="/sala">
+          <CardCategoria imgCategory={livingRoomCategory} tituloCategory="Sala" />
         </Link>
-        <Link to="/kitchenCategory">
-          <CategoryCard imgCategory={kitchenCategory} tituloCategory="Kitchen" />
+        <Link to="/cozinha">
+          <CardCategoria imgCategory={kitchenCategory} tituloCategory="Cozinha" />
         </Link>
-        <Link to="/bathroomCategory">
-          <CategoryCard imgCategory={bathroomCategory} tituloCategory="Bathroom" />
+        <Link to="/banheiro">
+          <CardCategoria imgCategory={bathroomCategory} tituloCategory="Banheiro" />
         </Link>
-        <Link to="/officeCategory">
-          <CategoryCard imgCategory={officeCategory} tituloCategory="Office" />
+        <Link to="/escritorio">
+          <CardCategoria imgCategory={officeCategory} tituloCategory="Escritorio" />
         </Link>
       </div>
-      <Credibility />
+      <Credibilidade />
       <Newsletter />
       <ScrollToTop />
       <Footer />

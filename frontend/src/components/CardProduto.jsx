@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-export default function ProductCard({ id, imgProduct, title, price }) {
+export default function CardProduto({ id, imgProduct, title, price }) {
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -116,10 +116,8 @@ export default function ProductCard({ id, imgProduct, title, price }) {
         </div>
 
         <button
-          className="mt-[5px] w-full bg-greenMain text-white py-2 rounded-lg transition hover:bg-green-600"
-          onClick={adicionarCarrinho}
-        >
-          Add to cart
+          className="mt-[5px] w-full  bg-greenMain text-white py-2 rounded-lg transition hover:bg-green-600"
+          onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>
     </div>

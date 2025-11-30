@@ -1,4 +1,4 @@
-export default function ({img}){
+export default function DescricaoCategoria ({img}){
     return(
         <div className="h-[120px] flex justify-center bg-greenMain ">
             <img className="w-[] " src={img} />

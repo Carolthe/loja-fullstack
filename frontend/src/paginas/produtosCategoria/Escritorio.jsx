@@ -1,16 +1,16 @@
-import ProductCard from "../components/ProductCard.jsx"
-import Credibility from "../components/Crediblility.jsx"
-import Footer from "../components/Footer.jsx"
-import ScrollToTop from "../components/ScrollToTop.jsx"
+import Footer from "../../components/Footer.jsx"
+import ScrollToTop from "../../components/ScrollToTop.jsx"
 import { useState, useEffect } from "react";
-import api from "../services/api";
+import api from "../../services/api.js";
+import CardProduto from "../../components/CardProduto.jsx";
+import Credibilidade from "../../components/Credibilidade.jsx";
+
 //import CategoryDescription from "../components/CategoryDescription.jsx";
-//import cozinhaLogo from "../logoCategory/cozinhaLogo.jpeg"
+//import escritorioLogo from "../logoCategory/escritorioLogo.jpeg"
 
-export default function KitchenCategory() {
+export default function Escritorio() {
     const [produtos, setProdutos] = useState([])
-    const categoriaId = 3; // Cozinha
-
+    const categoriaId = 5; // Escritório
     useEffect(() => {
         let isMounted = true;
 
@@ -29,15 +29,15 @@ export default function KitchenCategory() {
     }, [categoriaId])
 
     return (
-        <div className="">
-            {/* <CategoryDescription img={cozinhaLogo} /> */}
+        <div className="mt-[30px]">
+            {/* <CategoryDescription img={escritorioLogo} /> */}
 
             {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (
                 <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (
-                        <ProductCard 
+                        <CardProduto
                             key={produto.id_produto}
                             id={produto.id_produto}
                             title={produto.nome}
@@ -47,7 +47,7 @@ export default function KitchenCategory() {
                     ))}
                 </div>
             )}
-            <Credibility />
+            <Credibilidade />
             <ScrollToTop />
             <Footer />
         </div>

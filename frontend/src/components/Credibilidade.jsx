@@ -1,27 +1,27 @@
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { LiaLockSolid, LiaHeadsetSolid, LiaMedalSolid } from "react-icons/lia";
 
-export default function Credibility() {
+export default function Credibilidade() {
   const items = [
     {
       icon: <LiaShippingFastSolid className="text-[25px]" />,
-      title: "Fast Delivery",
-      desc: "Fast delivery throughout the continent"
+      title: "Entrega Rápida",
+      desc: "Entrega rápida em todo o país"
     },
     {
       icon: <LiaLockSolid className="text-[25px]" />,
       title: "Pagamento Seguro",
-      desc: "100% secure transactions"
+      desc: "100% transações seguras"
     },
     {
       icon: <LiaHeadsetSolid className="text-[25px]" />,
-      title: "24/7 support",
-      desc: "Customer service always available"
+      title: "24/7 suporte",
+      desc: "Atendimento ao cliente sempre disponível"
     },
     {
       icon: <LiaMedalSolid className="text-[25px]" />,
-      title: "Guaranteed quality",
-      desc: "Quality products"
+      title: "Qualidade garantida",
+      desc: "Produtos de qualidade"
     },
   ];
 

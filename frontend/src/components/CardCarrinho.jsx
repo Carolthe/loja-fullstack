@@ -1,7 +1,7 @@
 import { FiTrash2 } from "react-icons/fi";
 import api from "../services/api";
 
-export default function CartCard({ product, atualizarCarrinho }) {
+export default function CardCarrinho({ product, atualizarCarrinho }) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   async function removerDoCarrinho() {

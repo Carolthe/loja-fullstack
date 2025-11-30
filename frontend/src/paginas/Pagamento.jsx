@@ -1,53 +1,53 @@
 //import { FaCcVisa, FaCcPaypal } from "react-icons/fa";
 //import { RiMastercardFill } from "react-icons/ri";
 //import Input from "../components/Input";
-import Credibility from "../components/Crediblility";
+import Credibilidade from "../components/Credibilidade";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import ScrollToTop from "../components/ScrollToTop";
-import { CardPayment } from '@mercadopago/sdk-react';
-import { initMercadoPago } from '@mercadopago/sdk-react'
-import api from "../services/api";
+// import { CardPayment } from '@mercadopago/sdk-react';
+// import { initMercadoPago } from '@mercadopago/sdk-react'
+// import api from "../services/api";
 
 
-initMercadoPago('YOUR_PUBLIC_KEY');
+//initMercadoPago('YOUR_PUBLIC_KEY');
 
 export default function Pagamento() {
 
 
-    const initialization = {
-        amount: 100,
-    };
+    // const initialization = {
+    //     amount: 100,
+    // };
 
-    const onSubmit = async (formData) => {
-        try {
-            // envia o token/card ao backend
-            const response = await api.post("/process_payment", formData);
+    // const onSubmit = async (formData) => {
+    //     try {
+    //         // envia o token/card ao backend
+    //         const response = await api.post("/process_payment", formData);
 
-            console.log("Pagamento aprovado:", response.data);
-            return response.data; // o Brick espera um retorno
-        } catch (error) {
-            console.error("Erro ao processar pagamento:", error);
-            throw error; // o Brick precisa saber que deu erro
-        }
-    };
+    //         console.log("Pagamento aprovado:", response.data);
+    //         return response.data; // o Brick espera um retorno
+    //     } catch (error) {
+    //         console.error("Erro ao processar pagamento:", error);
+    //         throw error; // o Brick precisa saber que deu erro
+    //     }
+    // };
 
-    const onError = async (error) => {
-        console.log("Erro no Brick:", error);
-    };
+    // const onError = async (error) => {
+    //     console.log("Erro no Brick:", error);
+    // };
 
-    const onReady = async () => {
-        // Brick carregou
-        console.log("Brick pronto");
-    };
+    // const onReady = async () => {
+    //     // Brick carregou
+    //     console.log("Brick pronto");
+    // };
 
 
 
     return (
         <>
             <div className="flex flex-col items-center mt-[20px]">
-                <p className="font-semibold text-greenMain text-center mt-[25px] ">Payment Method</p>
-                <p className="text-fontGray">All transformations are secure and encrypted.</p>
+                <p className="font-semibold text-greenMain text-center mt-[25px] ">Métodos de Pagamento</p>
+                <p className="text-fontGray">Todas as transações são seguras e criptografadas.</p>
                 {/* <form className="bg-white w-[340px] mt-[20px] rounded-xl shadow-lg p-5 border border-gray-200">
                     <div className="flex justify-center gap-4 mb-5">
                         <div className="bg-white px-[20px] py-[8px] rounded-xl border border-gray-300 shadow-sm 
@@ -99,15 +99,15 @@ export default function Pagamento() {
                     </button>
                 </form> */}
 
-                <CardPayment
+                {/* <CardPayment
                     initialization={initialization}
                     onSubmit={onSubmit}
                     onReady={onReady}
                     onError={onError}
-                />
+                /> */}
 
             </div>
-            <Credibility />
+            <Credibilidade />
             <Newsletter />
             <ScrollToTop />
             <Footer />

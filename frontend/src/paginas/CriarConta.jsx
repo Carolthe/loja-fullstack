@@ -4,7 +4,7 @@ import { useState } from "react";
 import api from "../services/api";
 import { SlArrowLeft } from "react-icons/sl";
 
-export default function CreateAccount() {
+export default function CriarConta() {
   const [nome, setNome] = useState("")
   const [email, setEmail] = useState("")
   const [senha, setSenha] = useState("")
@@ -44,25 +44,25 @@ export default function CreateAccount() {
         <form className="flex flex-col items-center pt-[20px] pb-6 space-y-5"
           onSubmit={handleRegister}>
           <div>
-            <label className="font-medium">Full Name</label>
+            <label className="font-medium">Nome Inteiro</label>
             <Input value={nome} onChange={(e) => setNome(e.target.value)} />
           </div>
           <div>
-            <label className="font-medium">Email</label>
+            <label className="font-medium">E-mail</label>
             <Input value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
-            <label className="font-medium">Password</label>
+            <label className="font-medium">Senha</label>
             <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
           </div>
           <div>
-            <label className="font-medium">Confirm Password</label>
+            <label className="font-medium">Confirmar a Senha</label>
             <Input type="password" value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} />
           </div>
-          <button type="submit" className="w-[300px] py-3 bg-orangeMain text-white rounded-xl hover:bg-orange-400 transition">Sign Up</button>
+          <button type="submit" className="w-[300px] py-3 bg-orangeMain text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
         </form>
-        <p className="text-center text-sm text-gray-600 pb-6">Already have an account?{" "}
-          <Link to="/login" className="text-greenMain font-medium hover:underline">Sign In</Link>
+        <p className="text-center text-sm text-gray-600 pb-6">Eu já tenho uma conta?{" "}
+          <Link to="/login" className="text-greenMain font-medium hover:underline">Login</Link>
         </p>
       </div>
     </div>

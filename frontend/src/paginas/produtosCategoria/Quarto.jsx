@@ -1,16 +1,14 @@
-import ProductCard from "../components/ProductCard.jsx"
-import Credibility from "../components/Crediblility.jsx"
-import Footer from "../components/Footer.jsx"
-import ScrollToTop from "../components/ScrollToTop.jsx"
+import Footer from "../../components/Footer.jsx"
+import ScrollToTop from "../../components/ScrollToTop.jsx"
 import { useState, useEffect } from "react";
-import api from "../services/api";
-//import CategoryDescription from "../components/CategoryDescription.jsx";
-//import banheiroLogo from "../logoCategory/banheiroLogo.jpeg"
+import api from "../../services/api.js";
+import CardProduto from "../../components/CardProduto.jsx";
+//import DescricaoCategoria from "../../components/DescricaoCategoria.jsx";
+import Credibilidade from "../../components/Credibilidade.jsx";
 
-export default function BanheiroCategory() {
+export default function Quarto() {
     const [produtos, setProdutos] = useState([])
-    const categoriaId = 4; // Banheiro
-
+    const categoriaId = 1;
     useEffect(() => {
         let isMounted = true;
 
@@ -28,16 +26,17 @@ export default function BanheiroCategory() {
         return () => { isMounted = false }
     }, [categoriaId])
 
-    return (
-        <div className="">
-            {/* <CategoryDescription img={banheiroLogo} /> */}
 
-            {produtos.length === 0 ? (
+    return (
+        <div className="mt-[30px]">
+           {/* <DescricaoCategoria img={roomLogo} /> */}
+
+               {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (
                 <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (
-                        <ProductCard 
+                        <CardProduto
                             key={produto.id_produto}
                             id={produto.id_produto}
                             title={produto.nome}
@@ -47,7 +46,7 @@ export default function BanheiroCategory() {
                     ))}
                 </div>
             )}
-            <Credibility />
+            <Credibilidade />
             <ScrollToTop />
             <Footer />
         </div>

@@ -27,7 +27,7 @@ export default function Login() {
     return (
         <div className="h-[100vh]">
             <div>
-                <div className="relative bg-greenMain h-[210px] flex flex-col items-center justify-center text-center">
+                <div className="relative bg-greenMain h-[190px] flex flex-col items-center justify-center text-center">
                     <div className="absolute bottom-0 left-0 w-full h-[50px] bg-white rounded-t-[100px]"></div>
                     <div className="relative z-10 flex flex-col items-center justify-center">
                         <img className="w-[170px] mb-[60px]" src={logotipo} alt="logo" />
@@ -36,20 +36,20 @@ export default function Login() {
                 <form className="flex flex-col items-center pb-6"
                     onSubmit={handleLogin}>
                     <div className="mt-[35px]">
-                        <label className="font-semibold">Your E-mail</label>
+                        <label className="font-semibold">Seu E-mail</label>
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="mt-[20px]">
-                        <label className="font-semibold">Your Password</label>
+                        <label className="font-semibold">Sua Senha</label>
                         <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
                     <button className="w-[300px] h-[45px] mt-[25px] bg-orangeMain text-white text-[19px] rounded-md">Login</button>
                     <Link to="/password-recovery">
-                    <p className="mt-[15px] text-fontGray">Recover the Password</p>
+                    <p className="mt-[15px] text-fontGray">Recuperar a Senha</p>
                     </Link>
                     <div className="mt-[150px] mb-6">
                         <Link to="/createAccount">
-                            <p>Don't have an account?{" "}<span className="text-greenMain font-semibold">Sign up</span></p>
+                            <p>Não tenho uma conta?{" "}<span className="text-greenMain font-semibold">Inscreva-se</span></p>
                         </Link>
                     </div>
                 </form>

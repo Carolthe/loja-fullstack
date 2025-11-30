@@ -17,7 +17,7 @@ const newsletterRoutes = require('./routes/newsletter');
 const categoriasRoutes = require('./routes/categorias');
 const contatoRoutes = require('./routes/contato');
 const localizacaoRoutes = require('./routes/localizacao');
-const processoPagamentoRoutes = require('./routes/processoPagamento')
+//const processoPagamentoRoutes = require('./routes/processoPagamento')
 
 //rotas de acasso a api
 app.use('/api/produtos', produtosRoutes);
@@ -28,7 +28,7 @@ app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/categorias', categoriasRoutes);
 app.use('/api/contact', contatoRoutes); 
 app.use('/localizacao', localizacaoRoutes);
-app.use('/api/processoPagamento', processoPagamentoRoutes);
+//app.use('/api/processoPagamento', processoPagamentoRoutes);
 
 //porta do servidor guardada na variavel de ambiente .env
 const PORT = process.env.PORT;

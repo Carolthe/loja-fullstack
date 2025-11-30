@@ -1,9 +1,9 @@
-import Credibility from "../components/Crediblility"
 import Footer from "../components/Footer"
 import produto6 from "../imgProducts/produto6.jpg"
 import product7 from "../imgProducts/product7.jpg"
+import Credibilidade from "../components/Credibilidade"
 
-export default function ProductsDetails() {
+export default function DetalheProdutos() {
     return (
         <>
             <div className="mt-[15 px] mx-[15px]" >
@@ -35,7 +35,7 @@ export default function ProductsDetails() {
                 <hr className="mt-[20px]" />
                 <img src={product7} />
             </div>
-            <Credibility />
+            <Credibilidade />
             <Footer />
         </>
     )

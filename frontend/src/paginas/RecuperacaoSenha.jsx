@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import api from "../services/api";
 
-export default function PasswordRecovery() {
+export default function RecuperacaoSenha() {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const email = searchParams.get("email");

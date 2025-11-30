@@ -10,10 +10,9 @@ router.get('/', async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error('Erro ao buscar produtos:', error.message);
-    res.status(500).json({ error: 'Erro ao buscar produtos' });
+    res.status(500).json({ error: 'Erro ao buscar produtos' });                             
   }
 });
-
 
 // Lista produtos ordenados por preço do menor para o maior
 router.get('/ordenados', async (req, res) => {
