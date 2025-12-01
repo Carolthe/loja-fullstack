@@ -1,116 +1,135 @@
-//import { FaCcVisa, FaCcPaypal } from "react-icons/fa";
-//import { RiMastercardFill } from "react-icons/ri";
-//import Input from "../components/Input";
+import { useState } from "react";
+import axios from "axios";
+
 import Credibilidade from "../components/Credibilidade";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import ScrollToTop from "../components/ScrollToTop";
-// import { CardPayment } from '@mercadopago/sdk-react';
-// import { initMercadoPago } from '@mercadopago/sdk-react'
-// import api from "../services/api";
-
-
-//initMercadoPago('YOUR_PUBLIC_KEY');
 
 export default function Pagamento() {
+  const [paymentData, setPaymentData] = useState(null);
+  const [metodo, setMetodo] = useState("multibanco"); // "multibanco" ou "mbway"
+  const [phone, setPhone] = useState(""); // só para MB WAY
+  const [loading, setLoading] = useState(false);
 
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        amount: 59.90,
+        cliente: "João Silva",
+        metodo,
+      };
 
-    // const initialization = {
-    //     amount: 100,
-    // };
+      if (metodo === "mbway") {
+        payload.phone = phone; // telefone obrigatório para MB WAY
+      }
 
-    // const onSubmit = async (formData) => {
-    //     try {
-    //         // envia o token/card ao backend
-    //         const response = await api.post("/process_payment", formData);
+      const response = await axios.post(
+        "http://localhost:3000/api/pagamento/create",
+        payload
+      );
 
-    //         console.log("Pagamento aprovado:", response.data);
-    //         return response.data; // o Brick espera um retorno
-    //     } catch (error) {
-    //         console.error("Erro ao processar pagamento:", error);
-    //         throw error; // o Brick precisa saber que deu erro
-    //     }
-    // };
+      setPaymentData(response.data.data); // atualiza estado com dados do pagamento
+      console.log("Pagamento criado:", response.data);
+    } catch (error) {
+      console.error("Erro ao criar pagamento:", error.response?.data || error.message);
+      alert("Erro ao criar pagamento. Veja o console para detalhes.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // const onError = async (error) => {
-    //     console.log("Erro no Brick:", error);
-    // };
+  return (
+    <>
+      <div className="flex flex-col items-center mt-[20px]">
+        <p className="font-semibold text-greenMain text-center mt-[25px]">
+          Métodos de Pagamento
+        </p>
+        <p className="text-fontGray">
+          Todas as transações são seguras e criptografadas.
+        </p>
 
-    // const onReady = async () => {
-    //     // Brick carregou
-    //     console.log("Brick pronto");
-    // };
+        {/* Seleção de método */}
+        <div className="mt-4 flex gap-4">
+          <button
+            className={metodo === "multibanco" ? "bg-greenMain text-white px-4 py-2" : "px-4 py-2"}
+            onClick={() => setMetodo("multibanco")}
+          >
+            Multibanco
+          </button>
+          <button
+            className={metodo === "mbway" ? "bg-greenMain text-white px-4 py-2" : "px-4 py-2"}
+            onClick={() => setMetodo("mbway")}
+          >
+            MB WAY
+          </button>
+        </div>
 
+        {/* Input telefone para MB WAY */}
+        {metodo === "mbway" && (
+          <div className="mt-2">
+            <input
+              type="text"
+              placeholder="Número de telefone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="border px-2 py-1 rounded"
+            />
+          </div>
+        )}
 
+        {/* Botão de pagamento */}
+        <div className="mt-4">
+          <button
+            onClick={handleCheckout}
+            className="bg-blue-600 text-white px-6 py-2 rounded"
+            disabled={loading}
+          >
+            {loading ? "Processando..." : "Pagar"}
+          </button>
+        </div>
 
-    return (
-        <>
-            <div className="flex flex-col items-center mt-[20px]">
-                <p className="font-semibold text-greenMain text-center mt-[25px] ">Métodos de Pagamento</p>
-                <p className="text-fontGray">Todas as transações são seguras e criptografadas.</p>
-                {/* <form className="bg-white w-[340px] mt-[20px] rounded-xl shadow-lg p-5 border border-gray-200">
-                    <div className="flex justify-center gap-4 mb-5">
-                        <div className="bg-white px-[20px] py-[8px] rounded-xl border border-gray-300 shadow-sm 
-                            flex items-center justify-center hover:shadow-md cursor-pointer transition-all duration-200">
-                            <FaCcVisa className="text-[38px] text-blue-600" />
-                        </div>
-                        <div className="bg-white px-[20px] py-[8px] rounded-xl border border-gray-300 shadow-sm 
-                            flex items-center justify-center hover:shadow-md cursor-pointer transition-all duration-200">
-                            <RiMastercardFill className="text-[38px] text-orange-500" />
-                        </div>
-                        <div className="bg-white px-[20px] py-[8px] rounded-xl border border-gray-300 shadow-sm 
-                            flex items-center justify-center hover:shadow-md cursor-pointer transition-all duration-200">
-                            <FaCcPaypal className="text-[36px] text-blue-500" />
-                        </div>
-                    </div>
-                    <label className="text-sm font-medium text-gray-700">Nome no cartão</label>
-                    <Input />
-                    <label className="text-sm font-medium text-gray-700">Número do cartão</label>
-                    <Input />
+        {/* Exibição dos dados do pagamento */}
+        {paymentData && (
+          <div className="mt-4 border p-4 rounded shadow-md w-80">
+            <p>
+              <strong>Entidade:</strong> {paymentData.entity}
+            </p>
+            <p>
+              <strong>Referência:</strong> {paymentData.reference}
+            </p>
+            <p>
+              <strong>Montante:</strong> {paymentData.amount}€
+            </p>
 
-                    <div className="flex gap-4">
-                        <div className="flex flex-col">
-                            <label className="text-sm font-medium text-gray-700">Data de expiração</label>
-                            <input
-                                type="text"
-                                placeholder="MM/AA"
-                                className="mt-1 w-[120px] h-[38px] px-2 rounded-lg border border-gray-300 
-                           shadow-sm focus:ring-2 focus:ring-greenMain outline-none transition"
-                            />
-                        </div>
+            {metodo === "multibanco" && (
+              <p className="mt-2 text-sm text-gray-700">
+                Pague este montante no seu homebanking ou numa caixa Multibanco usando a entidade e referência acima.
+              </p>
+            )}
 
-                        <div className="flex flex-col">
-                            <label className="text-sm font-medium text-gray-700">CCV</label>
-                            <input
-                                type="text"
-                                placeholder="000"
-                                maxLength={3}
-                                className="mt-1 w-[100px] h-[38px] px-2 rounded-lg border border-gray-300 
-                           shadow-sm focus:ring-2 focus:ring-greenMain outline-none transition"
-                            />
-                        </div>
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full h-[50px] mt-6 bg-greenMain text-white font-semibold rounded-lg 
-                       shadow-md hover:brightness-110 transition-all duration-200"
-                    >
-                        Finalizar Pagamento
-                    </button>
-                </form> */}
+            {metodo === "mbway" && paymentData.checkout_url && (
+              <p className="mt-2 text-sm text-gray-700">
+                Siga o link enviado para concluir o pagamento via MB WAY:{" "}
+                <a
+                  href={paymentData.checkout_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Pagar com MB WAY
+                </a>
+              </p>
+            )}
+          </div>
+        )}
+      </div>
 
-                {/* <CardPayment
-                    initialization={initialization}
-                    onSubmit={onSubmit}
-                    onReady={onReady}
-                    onError={onError}
-                /> */}
-
-            </div>
-            <Credibilidade />
-            <Newsletter />
-            <ScrollToTop />
-            <Footer />
-        </>
-    )
+      <Credibilidade />
+      <Newsletter />
+      <ScrollToTop />
+      <Footer />
+    </>
+  );
 }

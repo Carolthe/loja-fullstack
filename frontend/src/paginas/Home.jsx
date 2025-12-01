@@ -16,25 +16,29 @@ import Credibilidade from "../components/Credibilidade";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
-  
+  const [limite, setLimite] = useState(6); // começa com 6 produtos
+
+  async function carregarProdutos() {
+    try {
+      const res = await api.get(`/produtos/ordenados?limite=${limite}`);
+      setProdutos(res.data);
+    } catch (error) {
+      console.error("Erro ao carregar produtos:", error);
+    }
+  }
 
   useEffect(() => {
-    async function carregarProdutos() {
-      try {
-    //receber os produtos via requisição axios
-        const res = await api.get("/produtos/ordenados")
-    //salvar no state, somente os dados, através da data
-        setProdutos(res.data);
-      } catch (error) {
-        console.error("Erro ao carregar produtos:", error);
-      }
-    }
     carregarProdutos();
-  }, []);
+  }, [limite]); // sempre que o limite mudar, recarrega
+
+  function verMais() {
+    setLimite(prev => prev + 6); // carrega +6 a cada clique
+  }
 
   return (
     <div>
       <img src={homeMobile} className="md:hidden" />
+
       <div className="flex flex-col text-center items-center">
         <h3 className="mt-[30px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
           Produtos em Destaque
@@ -61,14 +65,21 @@ export default function Home() {
         )}
       </div>
 
+      {/* 🔹 BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
-        <button className="border-[1px] font-medium bg-orangeMain text-white rounded-[10px] w-[110px] h-[45px]">
+        <button
+          className="border-[1px] font-medium bg-orangeMain text-white rounded-[10px] w-[110px] h-[45px]"
+          onClick={verMais}
+        >
           Ver Mais
         </button>
       </div>
+
+      {/* Categorias */}
       <p className="mt-[30px] mb-[25px] text-center flex flex-col text-[22px] font-semibold">
         Categorias Disponíveis
       </p>
+
       <div className="flex overflow-x-auto gap-[25px] mx-[20px]">
         <Link to="/quarto">
           <CardCategoria imgCategory={categoryLivingRoom} tituloCategory="Quarto" />
@@ -86,6 +97,7 @@ export default function Home() {
           <CardCategoria imgCategory={officeCategory} tituloCategory="Escritorio" />
         </Link>
       </div>
+
       <Credibilidade />
       <Newsletter />
       <ScrollToTop />
