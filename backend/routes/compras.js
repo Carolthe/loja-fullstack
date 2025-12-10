@@ -22,7 +22,7 @@ router.post('/finalizar', async (req, res) => {
 
     // 2. Calcular total
     const total = carrinho.reduce(
-      (acc, item) => acc + item.preco * item.quantidade,
+      (acumulador, item) => acumulador + item.preco * item.quantidade,
       0
     );
 
@@ -55,5 +55,5 @@ router.post('/finalizar', async (req, res) => {
     res.status(500).json({ error: "Erro ao finalizar compra" });
   }
 });
-
+ 
 module.exports = router;

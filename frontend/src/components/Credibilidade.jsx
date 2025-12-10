@@ -49,7 +49,7 @@ export default function Credibilidade() {
                 flex flex-col items-center justify-center text-center
                 flex-shrink-0
                 w-[320px] snap-center
-                text-[#1b7488]
+                text-[#363E7A]
               "
             >
               {it.icon}

@@ -40,7 +40,7 @@ export default function Header() {
   }, [usuario]);
 
   return (
-    <div className="fixed z-50 flex items-center justify-between px-[20px] bg-greenMain w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
+    <div className="fixed z-50 flex items-center justify-between px-[20px] bg-[#5769a9] w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
       <Navbar />
       <Link to="/" className="flex items-center">
         <LiaHomeSolid className="text-[18px] md:text-[40px]" />

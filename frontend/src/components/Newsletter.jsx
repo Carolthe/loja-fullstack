@@ -1,5 +1,6 @@
 import { useState } from "react"
 import api from "../services/api"
+import Input from "./Input"
 
 export default function Newsletter() {
     const [nome, setNome] = useState("")
@@ -26,13 +27,13 @@ export default function Newsletter() {
     }
 
     return (
-        <div className="flex flex-col items-center text-center py-[40px]  w-[100vw] bg-gray-200  ">
+        <div className="flex flex-col items-center text-center py-[40px]  w-[100vw] bg-gray-100  ">
             <h4 className="font-semibold text-fontGray ">INSCREVA-SE NA NOSSA NEWSLETTER</h4>
-            <p className="w-[265px] text-fontGray pb-[15px] ">Não perca a inspiração e matenha-se atualizado com todas as novidades!</p>
+            <p className="w-[265px] text-fontGray pb-[10px] ">Não perca a inspiração e matenha-se atualizado com todas as novidades!</p>
             <form onSubmit={handleSubmit} className="grid gap-3 ">
-                <input value={nome} onChange={(e) => setNome(e.target.value)} type="text" className="pl-[8px] w-[300px] p-[7px] " placeholder="Nome" />
-                <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className="pl-[8px] w-[300px] p-[7px] " placeholder="E-mail" />
-                <button type="submit" className="p-[10px] bg-greenMain text-white ">INSCREVA-SE</button>
+                <Input value={nome} onChange={(e) => setNome(e.target.value)} type="text" placeholder="Nome" />
+                <Input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder="E-mail" />
+                <button type="submit" className="p-[10px] rounded-[15px] bg-[#56585f] text-white ">INSCREVA-SE</button>
             </form>
         </div>
     )

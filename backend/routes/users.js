@@ -8,7 +8,6 @@ const jwt = require('jsonwebtoken');
 //variavel de ambiente
 require('dotenv').config();
 
-
 // Registro de usuário
 router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;

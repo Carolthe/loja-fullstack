@@ -9,7 +9,7 @@ import { FaFacebook } from "react-icons/fa";
 export default function Footer() {
     return (
         <>
-            <div className="bg-orangeMain text-white leading-[30px]">
+            <div className="bg-[#3A4360] text-white leading-[30px]">
                 <div className="flex flex-col items-center pt-[30px]">
                     <div className="flex items-center gap-[3px]">
                         <LiaHomeSolid className="text-[18px] " />
@@ -25,7 +25,7 @@ export default function Footer() {
                     <a href="#">Carrinho</a>
                     <a href="#">Favoritos</a>
                 </div>
-                <div className="flex items-center pl-[10px] bg-highlightGreen w-[190px] h-[50px] rounded-[8px] mt-[20px] ml-[20px] ">
+                <div className="flex items-center pl-[10px] bg-[#56595F] w-[190px] h-[50px] rounded-[8px] mt-[20px] ml-[20px] ">
                     <FaWhatsapp className="text-[20px] " />
                     <p className="p-[10px]">Fale conosco</p>
                 </div>

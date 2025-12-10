@@ -5,14 +5,14 @@ import CardCategoria from "../components/CardCategoria";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Newsletter from "../components/Newsletter";
-import homeMobile from "../imgMobile/homeMobile.png";
-import categoryLivingRoom from "../imgCategory/categoryLivingRoom.png";
+import home from "../imgMobile/home.webp";
 import livingRoomCategory from "../imgCategory/livingRoomCategory.png";
 import kitchenCategory from "../imgCategory/kitchenCategory.png";
 import bathroomCategory from "../imgCategory/bathroomCategory.png";
 import officeCategory from "../imgCategory/officeCategory.png";
 import CardProduto from "../components/CardProduto";
 import Credibilidade from "../components/Credibilidade";
+import quarto from "../imgCategory/quarto.png"
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -36,11 +36,12 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <img src={homeMobile} className="md:hidden" />
+    <div className="bg-[#EDEEF7]">
+    <div >
+      <img src={home} className="md:hidden mt-[10px]" />
 
       <div className="flex flex-col text-center items-center">
-        <h3 className="mt-[30px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
+        <h3 className="mt-[px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
           Produtos em Destaque
         </h3>
         <p className="w-[310px] text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
@@ -68,7 +69,7 @@ export default function Home() {
       {/* 🔹 BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
         <button
-          className="border-[1px] font-medium bg-orangeMain text-white rounded-[10px] w-[110px] h-[45px]"
+          className="border-[1px] font-medium bg-[#56595F] text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}
         >
           Ver Mais
@@ -82,7 +83,7 @@ export default function Home() {
 
       <div className="flex overflow-x-auto gap-[25px] mx-[20px]">
         <Link to="/quarto">
-          <CardCategoria imgCategory={categoryLivingRoom} tituloCategory="Quarto" />
+          <CardCategoria imgCategory={quarto} tituloCategory="Quarto" />
         </Link>
         <Link to="/sala">
           <CardCategoria imgCategory={livingRoomCategory} tituloCategory="Sala" />
@@ -102,6 +103,6 @@ export default function Home() {
       <Newsletter />
       <ScrollToTop />
       <Footer />
-    </div>
+    </div></div>
   );
 }

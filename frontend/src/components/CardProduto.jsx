@@ -116,7 +116,7 @@ export default function CardProduto({ id, imgProduct, title, price }) {
         </div>
 
         <button
-          className="mt-[5px] w-full  bg-greenMain text-white py-2 rounded-lg transition hover:bg-green-600"
+          className="mt-[5px] w-full  bg-[#4E59B1] text-white py-2 rounded-[15px] transition hover:bg-green-600"
           onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>
