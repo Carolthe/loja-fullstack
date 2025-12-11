@@ -2,14 +2,22 @@ import Footer from "../components/Footer"
 import produto6 from "../imgProducts/produto6.jpg"
 import product7 from "../imgProducts/product7.jpg"
 import Credibilidade from "../components/Credibilidade"
+import { useLocation } from "react-router-dom";
 
 export default function DetalheProdutos() {
+
+    const location = useLocation();
+    const produto = location.state; // recebe { id, imgProduct, title, price }
+     if (!produto) {
+      return <p>Produto não encontrado.</p>; // fallback caso acessem a URL direto
+     }
     return (
         <>
             <div className="mt-[15 px] mx-[15px]" >
-                <img src={produto6} />
-                <p className="text-[22px] mt-[5px]">Descrição competa sobre o produto</p>
-                <p className="text-[20px]"><span className="line-through text-[16px] ">52,00 €</span> 42,00 € </p>
+                <img className="w-[100%] h-[400px]" src={produto.imgProduct} />
+                <p className="text-[22px] font-semibold mt-[15px]">{produto.title}</p>
+                <p className="text-[22px]">Descrição competa sobre o produto</p>
+                <p className="text-[20px]"><span className="line-through text-[16px] ">52,00 €</span> {produto.price.toFixed(2).replace(".", ",")}€ </p>
                 <p className="text-highlightGreen my-[5px]">Envio Gratuito para este artigo</p>
                 <p className="font-semibold mb-[3px]">Opção:</p>
                 <div className="flex gap-[5px]">

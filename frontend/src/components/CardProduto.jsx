@@ -78,7 +78,9 @@ export default function CardProduto({ id, imgProduct, title, price }) {
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
       <div className="relative">
-        <Link to="/productsDetails">
+        <Link to="/productsDetails"
+        state={{ id, imgProduct, title, price }}
+        >
           <img
             className="w-full h-[180px] object-cover rounded-t-2xl md:h-[280px]"
             src={imgProduct}
