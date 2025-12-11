@@ -49,22 +49,13 @@ export default function CardCarrinho({ product, atualizarCarrinho }) {
         <div className="flex justify-between mt-[10px]">
           <div className="flex items-center gap-[10px]">
             <button
-              className="flex items-center justify-center bg-greenMain w-[22px] h-[14px] text-white"
-              onClick={diminuirQuantidade}
-            >
-              -
-            </button>
-
+              className="flex items-center justify-center border-[1px] border-[#5769a9] w-[20px] h-[20px] text-black "
+              onClick={diminuirQuantidade}> - </button>
             <p>{product.quantidade}</p>
-
             <button
-              className="flex items-center justify-center bg-greenMain w-[22px] h-[14px] text-white"
-              onClick={aumentarQuantidade}
-            >
-              +
-            </button>
+              className="flex items-center justify-center  border-[1px] border-[#5769a9] w-[20px] h-[20px] text-black"
+              onClick={aumentarQuantidade}> + </button>
           </div>
-
           <FiTrash2
             className="text-[20px] text-red-600 cursor-pointer"
             onClick={removerDoCarrinho}

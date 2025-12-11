@@ -33,7 +33,7 @@ export default function Newsletter() {
             <form onSubmit={handleSubmit} className="grid gap-3 ">
                 <Input value={nome} onChange={(e) => setNome(e.target.value)} type="text" placeholder="Nome" />
                 <Input onChange={(e) => setEmail(e.target.value)} value={email} type="email" placeholder="E-mail" />
-                <button type="submit" className="p-[10px] rounded-[15px] bg-[#56585f] text-white ">INSCREVA-SE</button>
+                <button type="submit" className="p-[10px] rounded-[15px] bg-yellow-400 text-white ">INSCREVA-SE</button>
             </form>
         </div>
     )

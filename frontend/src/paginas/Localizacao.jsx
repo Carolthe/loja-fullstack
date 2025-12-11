@@ -137,7 +137,7 @@ export default function Localizacao() {
 
           <button
             type="submit"
-            className="bg-highlightGreen px-[40px] py-[15px] text-white"
+            className="bg-orangeMain rounded-[15px] px-[40px] py-[15px] text-white"
           >
             Ir Para Pagamento
           </button>

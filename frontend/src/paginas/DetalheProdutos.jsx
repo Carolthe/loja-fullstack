@@ -18,12 +18,12 @@ export default function DetalheProdutos() {
                     <div className="bg-orange-300 rounded-full w-[20px] h-[20px]" ></div>
                 </div>
                 <div className="flex items-center my-[18px]">
-                    <p className="flex  items-center justify-center bg-highlightGreen text-white w-[180px] h-[40px]  ">Adicionar ao carrinho</p>
-                    <button className="w-[40px] h-[40px] ml-[50px] border-[1px] border-highlightGreen" >-</button>
+                    <p className="flex  items-center justify-center bg-[#5769a9] text-white w-[180px] h-[40px]  ">Adicionar ao carrinho</p>
+                    <button className="w-[40px] h-[40px] ml-[50px] border-[1px] border-[#5769a9]" >-</button>
                     <p className="mx-[15px]">1</p>
-                    <button className="w-[40px] h-[40px] border-[1px]  border-highlightGreen ">+</button>
+                    <button className="w-[40px] h-[40px] border-[1px]  border-[#5769a9] ">+</button>
                 </div>
-                <p className="flex items-center pl-[10px] bg-[#ffaf85] h-[50px] mb-[5px]" ><spna className="font-semibold pr-[5px]">Envio:</spna> Gratuito</p>
+                <p className="flex items-center pl-[10px] bg-[#ffaf85] h-[50px] mb-[5px]" ><span className="font-semibold pr-[5px]">Envio:</span> Gratuito</p>
                 <p className="flex items-center pl-[10px] bg-[#ffaf85] h-[50px] mb-[5px] ">Pagamento seguro </p>
                 <p className="flex items-center pl-[10px] bg-[#ffaf85] h-[50px] "><span className="font-semibold">Estimativa de entrega:</span> 10-30 dias úteis</p>
                 <hr className="mt-[40px]" />

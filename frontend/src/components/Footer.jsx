@@ -9,14 +9,14 @@ import { FaFacebook } from "react-icons/fa";
 export default function Footer() {
     return (
         <>
-            <div className="bg-[#3A4360] text-white leading-[30px]">
+            <div className="bg-[#5769a9] text-white leading-[30px]">
                 <div className="flex flex-col items-center pt-[30px]">
                     <div className="flex items-center gap-[3px]">
                         <LiaHomeSolid className="text-[18px] " />
                         <p className="text-[15px] md:text-[22px]">HOMEHAVEN</p>
                     </div>
                     <p className=" font-semibold md:text-[17px]">Entre em contato:</p>
-                    <p className="flex items-center md:text-[15px]"><BsTelephone className="mr-[4px] text-[17px]" />+351 937 628 516</p>
+                    <p className="flex items-center md:text-[15px]"><FaWhatsapp className="mr-[4px] text-[17px] " />+351 937 628 516</p>
                     <p className="flex items-center md:text-[15px]"><AiOutlineMail className="mr-[4px] text-[17px]" />homehaven1998@gmail.com</p>
                 </div>
                 <div className="flex justify-center gap-[20px] mt-[18px] md:text-[17px] md:justify-center md:gap-[10%] md:my-[70px]">
@@ -24,10 +24,6 @@ export default function Footer() {
                     <a href="#">Produtos</a>
                     <a href="#">Carrinho</a>
                     <a href="#">Favoritos</a>
-                </div>
-                <div className="flex items-center pl-[10px] bg-[#56595F] w-[190px] h-[50px] rounded-[8px] mt-[20px] ml-[20px] ">
-                    <FaWhatsapp className="text-[20px] " />
-                    <p className="p-[10px]">Fale conosco</p>
                 </div>
                 <div className="pl-[20px] flex flex-col ">
                     <p className="mt-[20px] font-semibold ">NOSSA POLÍTICA</p>

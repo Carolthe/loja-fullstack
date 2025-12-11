@@ -19,7 +19,7 @@ export default function CriarConta() {
       return
     }
     try {
-      await api.post("/register", { nome, email, senha })
+      await api.post("/users/register", { nome, email, senha })
       alert("Cadastro realizado com sucesso!")
       navigate("/login")
     } catch (error) {
@@ -30,7 +30,7 @@ export default function CriarConta() {
   return (
     <div>
       <div>
-        <div className="relative bg-greenMain h-[160px] flex flex-col text-center text-white">
+        <div className="relative bg-[#5769a9] h-[160px] flex flex-col text-center text-white">
           <div className="absolute bottom-0 left-0 w-full h-[45px] bg-white rounded-t-[120px]"></div>
           <div className="relative z-10">
             <Link to="/login" className="absolute mt-[15px] left-4 text-2xl hover:text-gray-400">

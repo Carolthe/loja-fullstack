@@ -1,7 +1,7 @@
 export default function CardCategoria({ tituloCategory, imgCategory }) {
     return (
-        <div className="w-[90px]">
-            <div className="w-[90px] h-[90px] bg-fontGray rounded-full">
+        <div className="w-[90px] ">
+            <div className="w-[90px] h-[90px] bg-[#d8e2ef] rounded-full flex items-center  justify-center">
                 <img className="" src={imgCategory} />
             </div>
             <p className="text-center text-fontGray flex flex-col mt-[10px]">{tituloCategory}</p>

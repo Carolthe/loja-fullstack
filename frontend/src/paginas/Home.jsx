@@ -6,13 +6,13 @@ import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Newsletter from "../components/Newsletter";
 import home from "../imgMobile/home.webp";
-import livingRoomCategory from "../imgCategory/livingRoomCategory.png";
-import kitchenCategory from "../imgCategory/kitchenCategory.png";
-import bathroomCategory from "../imgCategory/bathroomCategory.png";
-import officeCategory from "../imgCategory/officeCategory.png";
+import sala from "../imagensCategorias/sala.png";
+import quarto from "../imagensCategorias/quarto.png"
+import cozinha from "../imagensCategorias/cozinha.png";
+import banheiro from "../imagensCategorias/banheiro.png";
+import escritorio from "../imagensCategorias/escritorio.png";
 import CardProduto from "../components/CardProduto";
 import Credibilidade from "../components/Credibilidade";
-import quarto from "../imgCategory/quarto.png"
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -37,18 +37,28 @@ export default function Home() {
 
   return (
     <div className="bg-[#EDEEF7]">
-    <div >
-      <img src={home} className="md:hidden mt-[10px]" />
 
-      <div className="flex flex-col text-center items-center">
+
+      <div className="relative">
+        <img src={home} alt="Home" className="" />
+        <div className="absolute inset-0 mt-[150px] text-center text-white px-4">
+          <p className="text-[35px] font-semibold">Shop and fun</p>
+          <p className="mt-2 ">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem incidunt repellat omnis itaque
+          </p>
+          <button className="mt-4 px-6 py-2 border-[1px] border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
+            Ver Produtos
+          </button>
+        </div>
+      </div>
+      <div className="text-center items-center flex flex-col justify-center">
         <h3 className="mt-[px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
           Produtos em Destaque
         </h3>
         <p className="w-[310px] text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
-         Compre nossos produtos mais vendidos e tenha certeza de qualidade!
+          Compre nossos produtos mais vendidos e tenha certeza de qualidade!
         </p>
       </div>
-
       {/* 🔹 Produtos ordenados por preço */}
       <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
         {produtos.length === 0 ? (
@@ -69,11 +79,8 @@ export default function Home() {
       {/* 🔹 BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
         <button
-          className="border-[1px] font-medium bg-[#56595F] text-white text-sm rounded-full w-[105px] h-[45px]"
-          onClick={verMais}
-        >
-          Ver Mais
-        </button>
+          className="border-[1px] font-medium bg-yellow-400 text-white text-sm rounded-full w-[105px] h-[45px]"
+          onClick={verMais}> Ver Mais</button>
       </div>
 
       {/* Categorias */}
@@ -86,16 +93,16 @@ export default function Home() {
           <CardCategoria imgCategory={quarto} tituloCategory="Quarto" />
         </Link>
         <Link to="/sala">
-          <CardCategoria imgCategory={livingRoomCategory} tituloCategory="Sala" />
+          <CardCategoria imgCategory={sala} tituloCategory="Sala" />
         </Link>
         <Link to="/cozinha">
-          <CardCategoria imgCategory={kitchenCategory} tituloCategory="Cozinha" />
+          <CardCategoria imgCategory={cozinha} tituloCategory="Cozinha" />
         </Link>
         <Link to="/banheiro">
-          <CardCategoria imgCategory={bathroomCategory} tituloCategory="Banheiro" />
+          <CardCategoria imgCategory={banheiro} tituloCategory="Banheiro" />
         </Link>
         <Link to="/escritorio">
-          <CardCategoria imgCategory={officeCategory} tituloCategory="Escritorio" />
+          <CardCategoria imgCategory={escritorio} tituloCategory="Escritorio" />
         </Link>
       </div>
 
@@ -103,6 +110,6 @@ export default function Home() {
       <Newsletter />
       <ScrollToTop />
       <Footer />
-    </div></div>
+    </div>
   );
 }

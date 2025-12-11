@@ -103,11 +103,8 @@ export default function Carrinho() {
           </Link>
 
           <button
-            className="w-[310px] h-[50px] text-white bg-highlightGreen mt-3"
-            onClick={limparCarrinho}
-          >
-            Limpar o Carrinho
-          </button>
+            className="w-[310px] h-[50px] text-white bg-orangeMain rounded-[15px] mt-3"
+            onClick={limparCarrinho}> Limpar o Carrinho </button>
         </div>
       )}
 
