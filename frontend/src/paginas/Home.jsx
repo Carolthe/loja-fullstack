@@ -5,14 +5,15 @@ import CardCategoria from "../components/CardCategoria";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import Newsletter from "../components/Newsletter";
+import CardProduto from "../components/CardProduto";
+import Credibilidade from "../components/Credibilidade";
 import home from "../imgMobile/home.webp";
 import sala from "../imagensCategorias/sala.png";
 import quarto from "../imagensCategorias/quarto.png"
 import cozinha from "../imagensCategorias/cozinha.png";
 import banheiro from "../imagensCategorias/banheiro.png";
 import escritorio from "../imagensCategorias/escritorio.png";
-import CardProduto from "../components/CardProduto";
-import Credibilidade from "../components/Credibilidade";
+
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -76,7 +77,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* 🔹 BOTÃO VER MAIS */}
+      {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
         <button
           className="border-[1px] font-medium bg-yellow-400 text-white text-sm rounded-full w-[105px] h-[45px]"

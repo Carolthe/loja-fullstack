@@ -1,13 +1,49 @@
-// // routes/pagamento.js
-// const express = require("express");
-// const axios = require("axios");
+// routes/pagamento.js
+const express = require("express");
+const axios = require("axios");
+const eupago = require("@api/eupago")
 
-// const router = express.Router();
+const router = express.Router();
+
+/**
+ * Criar pagamento no Eupago
+ * Aceita Multibanco e MB WAY
+ */
+router.post("/create", async (req, res) => {
+    
+   const response = await eupago.multibanco({
+    chave: "demo-b290-6d99-6cf0-931",
+    valor: "23.4",
+    per_dup: "0"
+   }).then(data => console.log(data))
+   res.status(201).send(response)
+
+
+});
 
 // /**
-//  * Criar pagamento no Eupago
-//  * Aceita Multibanco e MB WAY
+//  * CALLBACK (WEBHOOK) DO EUPAGO
+//  * Quando o pagamento for confirmado, o Eupago envia uma notificação aqui
 //  */
+// router.post("/callback", (req, res) => {
+//   const dados = req.body;
+
+//   console.log("📌 Pagamento confirmado no Eupago:", dados);
+
+//   // Aqui você deve:
+//   // - atualizar tabela de compras no banco
+//   // - marcar pedido como pago
+//   // - enviar email ou notificação para o cliente, etc.
+
+//   res.status(200).send("OK"); // obrigatório para o Eupago aceitar o callback
+// });
+
+module.exports = router;
+
+/**
+ * Criar pagamento no Eupago
+ * Aceita Multibanco e MB WAY
+ */
 // router.post("/create", async (req, res) => {
 //   try {
 //     const { amount, cliente, metodo, phone } = req.body;
@@ -85,5 +121,3 @@
 
 //   res.status(200).send("OK"); // obrigatório para o Eupago aceitar o callback
 // });
-
-// module.exports = router;

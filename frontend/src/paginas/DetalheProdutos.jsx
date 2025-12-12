@@ -1,5 +1,4 @@
 import Footer from "../components/Footer"
-import produto6 from "../imgProducts/produto6.jpg"
 import product7 from "../imgProducts/product7.jpg"
 import Credibilidade from "../components/Credibilidade"
 import { useLocation } from "react-router-dom";

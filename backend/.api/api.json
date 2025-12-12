@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "eupago",
+      "source": "@eupago/v1.0#c0umm71cmj0bltxn",
+      "integrity": "sha512-TGjO67vjM1N7iorCdU+7X1NnULDQzyI/jaNKtxnusJuCnP/itRIKY4FfC+ZHeZDyi+TwoeOhChLI6XjSwiYrDw==",
+      "installerVersion": "6.1.3"
+    }
+  ]
+}
