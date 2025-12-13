@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import api from "../../services/api.js";
 import CardProduto from "../../components/CardProduto.jsx";
 import Credibilidade from "../../components/Credibilidade.jsx";
-//import DescricaoCategoria from "../components/DescricaoCategoria.jsx";
-//import banheiroLogo from "../logoCategory/banheiroLogo.jpeg"
 
 export default function Banheiro() {
     const [produtos, setProdutos] = useState([])
