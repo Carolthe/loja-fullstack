@@ -3,25 +3,7 @@ import Header from "./Components/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./Pages/Login";
 import Products from "./Pages/Products";
-// import Header from './components/Header'
-// import Home from './paginas/Home'
-// import TodosProdutos from './paginas/TodosProdutos'
-// import Carrinho from './paginas/Carrinho'
-// import Favoritos from './paginas/Favoritos'
-// import Compras from './paginas/Compras'
-// import Contato from './paginas/Contato'
-// import Login from './paginas/Login'
-// import CriarConta from './paginas/CriarConta'
-// import Perfil from './paginas/Perfil'
-// import Pagamento from './paginas/Pagamento'
-// import Localizacao from './paginas/Localizacao'
-// import DetalheProdutos from './paginas/DetalheProdutos'
-// import Sala from './paginas/produtosCategoria/Sala'
-// import Cozinha from './paginas/produtosCategoria/Cozinha'
-// import Banheiro from './paginas/produtosCategoria/Banheiro'
-// import Escritorio from './paginas/produtosCategoria/Escritorio'
-// import RecuperacaoSenha from './paginas/RecuperacaoSenha'
-// import Quarto from './paginas/produtosCategoria/Quarto'
+import NewProduct from "./Pages/NewProduct";
 
 function App() {
   return (
@@ -32,6 +14,8 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/produtos" element={<Products />} />
+          <Route path="/produtos/novo" element={<NewProduct />} />
+          <Route path="/produtos/editar/:id" element={<Products />} />
           {/* <Route path="/" element={<Home />} />
           <Route path="/produtos" element={<TodosProdutos />} />
           <Route path="/carrinho" element={<Carrinho />} />

@@ -19,7 +19,7 @@ const contatoRoutes = require('./routes/contato');
 const localizacaoRoutes = require('./routes/localizacao');
 const comprasRoutes = require('./routes/compras');
 const pagamentoRoutes = require('./routes/pagamento')
-
+const adminRoutes = require('./admin/admin.routes');
 //rotas de acasso a api
 app.use('/api/produtos', produtosRoutes);
 app.use('/api/favoritos', favoritosRoutes);
@@ -31,6 +31,7 @@ app.use('/api/contact', contatoRoutes);
 app.use('/api/localizacao', localizacaoRoutes);
 app.use('/api/compras', comprasRoutes);
 app.use('/api/pagamento', pagamentoRoutes);
+app.use('/admin', adminRoutes);
 
 //porta do servidor guardada na variavel de ambiente .env
 const PORT = process.env.PORT;

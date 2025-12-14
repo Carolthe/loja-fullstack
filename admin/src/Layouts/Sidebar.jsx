@@ -17,7 +17,7 @@ export default function SidebarComponent(props) {
     return null;
   }
   return (
-    <Sidebar aria-label="Default sidebar example">
+    <Sidebar aria-label="Default sidebar example" className="max-h-150">
       <SidebarItems>
         <SidebarItemGroup>
           <SidebarItem
