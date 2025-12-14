@@ -32,7 +32,7 @@ export default function RecuperacaoSenha() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className=" flex justify-center mt-[250px] bg-gray-50">
       <div className="bg-white rounded-2xl shadow-lg w-[350px] p-6 sm:w-[400px]">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           {step === 1 ? "Recuperar senha" : "Nova senha"}
@@ -49,7 +49,7 @@ export default function RecuperacaoSenha() {
             />
             <button
               onClick={solicitarLink}
-              className="w-full py-3 bg-greenMain text-white font-semibold rounded-lg hover:bg-green-600 transition"
+              className="w-full py-3 bg-amareloPrincipal text-white font-semibold rounded-lg hover:bg-yellow-400 transition"
             >
               Enviar link
             </button>

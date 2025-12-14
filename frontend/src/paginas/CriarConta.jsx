@@ -32,14 +32,10 @@ export default function CriarConta() {
       <div>
         <div className="relative bg-[#5769a9] h-[160px] flex flex-col text-center text-white">
           <div className="absolute bottom-0 left-0 w-full h-[45px] bg-white rounded-t-[120px]"></div>
-          <div className="relative z-10">
-            <Link to="/login" className="absolute mt-[15px] left-4 text-2xl hover:text-gray-400">
+            <Link to="/login" className="pt-[20px] pl-[30px]  text-2xl hover:text-gray-400">
             <SlArrowLeft className="text-[20px]"/>
             </Link>
-            <p className="mt-[60px]">Crie sua Conta</p>
-            <div className="flex justify-center ">
-            </div>
-          </div>
+            <p className="mt-[15px]">Crie sua Conta</p>
         </div>
         <form className="flex flex-col items-center pt-[20px] pb-6 space-y-5"
           onSubmit={handleRegister}>
@@ -59,10 +55,10 @@ export default function CriarConta() {
             <label className="font-medium">Confirmar a Senha</label>
             <Input type="password" value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} />
           </div>
-          <button type="submit" className="w-[300px] py-3 bg-orangeMain text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
+          <button type="submit" className="w-[300px] py-3 bg-amareloPrincipal text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
         </form>
         <p className="text-center text-sm text-gray-600 pb-6">Eu já tenho uma conta?{" "}
-          <Link to="/login" className="text-greenMain font-medium hover:underline">Login</Link>
+          <Link to="/login" className="text-azulPrincipal font-medium hover:underline">Login</Link>
         </p>
       </div>
     </div>

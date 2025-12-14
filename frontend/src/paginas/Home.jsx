@@ -38,16 +38,14 @@ export default function Home() {
 
   return (
     <div className="bg-[#EDEEF7]">
-
-
       <div className="relative">
         <img src={home} alt="Home" className="" />
-        <div className="absolute inset-0 mt-[150px] text-center text-white px-4">
-          <p className="text-[35px] font-semibold">Shop and fun</p>
-          <p className="mt-2 ">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem incidunt repellat omnis itaque
+        <div className="absolute inset-0 mt-[150px] text-center text-[#ffffffaf] px-4">
+          <p className="text-[30px] font-semibold">Loja HomeHaven</p>
+          <p className="mt-1 ">
+            Não perca a oportunidade de ter conforto e elegancia em cada canto da sua casa
           </p>
-          <button className="mt-4 px-6 py-2 border-[1px] border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
+          <button className="mt-6 px-6 py-2 border-[1px] border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
             Ver Produtos
           </button>
         </div>
@@ -80,7 +78,7 @@ export default function Home() {
       {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
         <button
-          className="border-[1px] font-medium bg-yellow-400 text-white text-sm rounded-full w-[105px] h-[45px]"
+          className="border-[1px] font-medium bg-amareloPrincipal text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}> Ver Mais</button>
       </div>
 

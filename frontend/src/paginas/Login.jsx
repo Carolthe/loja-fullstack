@@ -43,13 +43,13 @@ export default function Login() {
                         <label className="font-semibold">Sua Senha</label>
                         <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
-                    <button className="w-[300px] h-[45px] mt-[25px] bg-orangeMain text-white text-[19px] rounded-md">Login</button>
+                    <button className="w-[300px] h-[45px] mt-[25px] bg-amareloPrincipal text-white text-[19px] rounded-md">Login</button>
                     <Link to="/password-recovery">
                     <p className="mt-[15px] text-fontGray">Recuperar a Senha</p>
                     </Link>
                     <div className="mt-[150px] mb-6">
                         <Link to="/createAccount">
-                            <p>Não tenho uma conta?{" "}<span className="text-greenMain font-semibold">Inscreva-se</span></p>
+                            <p>Não tenho uma conta?{" "}<span className="text-azulPrincipal font-semibold">Inscreva-se</span></p>
                         </Link>
                     </div>
                 </form>
