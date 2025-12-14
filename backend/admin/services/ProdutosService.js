@@ -63,6 +63,10 @@ class ProdutoService {
       estoque,
       data_criacao,
     });
+    const produto = await produtosRepository.obterProdutoPorId(id);
+    if (!produto) {
+      throw new NotFoundError("Produto não encontrado");
+    }
     const idProduto = await produtosRepository.atualizarProduto(
       produtoAtualizado
     );
