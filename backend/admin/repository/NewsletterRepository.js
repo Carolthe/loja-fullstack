@@ -2,6 +2,8 @@
 
 const Newsletter = require("../Interfaces/NewsletterInterface");
 const pool = require("../../models/db");
+const LogError = require("../utils/LogError");
+const InternalServerError = require("../errors/InternalServerError");
 
 class NewsletterRepository {
   /**
@@ -10,20 +12,25 @@ class NewsletterRepository {
    * @return {Promise<Newsletter[]>}
    */
   async listarNewsletters(pagina, limite) {
-    const [rows] = await pool.query(
-      `SELECT id_newsletter, nome, email FROM newsletters LIMIT ? OFFSET ?`,
-      [limite, (pagina - 1) * limite]
-    );
-    /**
-     * @type {Newsletter[]}
-     */
-    let newsletters = [];
-    if (Array.isArray(rows)) {
-      newsletters = rows.map(Newsletter.fromDb);
-    } else {
-      newsletters = [];
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_newsletter, nome, email FROM newsletters LIMIT ? OFFSET ?`,
+        [limite, (pagina - 1) * limite]
+      );
+      /**
+       * @type {Newsletter[]}
+       */
+      let newsletters = [];
+      if (Array.isArray(rows)) {
+        newsletters = rows.map(Newsletter.fromDb);
+      } else {
+        newsletters = [];
+      }
+      return newsletters;
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao listar newsletters");
     }
-    return newsletters;
   }
 
   /**
@@ -31,13 +38,18 @@ class NewsletterRepository {
    * @return {Promise<Newsletter|null>}
    */
   async obterNewsletterPorId(id) {
-    const [rows] = await pool.query(
-      `SELECT id_newsletter, nome, email, data_inscricao FROM newsletters WHERE id_newsletter = ?`,
-      [id]
-    );
-    if (Array.isArray(rows) && rows.length > 0) {
-      return new Newsletter(rows[0]);
-    } else {
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_newsletter, nome, email, data_inscricao FROM newsletters WHERE id_newsletter = ?`,
+        [id]
+      );
+      if (Array.isArray(rows) && rows.length > 0) {
+        return new Newsletter(rows[0]);
+      } else {
+        return null;
+      }
+    } catch (error) {
+      LogError.log(error, __filename);
       return null;
     }
   }
@@ -60,6 +72,7 @@ class NewsletterRepository {
       }
       return false;
     } catch (error) {
+      LogError.log(error, __filename);
       return false;
     }
   }

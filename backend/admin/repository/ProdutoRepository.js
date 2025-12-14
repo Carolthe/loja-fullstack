@@ -2,6 +2,8 @@
 
 const Produto = require("../Interfaces/ProdutoInterface");
 const pool = require("../../models/db");
+const LogError = require("../utils/LogError");
+const InternalServerError = require("../errors/InternalServerError");
 
 class ProdutoRepository {
   /**
@@ -10,20 +12,25 @@ class ProdutoRepository {
    * @return {Promise<Produto[]>}
    */
   async listarProdutos(pagina, limite) {
-    const [rows] = await pool.query(
-      `SELECT id_produto, nome, preco, estoque FROM produtos LIMIT ? OFFSET ?`,
-      [limite, (pagina - 1) * limite]
-    );
-    /**
-     * @type {Produto[]}
-     */
-    let produtos = [];
-    if (Array.isArray(rows)) {
-      produtos = rows.map(Produto.fromDb);
-    } else {
-      produtos = [];
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_produto, nome, preco, estoque FROM produtos LIMIT ? OFFSET ?`,
+        [limite, (pagina - 1) * limite]
+      );
+      /**
+       * @type {Produto[]}
+       */
+      let produtos = [];
+      if (Array.isArray(rows)) {
+        produtos = rows.map(Produto.fromDb);
+      } else {
+        produtos = [];
+      }
+      return produtos;
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao listar produtos");
     }
-    return produtos;
   }
 
   /**
@@ -31,13 +38,18 @@ class ProdutoRepository {
    * @return {Promise<Produto|null>}
    */
   async obterProdutoPorId(id) {
-    const [rows] = await pool.query(
-      `SELECT id_produto, nome, descricao, preco, imagem, estoque, data_criacao FROM produtos WHERE id_produto = ?`,
-      [id]
-    );
-    if (Array.isArray(rows) && rows.length > 0) {
-      return new Produto(rows[0]);
-    } else {
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_produto, nome, descricao, preco, imagem, estoque, data_criacao FROM produtos WHERE id_produto = ?`,
+        [id]
+      );
+      if (Array.isArray(rows) && rows.length > 0) {
+        return new Produto(rows[0]);
+      } else {
+        return null;
+      }
+    } catch (error) {
+      LogError.log(error, __filename);
       return null;
     }
   }
@@ -67,6 +79,7 @@ class ProdutoRepository {
       }
       throw null;
     } catch (error) {
+      LogError.log(error, __filename);
       throw null;
     }
   }
@@ -96,6 +109,7 @@ class ProdutoRepository {
       }
       return produto.id_produto ?? null;
     } catch (error) {
+      LogError.log(error, __filename);
       return null;
     }
   }
@@ -118,6 +132,7 @@ class ProdutoRepository {
       }
       return false;
     } catch (error) {
+      LogError.log(error, __filename);
       return false;
     }
   }

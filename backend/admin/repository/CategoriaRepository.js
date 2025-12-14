@@ -2,6 +2,8 @@
 
 const Categoria = require("../Interfaces/CategoriaInterface");
 const pool = require("../../models/db");
+const LogError = require("../utils/LogError");
+const InternalServerError = require("../errors/InternalServerError");
 
 class CategoriaRepository {
   /**
@@ -10,20 +12,25 @@ class CategoriaRepository {
    * @return {Promise<Categoria[]>}
    */
   async listarCategorias(pagina, limite) {
-    const [rows] = await pool.query(
-      `SELECT id_categoria, nome FROM categorias LIMIT ? OFFSET ?`,
-      [limite, (pagina - 1) * limite]
-    );
-    /**
-     * @type {Categoria[]}
-     */
-    let categorias = [];
-    if (Array.isArray(rows)) {
-      categorias = rows.map(Categoria.fromDb);
-    } else {
-      categorias = [];
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_categoria, nome FROM categorias LIMIT ? OFFSET ?`,
+        [limite, (pagina - 1) * limite]
+      );
+      /**
+       * @type {Categoria[]}
+       */
+      let categorias = [];
+      if (Array.isArray(rows)) {
+        categorias = rows.map(Categoria.fromDb);
+      } else {
+        categorias = [];
+      }
+      return categorias;
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao listar categorias");
     }
-    return categorias;
   }
 
   /**
@@ -31,13 +38,18 @@ class CategoriaRepository {
    * @return {Promise<Categoria|null>}
    */
   async obterCategoriaPorId(id) {
-    const [rows] = await pool.query(
-      `SELECT id_categoria, nome FROM categorias WHERE id_categoria = ?`,
-      [id]
-    );
-    if (Array.isArray(rows) && rows.length > 0) {
-      return new Categoria(rows[0]);
-    } else {
+    try {
+      const [rows] = await pool.query(
+        `SELECT id_categoria, nome FROM categorias WHERE id_categoria = ?`,
+        [id]
+      );
+      if (Array.isArray(rows) && rows.length > 0) {
+        return new Categoria(rows[0]);
+      } else {
+        return null;
+      }
+    } catch (error) {
+      LogError.log(error, __filename);
       return null;
     }
   }
@@ -60,6 +72,7 @@ class CategoriaRepository {
       }
       throw null;
     } catch (error) {
+      LogError.log(error, __filename);
       throw null;
     }
   }
@@ -82,6 +95,7 @@ class CategoriaRepository {
       }
       return categoria.id_categoria ?? null;
     } catch (error) {
+      LogError.log(error, __filename);
       return null;
     }
   }
@@ -104,6 +118,7 @@ class CategoriaRepository {
       }
       return false;
     } catch (error) {
+      LogError.log(error, __filename);
       return false;
     }
   }
