@@ -1,7 +1,7 @@
 // @ts-check
 const usuarioService = require("../services/UsuariosService");
 const UsuarioListarInput = require("../input/Usuarios/UsuarioListarInput");
-const ControllerBase = require("./ControllerBase");
+const ControllerBase = require("./ControllerBase.js");
 const UsuarioDetalheInput = require("../input/Usuarios/UsuarioDetalheInput");
 const UsuarioCriarInput = require("../input/Usuarios/UsuarioCriarInput");
 const UsuarioAtualizarInput = require("../input/Usuarios/UsuarioAtualizarInput");
