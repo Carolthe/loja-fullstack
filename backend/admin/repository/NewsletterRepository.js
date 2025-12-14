@@ -1,42 +1,42 @@
 // @ts-check
 
-const Usuario = require("../Interfaces/UsuarioInterface");
+const Newsletter = require("../Interfaces/NewsletterInterface");
 const pool = require("../../models/db");
 
-class UsuarioRepository {
+class NewsletterRepository {
   /**
    * @param {number} pagina
    * @param {number} limite
-   * @return {Promise<Usuario[]>}
+   * @return {Promise<Newsletter[]>}
    */
-  async listarUsuarios(pagina, limite) {
+  async listarNewsletters(pagina, limite) {
     const [rows] = await pool.query(
-      `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios LIMIT ? OFFSET ?`,
+      `SELECT id_newsletter, nome, email FROM newsletters LIMIT ? OFFSET ?`,
       [limite, (pagina - 1) * limite]
     );
     /**
-     * @type {Usuario[]}
+     * @type {Newsletter[]}
      */
-    let usuarios = [];
+    let newsletters = [];
     if (Array.isArray(rows)) {
-      usuarios = rows.map(Usuario.fromDb);
+      newsletters = rows.map(Newsletter.fromDb);
     } else {
-      usuarios = [];
+      newsletters = [];
     }
-    return usuarios;
+    return newsletters;
   }
 
   /**
    * @param {number} id
-   * @return {Promise<Usuario|null>}
+   * @return {Promise<Newsletter|null>}
    */
-  async obterUsuarioPorId(id) {
+  async obterNewsletterPorId(id) {
     const [rows] = await pool.query(
-      `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios WHERE id_usuario = ?`,
+      `SELECT id_newsletter, nome, email, data_inscricao FROM newsletters WHERE id_newsletter = ?`,
       [id]
     );
     if (Array.isArray(rows) && rows.length > 0) {
-      return new Usuario(rows[0]);
+      return new Newsletter(rows[0]);
     } else {
       return null;
     }
@@ -46,13 +46,13 @@ class UsuarioRepository {
    * @param {number} id
    * @return {Promise<boolean>}
    */
-  async removerUsuario(id) {
+  async removerNewsletter(id) {
     try {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
       const [removed] = await pool.query(
-        `DELETE FROM usuarios WHERE id_usuario = ?`,
+        `DELETE FROM newsletters WHERE id_newsletter = ?`,
         [id]
       );
       if (removed.affectedRows > 0) {
@@ -65,4 +65,4 @@ class UsuarioRepository {
   }
 }
 
-module.exports = new UsuarioRepository();
+module.exports = new NewsletterRepository();

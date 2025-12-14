@@ -1,42 +1,42 @@
 // @ts-check
 
-const Usuario = require("../Interfaces/UsuarioInterface");
+const Contato = require("../Interfaces/ContatoInterface");
 const pool = require("../../models/db");
 
-class UsuarioRepository {
+class ContatoRepository {
   /**
    * @param {number} pagina
    * @param {number} limite
-   * @return {Promise<Usuario[]>}
+   * @return {Promise<Contato[]>}
    */
-  async listarUsuarios(pagina, limite) {
+  async listarContatos(pagina, limite) {
     const [rows] = await pool.query(
-      `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios LIMIT ? OFFSET ?`,
+      `SELECT id_contato, nome, email FROM contatos LIMIT ? OFFSET ?`,
       [limite, (pagina - 1) * limite]
     );
     /**
-     * @type {Usuario[]}
+     * @type {Contato[]}
      */
-    let usuarios = [];
+    let contatos = [];
     if (Array.isArray(rows)) {
-      usuarios = rows.map(Usuario.fromDb);
+      contatos = rows.map(Contato.fromDb);
     } else {
-      usuarios = [];
+      contatos = [];
     }
-    return usuarios;
+    return contatos;
   }
 
   /**
    * @param {number} id
-   * @return {Promise<Usuario|null>}
+   * @return {Promise<Contato|null>}
    */
-  async obterUsuarioPorId(id) {
+  async obterContatoPorId(id) {
     const [rows] = await pool.query(
-      `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios WHERE id_usuario = ?`,
+      `SELECT id_contato, nome, email, mensagem FROM contatos WHERE id_contato = ?`,
       [id]
     );
     if (Array.isArray(rows) && rows.length > 0) {
-      return new Usuario(rows[0]);
+      return new Contato(rows[0]);
     } else {
       return null;
     }
@@ -46,13 +46,13 @@ class UsuarioRepository {
    * @param {number} id
    * @return {Promise<boolean>}
    */
-  async removerUsuario(id) {
+  async removerContato(id) {
     try {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
       const [removed] = await pool.query(
-        `DELETE FROM usuarios WHERE id_usuario = ?`,
+        `DELETE FROM contatos WHERE id_contato = ?`,
         [id]
       );
       if (removed.affectedRows > 0) {
@@ -65,4 +65,4 @@ class UsuarioRepository {
   }
 }
 
-module.exports = new UsuarioRepository();
+module.exports = new ContatoRepository();
