@@ -8,15 +8,17 @@ import {
 } from "flowbite-react";
 import { BiPieChart, BiShoppingBag, BiTag, BiUser } from "react-icons/bi";
 import { LuAtSign } from "react-icons/lu";
+import useSidebar from "../../Hooks/useSidebar";
 
-export default function Sidebar(props) {
-  const isPropsValid = (() => {
-    if (!props || !props.activeRoute) {
+export default function Sidebar() {
+  const { sidebar } = useSidebar();
+  const isSidebarValid = (() => {
+    if (!sidebar) {
       return false;
     }
     return true;
   })();
-  if (!isPropsValid) {
+  if (!isSidebarValid) {
     return null;
   }
   return (
@@ -29,7 +31,7 @@ export default function Sidebar(props) {
           <SidebarItem
             href="/"
             icon={BiPieChart}
-            active={props.activeRoute === "dashboard"}
+            active={sidebar === "dashboard"}
           >
             Dashboard
           </SidebarItem>
@@ -37,7 +39,7 @@ export default function Sidebar(props) {
             href="/categorias"
             icon={BiTag}
             // label="115"
-            active={props.activeRoute === "categorias"}
+            active={sidebar === "categorias"}
           >
             Categorias
           </SidebarItem>
@@ -45,7 +47,7 @@ export default function Sidebar(props) {
             href="/produtos"
             icon={BiShoppingBag}
             // label="115"
-            active={props.activeRoute === "produtos"}
+            active={sidebar === "produtos"}
           >
             Produtos
           </SidebarItem>
@@ -53,7 +55,7 @@ export default function Sidebar(props) {
             href="/newsletters"
             icon={LuAtSign}
             // label="115"
-            active={props.activeRoute === "newsletters"}
+            active={sidebar === "newsletters"}
           >
             Newsletter
           </SidebarItem>
@@ -61,7 +63,7 @@ export default function Sidebar(props) {
             href="/usuarios"
             icon={BiUser}
             // label="115"
-            active={props.activeRoute === "usuarios"}
+            active={sidebar === "usuarios"}
           >
             Usuários
           </SidebarItem>

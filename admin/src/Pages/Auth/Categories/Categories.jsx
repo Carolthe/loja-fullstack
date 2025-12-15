@@ -4,9 +4,11 @@ import TableList from "../../../Components/TableList";
 import Search from "../../../Components/Layout/Search";
 import { Categorias } from "../../../backend/Categorias";
 import { useEffect, useState } from "react";
+import useSidebar from "../../../Hooks/useSidebar";
 
 export default function Categories() {
   const [isLoading, setIsLoading] = useState(true);
+  const { setSidebar } = useSidebar();
   /**
    * @type {import("../../../backend/Categorias").Categoria[]}
    */
@@ -19,7 +21,19 @@ export default function Categories() {
       setCategorias(data);
       setIsLoading(false);
     });
+    // @ts-ignore
+    setSidebar("categorias");
   }, []);
+
+  const deleteCategory = async (id) => {
+    const categoria = new Categorias();
+    const deleted = await categoria.delete(id);
+    if (deleted) {
+      window.location.reload();
+    } else {
+      alert("Erro ao deletar categoria.");
+    }
+  };
 
   return (
     <div className="w-full">
@@ -28,10 +42,10 @@ export default function Categories() {
         <div className="flex items-center gap-4">
           <Search />
           <a
-            href="/categorias"
+            href="/categorias/novo"
             className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"
           >
-            Novo Categoria
+            Nova Categoria
           </a>
         </div>
       </div>
@@ -52,6 +66,9 @@ export default function Categories() {
           ]}
           items={categorias}
           isLoading={isLoading}
+          permissions={{ canView: true, canEdit: true, canDelete: true }}
+          routeName="categorias"
+          deleteAction={deleteCategory}
         />
       </div>
     </div>

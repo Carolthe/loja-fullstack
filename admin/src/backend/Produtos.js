@@ -28,4 +28,19 @@ export class Produtos extends Admin {
     }
     return data;
   }
+
+  /**
+   * @param {{nome: string, descricao: string, preco: number, imagem: string, estoque: number}} produtoData
+   * @returns {Promise<Produto|null>}
+   */
+  async create(produtoData) {
+    const response = await this.makeRequest({
+      body: produtoData,
+      method: "POST",
+    });
+    if (!response) {
+      return null;
+    }
+    return response;
+  }
 }

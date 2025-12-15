@@ -4,6 +4,7 @@ import TableList from "../../../Components/TableList";
 import Search from "../../../Components/Layout/Search";
 import { Produtos } from "../../../backend/Produtos";
 import { useEffect, useState } from "react";
+import useSidebar from "../../../Hooks/useSidebar";
 
 export default function Products() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +13,7 @@ export default function Products() {
    */
   const valores = [];
   const [produtos, setProdutos] = useState(valores);
+  const { setSidebar } = useSidebar();
 
   useEffect(() => {
     const products = new Produtos();
@@ -19,6 +21,8 @@ export default function Products() {
       setProdutos(data);
       setIsLoading(false);
     });
+    // @ts-ignore
+    setSidebar("produtos");
   }, []);
 
   return (
@@ -62,6 +66,8 @@ export default function Products() {
           ]}
           items={produtos}
           isLoading={isLoading}
+          permissions={{ canView: true, canEdit: true, canDelete: true }}
+          routeName="produtos"
         />
       </div>
     </div>

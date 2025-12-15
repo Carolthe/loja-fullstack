@@ -1,4 +1,14 @@
+// @ts-check
+
+import { useEffect } from "react";
+import useSidebar from "../../Hooks/useSidebar";
+
 export default function Dashboard() {
+  const { setSidebar } = useSidebar();
+  useEffect(() => {
+    // @ts-ignore
+    setSidebar("dashboard");
+  }, []);
   return (
     <div className="flex flex-col">
       <h1 className="text-2xl font-bold text-white">Painel de Controle</h1>

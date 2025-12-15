@@ -3,11 +3,20 @@
 import { Fragment } from "react";
 import AuthLayout from "./Layouts/AuthLayout";
 import GuestLayout from "./Layouts/GuestLayout";
+import { SidebarProvider } from "./Providers/SidebarProvider";
 
 function App() {
-  const isAuthenticated = true; // Replace with actual authentication logic
+  const isAuthenticated = true;
   return (
-    <Fragment>{isAuthenticated ? <AuthLayout /> : <GuestLayout />}</Fragment>
+    <Fragment>
+      {isAuthenticated ? (
+        <SidebarProvider>
+          <AuthLayout />
+        </SidebarProvider>
+      ) : (
+        <GuestLayout />
+      )}
+    </Fragment>
   );
 }
 

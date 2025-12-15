@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Produtos } from "../../../backend/Produtos";
 import useSidebar from "../../../Hooks/useSidebar";
 
-export default function NewProduct() {
+export default function EditProduct() {
   const [nome, setNome] = useState("Produto 01");
   const [descricao, setDescricao] = useState("Descrição Breve do Produto");
   const [preco, setPreco] = useState(50.5);

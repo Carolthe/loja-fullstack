@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Produtos } from "../../../backend/Produtos";
 import useSidebar from "../../../Hooks/useSidebar";
 
-export default function NewProduct() {
+export default function ViewProduct() {
   const [nome, setNome] = useState("Produto 01");
   const [descricao, setDescricao] = useState("Descrição Breve do Produto");
   const [preco, setPreco] = useState(50.5);
@@ -75,7 +75,7 @@ export default function NewProduct() {
         </div>
       </div>
       <div className="mt-4 w-full">
-        <Form onSubmit={handleSubmit} type="enabled">
+        <Form onSubmit={handleSubmit} type="disabled">
           {/* nome, descricao, preco, imagem, estoque */}
           <TextInput
             id="nome"

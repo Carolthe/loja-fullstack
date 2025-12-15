@@ -4,6 +4,7 @@ import TableList from "../../../Components/TableList";
 import Search from "../../../Components/Layout/Search";
 import { Newsletters as BackendNewsletters } from "../../../backend/Newsletters";
 import { useEffect, useState } from "react";
+import useSidebar from "../../../Hooks/useSidebar";
 
 export default function Newsletters() {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +13,7 @@ export default function Newsletters() {
    */
   const valores = [];
   const [newsletters, setNewsletters] = useState(valores);
+  const { setSidebar } = useSidebar();
 
   useEffect(() => {
     const products = new BackendNewsletters();
@@ -21,18 +23,27 @@ export default function Newsletters() {
     });
   }, []);
 
+  useEffect(() => {
+    // @ts-ignore
+    setSidebar("newsletters");
+  }, []);
+
+  const deleteNewsletter = async (id) => {
+    const newsletter = new BackendNewsletters();
+    const deleted = await newsletter.delete(id);
+    if (deleted) {
+      window.location.reload();
+    } else {
+      alert("Erro ao deletar newsletter.");
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Newsletters</h1>
         <div className="flex items-center gap-4">
           <Search />
-          <a
-            href="/newsletters"
-            className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"
-          >
-            Novo Newsletter
-          </a>
         </div>
       </div>
       <div className="mt-4 w-full">
@@ -57,6 +68,9 @@ export default function Newsletters() {
           actionsSize="w-1/4"
           items={newsletters}
           isLoading={isLoading}
+          permissions={{ canView: true, canEdit: false, canDelete: true }}
+          routeName="newsletters"
+          deleteAction={deleteNewsletter}
         />
       </div>
     </div>

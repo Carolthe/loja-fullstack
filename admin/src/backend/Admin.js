@@ -8,19 +8,43 @@ export class Admin {
     throw new Error("Method 'getSufix()' must be implemented.");
   }
 
-  getUrl() {
+  /**
+   * @param {Object} [pathParam]
+   */
+  getUrl(pathParam) {
+    if (pathParam) {
+      const param = Object.values(pathParam);
+      return `http://localhost:3000/admin/${this.getSufix()}/${param}`;
+    }
     return `http://localhost:3000/admin/${this.getSufix()}`;
   }
 
   /**
    * @template T
+   * @param {{body?: Object|null, method?: "GET"|"POST"|"PUT"|"DELETE", pathParams?: { [key: string]: string }}} [options]
    * @return {Promise<T|null>}
    */
-  async makeRequest() {
-    const url = this.getUrl();
-    const response = await fetch(url);
+  async makeRequest(options) {
+    let body = options?.body || null;
+    const method = options?.method || "GET";
+    const pathParams = options?.pathParams || undefined;
+    if (body) {
+      body = JSON.stringify(body);
+    }
+    const url = this.getUrl(pathParams);
+    const response = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
     if (!response.ok) {
       return null;
+    }
+    if (response.status === 204) {
+      // @ts-ignore
+      return true;
     }
     const data = await response.json();
     return data;
