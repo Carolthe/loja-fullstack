@@ -11,9 +11,9 @@ import { useParams } from "react-router-dom";
 
 export default function ViewNewsletter() {
   const { setSidebar } = useSidebar();
-  const { id } = useParams();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const { id } = useParams();
 
   useEffect(() => {
     const products = new BackendNewsletters();

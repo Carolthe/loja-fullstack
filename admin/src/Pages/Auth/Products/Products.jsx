@@ -5,6 +5,7 @@ import Search from "../../../Components/Layout/Search";
 import { Produtos } from "../../../backend/Produtos";
 import { useEffect, useState } from "react";
 import useSidebar from "../../../Hooks/useSidebar";
+import { useSearchParams } from "react-router-dom";
 
 export default function Products() {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,16 +15,29 @@ export default function Products() {
   const valores = [];
   const [produtos, setProdutos] = useState(valores);
   const { setSidebar } = useSidebar();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const products = new Produtos();
-    products.getAllProducts().then((data) => {
-      setProdutos(data);
-      setIsLoading(false);
-    });
+    products
+      .getAllProducts(parseInt(String(searchParams.get("pagina") || 1)))
+      .then((data) => {
+        setProdutos(data);
+        setIsLoading(false);
+      });
     // @ts-ignore
     setSidebar("produtos");
   }, []);
+
+  const deleteProduto = async (id) => {
+    const produtos = new Produtos();
+    const deleted = await produtos.delete(id);
+    if (deleted) {
+      window.location.reload();
+    } else {
+      alert("Erro ao deletar produtos.");
+    }
+  };
 
   return (
     <div className="w-full">
@@ -68,6 +82,7 @@ export default function Products() {
           isLoading={isLoading}
           permissions={{ canView: true, canEdit: true, canDelete: true }}
           routeName="produtos"
+          deleteAction={deleteProduto}
         />
       </div>
     </div>

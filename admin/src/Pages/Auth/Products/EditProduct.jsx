@@ -6,29 +6,22 @@ import Search from "../../../Components/Layout/Search";
 import { useEffect, useState } from "react";
 import { Produtos } from "../../../backend/Produtos";
 import useSidebar from "../../../Hooks/useSidebar";
+import UploadImage from "../../../Components/UploadImage";
+import { useParams } from "react-router-dom";
 
 export default function EditProduct() {
-  const [nome, setNome] = useState("Produto 01");
-  const [descricao, setDescricao] = useState("Descrição Breve do Produto");
-  const [preco, setPreco] = useState(50.5);
-  const [imagem, setImagem] = useState("https://via.placeholder.com/150");
-  const [estoque, setEstoque] = useState(10);
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [preco, setPreco] = useState(0);
+  const [imagem, setImagem] = useState("");
+  const [estoque, setEstoque] = useState(0);
   const { setSidebar } = useSidebar();
+  const { id } = useParams();
 
   const validateForm = () => {
     const isNomeValid = nome.trim().length > 0;
-    const isDescricaoValid = descricao.trim().length > 0;
-    const isPrecoValid = preco > 0;
-    const isImagemValid = imagem.trim().length > 0;
-    const isEstoqueValid = estoque >= 0;
 
-    return (
-      isNomeValid &&
-      isDescricaoValid &&
-      isPrecoValid &&
-      isImagemValid &&
-      isEstoqueValid
-    );
+    return isNomeValid;
   };
 
   const handleSubmit = async (e) => {
@@ -36,29 +29,55 @@ export default function EditProduct() {
 
     if (validateForm()) {
       const produto = new Produtos();
-      const created = await produto.create({
-        nome,
-        descricao,
-        preco,
-        imagem,
-        estoque,
-      });
+      if (!id) {
+        return;
+      }
+      const created = await produto.update(
+        {
+          nome,
+          descricao,
+          preco: parseFloat(String(preco)),
+          imagem,
+          estoque: parseInt(String(estoque)),
+        },
+        id,
+      );
       if (created) {
-        alert("Produto criado com sucesso!");
         window.location.href = "/produtos";
         return;
       }
-      alert("Erro ao criar o produto. Tente novamente.");
+      alert("Erro ao atualizar o produto. Tente novamente.");
     } else {
-      // Show validation errors
       alert("Por favor, preencha todos os campos corretamente.");
     }
   };
 
   useEffect(() => {
+    const produtos = new Produtos();
+    if (!id) {
+      return;
+    }
+    produtos.getById(id).then(
+      /**
+       * @param {{nome: string, descricao: string, preco: number, imagem: string, estoque: number}|null} data
+       */
+      (data) => {
+        if (data) {
+          setNome(data.nome);
+          setDescricao(data.descricao);
+          setPreco(data.preco);
+          setImagem(data.imagem);
+          setEstoque(data.estoque);
+        }
+      },
+    );
     // @ts-ignore
     setSidebar("produtos");
   }, []);
+
+  if (!id) {
+    return <div>Produto não encontrado.</div>;
+  }
 
   return (
     <div className="w-full">
@@ -101,14 +120,7 @@ export default function EditProduct() {
             onChange={(e) => setPreco(parseFloat(e.target.value))}
             required
           />
-          <TextInput
-            id="imagem"
-            type="text"
-            placeholder="URL da Imagem do Produto"
-            value={imagem}
-            onChange={(e) => setImagem(e.target.value)}
-            required
-          />
+          <UploadImage onUploaded={setImagem} imagemUrl={imagem} />
           <TextInput
             id="estoque"
             type="number"

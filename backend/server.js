@@ -5,7 +5,7 @@ const app = express();
 //variavel de ambiente
 require('dotenv').config();
 
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+app.use(cors({ origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL] }));
 app.use(express.json());
  
 //ligação com os arquivos separados na pasta routes
@@ -32,6 +32,7 @@ app.use('/api/localizacao', localizacaoRoutes);
 app.use('/api/compras', comprasRoutes);
 app.use('/api/pagamento', pagamentoRoutes);
 app.use('/admin', adminRoutes);
+app.use('/public', express.static('public'));
 
 //porta do servidor guardada na variavel de ambiente .env
 const PORT = process.env.PORT;

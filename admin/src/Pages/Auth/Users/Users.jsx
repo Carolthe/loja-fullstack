@@ -25,6 +25,16 @@ export default function Users() {
     setSidebar("usuarios");
   }, []);
 
+  const deleteUsers = async (id) => {
+    const usuarios = new Usuarios();
+    const deleted = await usuarios.delete(id);
+    if (deleted) {
+      window.location.reload();
+    } else {
+      alert("Erro ao deletar usuarios.");
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
@@ -35,6 +45,7 @@ export default function Users() {
       </div>
       <div className="mt-4 w-full">
         <TableList
+          deleteAction={deleteUsers}
           actionsSize="w-1/6"
           columns={[
             {

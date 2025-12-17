@@ -6,59 +6,39 @@ import Search from "../../../Components/Layout/Search";
 import { useEffect, useState } from "react";
 import { Produtos } from "../../../backend/Produtos";
 import useSidebar from "../../../Hooks/useSidebar";
+import UploadImage from "../../../Components/UploadImage";
+import { useParams } from "react-router-dom";
 
 export default function ViewProduct() {
-  const [nome, setNome] = useState("Produto 01");
-  const [descricao, setDescricao] = useState("Descrição Breve do Produto");
-  const [preco, setPreco] = useState(50.5);
-  const [imagem, setImagem] = useState("https://via.placeholder.com/150");
-  const [estoque, setEstoque] = useState(10);
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [preco, setPreco] = useState(0);
+  const [imagem, setImagem] = useState("");
+  const [estoque, setEstoque] = useState(0);
   const { setSidebar } = useSidebar();
-
-  const validateForm = () => {
-    const isNomeValid = nome.trim().length > 0;
-    const isDescricaoValid = descricao.trim().length > 0;
-    const isPrecoValid = preco > 0;
-    const isImagemValid = imagem.trim().length > 0;
-    const isEstoqueValid = estoque >= 0;
-
-    return (
-      isNomeValid &&
-      isDescricaoValid &&
-      isPrecoValid &&
-      isImagemValid &&
-      isEstoqueValid
-    );
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      const produto = new Produtos();
-      const created = await produto.create({
-        nome,
-        descricao,
-        preco,
-        imagem,
-        estoque,
-      });
-      if (created) {
-        alert("Produto criado com sucesso!");
-        window.location.href = "/produtos";
-        return;
-      }
-      alert("Erro ao criar o produto. Tente novamente.");
-    } else {
-      // Show validation errors
-      alert("Por favor, preencha todos os campos corretamente.");
-    }
-  };
+  const { id } = useParams();
 
   useEffect(() => {
+    const products = new Produtos();
+    if (!id) {
+      return;
+    }
+    products.getById(id).then((data) => {
+      if (data) {
+        setNome(data.nome);
+        setDescricao(data.descricao);
+        setPreco(data.preco);
+        setImagem(data.imagem);
+        setEstoque(data.estoque);
+      }
+    });
     // @ts-ignore
     setSidebar("produtos");
   }, []);
+
+  if (!id) {
+    return <div>Produto não encontrado.</div>;
+  }
 
   return (
     <div className="w-full">
@@ -75,9 +55,10 @@ export default function ViewProduct() {
         </div>
       </div>
       <div className="mt-4 w-full">
-        <Form onSubmit={handleSubmit} type="disabled">
+        <Form type="disabled">
           {/* nome, descricao, preco, imagem, estoque */}
           <TextInput
+            disabled={true}
             id="nome"
             type="text"
             placeholder="Nome do Produto"
@@ -86,6 +67,7 @@ export default function ViewProduct() {
             required
           />
           <TextInput
+            disabled={true}
             id="descricao"
             type="text"
             placeholder="Descrição do Produto"
@@ -94,6 +76,7 @@ export default function ViewProduct() {
             required
           />
           <TextInput
+            disabled={true}
             id="preco"
             type="number"
             placeholder="Preço do Produto"
@@ -101,15 +84,9 @@ export default function ViewProduct() {
             onChange={(e) => setPreco(parseFloat(e.target.value))}
             required
           />
+          <UploadImage onUploaded={setImagem} imagemUrl={imagem} />
           <TextInput
-            id="imagem"
-            type="text"
-            placeholder="URL da Imagem do Produto"
-            value={imagem}
-            onChange={(e) => setImagem(e.target.value)}
-            required
-          />
-          <TextInput
+            disabled={true}
             id="estoque"
             type="number"
             placeholder="Estoque do Produto"

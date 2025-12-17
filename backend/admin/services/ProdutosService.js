@@ -2,6 +2,7 @@
 const ProdutoListarInput = require("../input/Produtos/ProdutoListarInput");
 const Produto = require("../Interfaces/ProdutoInterface");
 const produtosRepository = require("../repository/ProdutoRepository");
+const uploadsService = require("../services/UploadsService");
 const NotFoundError = require("../errors/NotFoundError");
 const ProdutoAtualizarInput = require("../input/Produtos/ProdutoAtualizarInput");
 const ProdutoCriarInput = require("../input/Produtos/ProdutoCriarInput");
@@ -32,6 +33,10 @@ class ProdutoService {
    * @param {ProdutoCriarInput} produto
    */
   async criar(produto) {
+    const tempFilePath = uploadsService.getTempFilePathFromUrl(produto.imagem);
+    uploadsService.makeUploadPermanent("imagens", tempFilePath);
+    const imagemUrl = uploadsService.getPermanentFilePathFromUrl(produto.imagem, "imagens");
+    produto.imagem = imagemUrl;
     const novoProduto = new Produto({
       nome: produto.nome,
       descricao: produto.descricao,

@@ -1,21 +1,23 @@
 // @ts-check
 
 import { TextInput } from "flowbite-react";
-import Form from "../../../Components/Form";
-import Search from "../../../Components/Layout/Search";
 import { useEffect, useState } from "react";
 import { Produtos } from "../../../backend/Produtos";
+import Form from "../../../Components/Form";
+import Search from "../../../Components/Layout/Search";
+import UploadImage from "../../../Components/UploadImage";
 import useSidebar from "../../../Hooks/useSidebar";
 
 export default function NewProduct() {
-  const [nome, setNome] = useState("Produto 01");
-  const [descricao, setDescricao] = useState("Descrição Breve do Produto");
-  const [preco, setPreco] = useState(50.5);
-  const [imagem, setImagem] = useState("https://via.placeholder.com/150");
-  const [estoque, setEstoque] = useState(10);
+  const [nome, setNome] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [preco, setPreco] = useState(0);
+  const [imagem, setImagem] = useState("");
+  const [estoque, setEstoque] = useState(0);
   const { setSidebar } = useSidebar();
 
   const validateForm = () => {
+    console.log(imagem);
     const isNomeValid = nome.trim().length > 0;
     const isDescricaoValid = descricao.trim().length > 0;
     const isPrecoValid = preco > 0;
@@ -101,14 +103,7 @@ export default function NewProduct() {
             onChange={(e) => setPreco(parseFloat(e.target.value))}
             required
           />
-          <TextInput
-            id="imagem"
-            type="text"
-            placeholder="URL da Imagem do Produto"
-            value={imagem}
-            onChange={(e) => setImagem(e.target.value)}
-            required
-          />
+          <UploadImage onUploaded={setImagem} />
           <TextInput
             id="estoque"
             type="number"

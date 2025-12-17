@@ -34,7 +34,6 @@ export default function EditCategory() {
         id,
       );
       if (created) {
-        alert("Categoria criada com sucesso!");
         window.location.href = "/categorias";
         return;
       }
