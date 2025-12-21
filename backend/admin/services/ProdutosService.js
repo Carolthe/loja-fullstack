@@ -11,10 +11,12 @@ const InternalServerError = require("../errors/InternalServerError");
 class ProdutoService {
   /**
    * @param {ProdutoListarInput} query
-   * @return {Promise<Produto[]>}
+   * @return {Promise<{data: Produto[], meta: any}>}
    */
-  async listar({ limite, pagina }) {
-    return await produtosRepository.listarProdutos(pagina, limite);
+  async listar({ limite, pagina, busca }) {
+    const data = await produtosRepository.listarProdutos(pagina, limite, busca);
+    const meta = await produtosRepository.contarProdutos(pagina, limite, busca);
+    return { data, meta };
   }
 
   /**
@@ -35,7 +37,10 @@ class ProdutoService {
   async criar(produto) {
     const tempFilePath = uploadsService.getTempFilePathFromUrl(produto.imagem);
     uploadsService.makeUploadPermanent("imagens", tempFilePath);
-    const imagemUrl = uploadsService.getPermanentFilePathFromUrl(produto.imagem, "imagens");
+    const imagemUrl = uploadsService.getPermanentFilePathFromUrl(
+      produto.imagem,
+      "imagens"
+    );
     produto.imagem = imagemUrl;
     const novoProduto = new Produto({
       nome: produto.nome,

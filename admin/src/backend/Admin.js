@@ -57,4 +57,57 @@ export class Admin {
     const data = await response.json();
     return data;
   }
+
+  // Métodos comuns de CRUD podem ser adicionados aqui
+  async getAll({ page = 1, limit = 10, search = "" } = {}) {
+    const data = await this.makeRequest({
+      queryParams: {
+        pagina: String(page),
+        limite: String(limit),
+        busca: search,
+      },
+    });
+    if (!data) {
+      return [];
+    }
+    return data;
+  }
+
+  async create(body) {
+    const response = await this.makeRequest({
+      body,
+      method: "POST",
+    });
+    return response !== null;
+  }
+
+  async getById(id) {
+    const data = await this.makeRequest({
+      pathParams: {
+        id: String(id),
+      },
+    });
+    return data;
+  }
+
+  async update(body, id) {
+    const response = await this.makeRequest({
+      body: body,
+      method: "PUT",
+      pathParams: {
+        id: String(id),
+      },
+    });
+    return response !== null;
+  }
+
+  async delete(id) {
+    const response = await this.makeRequest({
+      method: "DELETE",
+      pathParams: {
+        id: String(id),
+      },
+    });
+    return response !== null;
+  }
 }

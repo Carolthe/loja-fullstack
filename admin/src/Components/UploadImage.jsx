@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 /**
  * @param {{
  *   onUploaded: (tempId: string) => void
- *  imagemUrl?: string
+ *  imagemUrl?: string,
+ *  disabled?: boolean
  * }} props
  */
-export default function UploadImage({ onUploaded, imagemUrl }) {
+export default function UploadImage({
+  onUploaded,
+  imagemUrl,
+  disabled = false,
+}) {
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -57,7 +62,7 @@ export default function UploadImage({ onUploaded, imagemUrl }) {
     <div className="flex w-full items-center justify-center">
       <Label
         htmlFor="dropzone-file"
-        className="relative flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        className={`relative flex h-64 w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600 ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
       >
         {preview ? (
           <img
@@ -102,6 +107,7 @@ export default function UploadImage({ onUploaded, imagemUrl }) {
           className="hidden"
           accept="image/*"
           onChange={handleChange}
+          disabled={disabled}
         />
       </Label>
 

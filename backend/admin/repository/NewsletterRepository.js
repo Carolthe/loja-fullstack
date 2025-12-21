@@ -11,11 +11,11 @@ class NewsletterRepository {
    * @param {number} limite
    * @return {Promise<Newsletter[]>}
    */
-  async listarNewsletters(pagina, limite) {
+  async listarNewsletters(pagina, limite, busca) {
     try {
       const [rows] = await pool.query(
-        `SELECT id_newsletter, nome, email FROM newsletters LIMIT ? OFFSET ?`,
-        [limite, (pagina - 1) * limite]
+        `SELECT id_newsletter, nome, email FROM newsletters WHERE nome LIKE ? LIMIT ? OFFSET ?`,
+        [`${busca}%`, limite, (pagina - 1) * limite]
       );
       /**
        * @type {Newsletter[]}
@@ -74,6 +74,24 @@ class NewsletterRepository {
     } catch (error) {
       LogError.log(error, __filename);
       return false;
+    }
+  }
+
+  async contarNewsletters(pagina, limite, busca) {
+    try {
+      const [rows] = await pool.query(
+        `SELECT COUNT(*) as total FROM newsletters WHERE nome LIKE ?`,
+        [`${busca}%`]
+      );
+      return {
+        current_page: pagina,
+        per_page: limite,
+        total_items: rows[0].total,
+        total_pages: Math.ceil(rows[0].total / limite),
+      };
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao contar newsletters");
     }
   }
 }

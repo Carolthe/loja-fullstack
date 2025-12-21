@@ -41,7 +41,6 @@ export default function ViewUser() {
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Usuarios</h1>
         <div className="flex items-center gap-4">
-          <Search />
           <a
             href="/usuarios"
             className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"

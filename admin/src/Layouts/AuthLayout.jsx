@@ -15,10 +15,14 @@ import Products from "../Pages/Auth/Products/Products";
 import ViewProduct from "../Pages/Auth/Products/ViewProduct";
 import Users from "../Pages/Auth/Users/Users";
 import ViewUser from "../Pages/Auth/Users/ViewUser";
+import { Toast, ToastToggle } from "flowbite-react";
+import { HiCheck, HiExclamation, HiX } from "react-icons/hi";
+import useToast from "../Hooks/useToast";
 
 export default function AuthLayout() {
+  const { toast, message } = useToast();
   return (
-    <div>
+    <div className="relative">
       <Header />
       <div className="flex min-h-[calc(100vh-56px)] min-w-screen bg-gray-800">
         <div className="mx-25 mt-25 flex w-full gap-10">
@@ -68,6 +72,35 @@ export default function AuthLayout() {
             <div className="mt-4 w-full"></div>
           </div>
         </div>
+      </div>
+      <div className="absolute top-8 right-8 flex flex-col gap-4">
+        {toast === "success" && message !== "" && (
+          <Toast>
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+              <HiCheck className="h-5 w-5" />
+            </div>
+            <div className="ml-3 text-sm font-normal">{message}</div>
+            <ToastToggle className="cursor-pointer" />
+          </Toast>
+        )}
+        {toast === "danger" && message !== "" && (
+          <Toast>
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+              <HiX className="h-5 w-5" />
+            </div>
+            <div className="ml-3 text-sm font-normal">{message}</div>
+            <ToastToggle className="cursor-pointer" />
+          </Toast>
+        )}
+        {toast === "warning" && message !== "" && (
+          <Toast>
+            <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500 dark:bg-orange-700 dark:text-orange-200">
+              <HiExclamation className="h-5 w-5" />
+            </div>
+            <div className="ml-3 text-sm font-normal">{message}</div>
+            <ToastToggle className="cursor-pointer" />
+          </Toast>
+        )}
       </div>
     </div>
   );

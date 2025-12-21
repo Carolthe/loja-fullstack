@@ -11,11 +11,11 @@ class ProdutoRepository {
    * @param {number} limite
    * @return {Promise<Produto[]>}
    */
-  async listarProdutos(pagina, limite) {
+  async listarProdutos(pagina, limite, busca) {
     try {
       const [rows] = await pool.query(
-        `SELECT id_produto, nome, preco, estoque FROM produtos LIMIT ? OFFSET ?`,
-        [limite, (pagina - 1) * limite]
+        `SELECT id_produto, nome, preco, estoque FROM produtos WHERE nome LIKE ? LIMIT ? OFFSET ?`,
+        [`${busca}%`, limite, (pagina - 1) * limite]
       );
       /**
        * @type {Produto[]}
@@ -134,6 +134,24 @@ class ProdutoRepository {
     } catch (error) {
       LogError.log(error, __filename);
       return false;
+    }
+  }
+
+  async contarProdutos(pagina, limite, busca) {
+    try {
+      const [rows] = await pool.query(
+        `SELECT COUNT(*) as total FROM produtos WHERE nome LIKE ?`,
+        [`${busca}%`]
+      );
+      return {
+        current_page: pagina,
+        per_page: limite,
+        total_items: rows[0].total,
+        total_pages: Math.ceil(rows[0].total / limite),
+      };
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao contar produtos");
     }
   }
 }

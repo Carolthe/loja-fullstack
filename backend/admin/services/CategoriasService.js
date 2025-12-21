@@ -10,10 +10,20 @@ const InternalServerError = require("../errors/InternalServerError");
 class CategoriaService {
   /**
    * @param {CategoriaListarInput} query
-   * @return {Promise<Categoria[]>}
+   * @return {Promise<{data: Categoria[], meta: {current_page: number, per_page: number, total_items: number, total_pages: number}}>}
    */
-  async listar({ limite, pagina }) {
-    return await categoriasRepository.listarCategorias(pagina, limite);
+  async listar({ limite, pagina, busca }) {
+    const data = await categoriasRepository.listarCategorias(
+      pagina,
+      limite,
+      busca
+    );
+    const meta = await categoriasRepository.contarCategorias(
+      pagina,
+      limite,
+      busca
+    );
+    return { data, meta };
   }
 
   /**

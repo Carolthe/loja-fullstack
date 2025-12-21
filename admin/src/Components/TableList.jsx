@@ -8,6 +8,13 @@
  */
 
 /**
+ * @typedef PaginationOptions
+ * @property {number} currentPage
+ * @property {number} totalPages
+ * @property {() => void} onPageChange
+ */
+
+/**
  * @typedef TableListProps
  * @property {Column[]} columns
  * @property {Object[]} items
@@ -19,6 +26,7 @@
  * @property {boolean} permissions.canDelete
  * @property {string} routeName
  * @property {(id: number|string) => Promise<void>} deleteAction
+ * @property {PaginationOptions} paginationOptions
  */
 
 import {
@@ -37,13 +45,14 @@ import { HiEye, HiOutlinePencilAlt, HiTrash } from "react-icons/hi";
  * @param {TableListProps} props
  */
 export default function TableList({
-  columns,
   items,
+  columns,
+  routeName,
   isLoading,
   actionsSize,
   permissions,
-  routeName,
   deleteAction,
+  paginationOptions,
 }) {
   if (isLoading) {
     return (
@@ -115,7 +124,7 @@ export default function TableList({
           </TableBody>
         </Table>
       </div>
-      <Pagination currentPage={1} totalPages={100} onPageChange={() => {}} />
+      <Pagination {...paginationOptions} />
     </div>
   );
 }

@@ -5,25 +5,36 @@ import Search from "../../../Components/Layout/Search";
 import { Newsletters as BackendNewsletters } from "../../../backend/Newsletters";
 import { useEffect, useState } from "react";
 import useSidebar from "../../../Hooks/useSidebar";
+import useToast from "../../../Hooks/useToast";
 
 export default function Newsletters() {
   const [isLoading, setIsLoading] = useState(true);
+  const { setSidebar } = useSidebar();
+  const { setMessage, setToast } = useToast();
   /**
    * @type {import("../../../backend/Newsletters").Newsletter[]}
    */
-  const valores = [];
-  const [newsletters, setNewsletters] = useState(valores);
-  const { setSidebar } = useSidebar();
+  const newslettersValores = [];
+  const [newsletters, setNewsletters] = useState(newslettersValores);
+  const [meta, setMeta] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    totalItems: 0,
+    perPage: 10,
+  });
 
   useEffect(() => {
-    const products = new BackendNewsletters();
-    products.getAllNewsletters().then((data) => {
-      setNewsletters(data);
+    const categories = new BackendNewsletters();
+    categories.getAll().then((data) => {
+      setNewsletters(data.data);
+      setMeta({
+        currentPage: data.meta.current_page ?? 1,
+        perPage: data.meta.per_page ?? 10,
+        totalItems: data.meta.total_items ?? 0,
+        totalPages: data.meta.total_pages > 0 ? data.meta.total_pages : 1,
+      });
       setIsLoading(false);
     });
-  }, []);
-
-  useEffect(() => {
     // @ts-ignore
     setSidebar("newsletters");
   }, []);
@@ -32,10 +43,35 @@ export default function Newsletters() {
     const newsletter = new BackendNewsletters();
     const deleted = await newsletter.delete(id);
     if (deleted) {
-      window.location.reload();
+      // @ts-ignore
+      setToast("success");
+      // @ts-ignore
+      setMessage("Newsletter deletada com sucesso.");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } else {
-      alert("Erro ao deletar newsletter.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Erro ao deletar a newsletter.");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     }
+  };
+
+  const handleSearch = ({ page = 1, search = "" }) => {
+    const categories = new BackendNewsletters();
+    categories.getAll({ search: search, page: page }).then((data) => {
+      setNewsletters(data.data);
+      setMeta({
+        currentPage: data.meta.current_page ?? 1,
+        perPage: data.meta.per_page ?? 10,
+        totalItems: data.meta.total_items ?? 0,
+        totalPages: data.meta.total_pages > 0 ? data.meta.total_pages : 1,
+      });
+    });
   };
 
   return (
@@ -43,7 +79,7 @@ export default function Newsletters() {
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Newsletters</h1>
         <div className="flex items-center gap-4">
-          <Search />
+          <Search handleSearch={handleSearch} />
         </div>
       </div>
       <div className="mt-4 w-full">
@@ -71,6 +107,11 @@ export default function Newsletters() {
           permissions={{ canView: true, canEdit: false, canDelete: true }}
           routeName="newsletters"
           deleteAction={deleteNewsletter}
+          paginationOptions={{
+            currentPage: meta.currentPage,
+            totalPages: meta.totalPages,
+            onPageChange: (page) => handleSearch({ page }),
+          }}
         />
       </div>
     </div>

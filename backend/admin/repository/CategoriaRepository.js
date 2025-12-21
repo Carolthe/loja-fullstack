@@ -11,11 +11,11 @@ class CategoriaRepository {
    * @param {number} limite
    * @return {Promise<Categoria[]>}
    */
-  async listarCategorias(pagina, limite) {
+  async listarCategorias(pagina, limite, busca) {
     try {
       const [rows] = await pool.query(
-        `SELECT id_categoria, nome FROM categorias LIMIT ? OFFSET ?`,
-        [limite, (pagina - 1) * limite]
+        `SELECT id_categoria, nome FROM categorias WHERE nome LIKE ? LIMIT ? OFFSET ?`,
+        [`${busca}%`, limite, (pagina - 1) * limite]
       );
       /**
        * @type {Categoria[]}
@@ -120,6 +120,24 @@ class CategoriaRepository {
     } catch (error) {
       LogError.log(error, __filename);
       return false;
+    }
+  }
+
+  async contarCategorias(pagina, limite, busca) {
+    try {
+      const [rows] = await pool.query(
+        `SELECT COUNT(*) as total FROM categorias WHERE nome LIKE ?`,
+        [`${busca}%`]
+      );
+      return {
+        current_page: pagina,
+        per_page: limite,
+        total_items: rows[0].total,
+        total_pages: Math.ceil(rows[0].total / limite),
+      };
+    } catch (error) {
+      LogError.log(error, __filename);
+      throw new InternalServerError("Erro ao contar categorias");
     }
   }
 }

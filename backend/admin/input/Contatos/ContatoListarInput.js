@@ -13,20 +13,27 @@ class ContatoListarInput {
   limite;
 
   /**
-   * @param {{ pagina: number, limite: number }} query
+   * @param {string} busca
    */
-  constructor({ pagina, limite }) {
+  busca;
+
+  /**
+   * @param {{ pagina: number, limite: number, busca: string }} query
+   */
+  constructor({ pagina, limite, busca }) {
     this.pagina = pagina;
     this.limite = limite;
+    this.busca = busca;
   }
 
   /**
    *
-   * @param {{ pagina?: number, limite?: number }} query
+   * @param {{ pagina?: number, limite?: number, busca?: string }} query
    */
-  static fromQuery({ limite, pagina }) {
+  static fromQuery({ limite, pagina, busca }) {
     const limiteNumber = limite ? Number(limite) : 10;
     const paginaNumber = pagina ? Number(pagina) : 1;
+    const buscaString = busca ? String(busca) : "";
 
     if (isNaN(limiteNumber) || limiteNumber <= 0) {
       throw new ValidationError("Limite inválido");
@@ -39,6 +46,7 @@ class ContatoListarInput {
     return new ContatoListarInput({
       limite: limiteNumber,
       pagina: paginaNumber,
+      busca: buscaString,
     });
   }
 }

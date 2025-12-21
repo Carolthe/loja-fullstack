@@ -8,6 +8,7 @@ import { Produtos } from "../../../backend/Produtos";
 import useSidebar from "../../../Hooks/useSidebar";
 import UploadImage from "../../../Components/UploadImage";
 import { useParams } from "react-router-dom";
+import useToast from "../../../Hooks/useToast";
 
 export default function EditProduct() {
   const [nome, setNome] = useState("");
@@ -17,6 +18,7 @@ export default function EditProduct() {
   const [estoque, setEstoque] = useState(0);
   const { setSidebar } = useSidebar();
   const { id } = useParams();
+  const { setMessage, setToast } = useToast();
 
   const validateForm = () => {
     const isNomeValid = nome.trim().length > 0;
@@ -43,12 +45,24 @@ export default function EditProduct() {
         id,
       );
       if (created) {
-        window.location.href = "/produtos";
+        // @ts-ignore
+        setToast("success");
+        // @ts-ignore
+        setMessage("Produto atualizado com sucesso.");
+        setTimeout(() => {
+          window.location.href = "/produtos";
+        }, 500);
         return;
       }
-      alert("Erro ao atualizar o produto. Tente novamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Error ao atualizar o produto.");
     } else {
-      alert("Por favor, preencha todos os campos corretamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Por favor, preencha todos os campos corretamente.");
     }
   };
 
@@ -84,7 +98,6 @@ export default function EditProduct() {
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Novo Produto</h1>
         <div className="flex items-center gap-4">
-          <Search />
           <a
             href="/produtos"
             className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"

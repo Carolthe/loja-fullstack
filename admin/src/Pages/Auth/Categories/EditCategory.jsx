@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import { Categorias } from "../../../backend/Categorias";
 import { useParams } from "react-router-dom";
 import useSidebar from "../../../Hooks/useSidebar";
+import useToast from "../../../Hooks/useToast";
 
 export default function EditCategory() {
   const [nome, setNome] = useState("Categoria 01");
   const { id } = useParams();
   const { setSidebar } = useSidebar();
+  const { setMessage, setToast } = useToast();
 
   const validateForm = () => {
     const isNomeValid = nome.trim().length > 0;
@@ -34,12 +36,24 @@ export default function EditCategory() {
         id,
       );
       if (created) {
-        window.location.href = "/categorias";
+        // @ts-ignore
+        setToast("success");
+        // @ts-ignore
+        setMessage("Categoria atualizada com sucesso.");
+        setTimeout(() => {
+          window.location.href = "/categorias";
+        }, 500);
         return;
       }
-      alert("Erro ao criar a categoria. Tente novamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Erro ao atualizar a categoria.");
     } else {
-      alert("Por favor, preencha todos os campos corretamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Por favor, preencha todos os campos corretamente.");
     }
   };
 
@@ -71,7 +85,6 @@ export default function EditCategory() {
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Novo Categoria</h1>
         <div className="flex items-center gap-4">
-          <Search />
           <a
             href="/categorias"
             className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"
@@ -81,7 +94,7 @@ export default function EditCategory() {
         </div>
       </div>
       <div className="mt-4 w-full">
-        <Form onSubmit={handleSubmit} type="enabled">
+        <Form onSubmit={handleSubmit} type="enabled" linkReturn="/categorias">
           {/* nome */}
           <TextInput
             id="nome"

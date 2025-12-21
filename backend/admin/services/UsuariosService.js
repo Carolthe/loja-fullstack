@@ -8,10 +8,12 @@ const InternalServerError = require("../errors/InternalServerError");
 class UsuarioService {
   /**
    * @param {UsuarioListarInput} query
-   * @return {Promise<Usuario[]>}
+   * @return {Promise<{data: Usuario[], meta: any}>}
    */
-  async listar({ limite, pagina }) {
-    return await usuariosRepository.listarUsuarios(pagina, limite);
+  async listar({ limite, pagina, busca }) {
+    const data = await usuariosRepository.listarUsuarios(pagina, limite, busca);
+    const meta = await usuariosRepository.contarUsuarios(pagina, limite, busca);
+    return { data, meta };
   }
 
   /**

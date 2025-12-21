@@ -7,6 +7,7 @@ import Form from "../../../Components/Form";
 import Search from "../../../Components/Layout/Search";
 import UploadImage from "../../../Components/UploadImage";
 import useSidebar from "../../../Hooks/useSidebar";
+import useToast from "../../../Hooks/useToast";
 
 export default function NewProduct() {
   const [nome, setNome] = useState("");
@@ -15,6 +16,7 @@ export default function NewProduct() {
   const [imagem, setImagem] = useState("");
   const [estoque, setEstoque] = useState(0);
   const { setSidebar } = useSidebar();
+  const { setMessage, setToast } = useToast();
 
   const validateForm = () => {
     console.log(imagem);
@@ -46,14 +48,24 @@ export default function NewProduct() {
         estoque,
       });
       if (created) {
-        alert("Produto criado com sucesso!");
-        window.location.href = "/produtos";
+        // @ts-ignore
+        setToast("success");
+        // @ts-ignore
+        setMessage("Produto criado com sucesso!");
+        setTimeout(() => {
+          window.location.href = "/produtos";
+        }, 500);
         return;
       }
-      alert("Erro ao criar o produto. Tente novamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Erro ao criar o produto.");
     } else {
-      // Show validation errors
-      alert("Por favor, preencha todos os campos corretamente.");
+      // @ts-ignore
+      setToast("danger");
+      // @ts-ignore
+      setMessage("Por favor, preencha todos os campos corretamente.");
     }
   };
 
@@ -67,7 +79,6 @@ export default function NewProduct() {
       <div className="mb-4 flex items-center justify-between rounded-md bg-gray-900 p-4">
         <h1 className="text-2xl font-bold text-gray-100">Novo Produto</h1>
         <div className="flex items-center gap-4">
-          <Search />
           <a
             href="/produtos"
             className="bg-primary-600 hover:bg-primary-500 rounded-md px-4 py-2 font-medium text-white"

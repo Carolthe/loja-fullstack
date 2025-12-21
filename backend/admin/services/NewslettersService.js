@@ -8,10 +8,20 @@ const InternalServerError = require("../errors/InternalServerError");
 class NewsletterService {
   /**
    * @param {NewsletterListarInput} query
-   * @return {Promise<Newsletter[]>}
+   * @return {Promise<{data: Newsletter[], meta: any}>}
    */
-  async listar({ limite, pagina }) {
-    return await newslettersRepository.listarNewsletters(pagina, limite);
+  async listar({ limite, pagina, busca }) {
+    const data = await newslettersRepository.listarNewsletters(
+      pagina,
+      limite,
+      busca
+    );
+    const meta = await newslettersRepository.contarNewsletters(
+      pagina,
+      limite,
+      busca
+    );
+    return { data, meta };
   }
 
   /**

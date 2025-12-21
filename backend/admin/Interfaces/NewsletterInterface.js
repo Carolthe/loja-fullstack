@@ -1,4 +1,4 @@
-class Usuario {
+class Newsletter {
   /**
    * @type {number|undefined}
    */
@@ -30,8 +30,8 @@ class Usuario {
    * @param {Object} row
    */
   static fromDb(row) {
-    return new Usuario(row);
+    return new Newsletter(row);
   }
 }
 
-module.exports = Usuario;
+module.exports = Newsletter;
