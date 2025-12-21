@@ -9,9 +9,12 @@ import {
 import { BiPieChart, BiShoppingBag, BiTag, BiUser } from "react-icons/bi";
 import { LuAtSign } from "react-icons/lu";
 import useSidebar from "../../Hooks/useSidebar";
+import { Auth } from "../../backend/Auth";
+import useAuth from "../../Hooks/useAuth";
 
 export default function Sidebar() {
   const { sidebar } = useSidebar();
+  const { setLogged } = useAuth();
   const isSidebarValid = (() => {
     if (!sidebar) {
       return false;
@@ -21,6 +24,20 @@ export default function Sidebar() {
   if (!isSidebarValid) {
     return null;
   }
+
+  const handleLogout = () => {
+    const auth = new Auth();
+    auth
+      .logout()
+      .then((res) => {
+        if (res.ok) {
+          setLogged(false);
+        } else {
+          setLogged(true);
+        }
+      })
+      .catch(setLogged(true));
+  };
   return (
     <SidebarRoot
       aria-label="Default sidebar example"
@@ -66,6 +83,16 @@ export default function Sidebar() {
             active={sidebar === "usuarios"}
           >
             Usuários
+          </SidebarItem>
+        </SidebarItemGroup>
+        <SidebarItemGroup>
+          <SidebarItem
+            onClick={handleLogout}
+            icon={BiUser}
+            active={sidebar === "sair"}
+            className="cursor-pointer"
+          >
+            Sair
           </SidebarItem>
         </SidebarItemGroup>
       </SidebarItems>

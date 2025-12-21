@@ -1,13 +1,16 @@
 //modulos esportados
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require("cookie-parser");
+
 const app = express();
 //variavel de ambiente
 require('dotenv').config();
 
-app.use(cors({ origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL] }));
+app.use(cors({ origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL], credentials: true }));
 app.use(express.json());
- 
+app.use(cookieParser());
+
 //ligação com os arquivos separados na pasta routes
 const produtosRoutes = require('./routes/produtos');
 const favoritosRoutes = require('./routes/favoritos');

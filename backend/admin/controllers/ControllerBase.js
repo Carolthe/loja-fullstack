@@ -1,6 +1,7 @@
 // @ts-check
 const InternalServerError = require("../errors/InternalServerError");
 const NotFoundError = require("../errors/NotFoundError");
+const UnauthorizedError = require("../errors/UnauthorizedError");
 const ValidationError = require("../errors/ValidationError");
 
 class ControllerBase {
@@ -18,6 +19,9 @@ class ControllerBase {
       return res.status(error.status).json({ error: error.message });
     }
     if (error instanceof NotFoundError) {
+      return res.status(error.status).json({ error: error.message });
+    }
+    if (error instanceof UnauthorizedError) {
       return res.status(error.status).json({ error: error.message });
     }
     return res.status(500).json({ error: "Erro desconhecido" });

@@ -1,24 +1,18 @@
 // @ts-check
 
 import { Fragment } from "react";
-import AuthLayout from "./Layouts/AuthLayout";
-import GuestLayout from "./Layouts/GuestLayout";
-import { SidebarProvider } from "./Providers/SidebarProvider";
 import { ToastProvider } from "./Providers/ToastProvider";
+import { AuthProvider } from "./Providers/AuthProvider";
+import DefaultLayout from "./Layouts/DefaultLayout";
 
 function App() {
-  const isAuthenticated = true;
   return (
     <Fragment>
-      <ToastProvider>
-        {isAuthenticated ? (
-          <SidebarProvider>
-            <AuthLayout />
-          </SidebarProvider>
-        ) : (
-          <GuestLayout />
-        )}
-      </ToastProvider>
+      <AuthProvider>
+        <ToastProvider>
+          <DefaultLayout />
+        </ToastProvider>
+      </AuthProvider>
     </Fragment>
   );
 }

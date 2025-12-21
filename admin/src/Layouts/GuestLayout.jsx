@@ -1,3 +1,9 @@
+import Login from "../Pages/Login";
+
 export default function GuestLayout() {
-  return <div>Guest Layout</div>;
+  return (
+    <div>
+      <Login></Login>
+    </div>
+  );
 }

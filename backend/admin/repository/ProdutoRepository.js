@@ -77,10 +77,10 @@ class ProdutoRepository {
       if (result.insertId) {
         return result.insertId;
       }
-      throw null;
+      return null;
     } catch (error) {
       LogError.log(error, __filename);
-      throw null;
+      return null;
     }
   }
 
