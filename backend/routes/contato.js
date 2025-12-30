@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
 
   // Validação
   if (!name || !email || !message) {
-    return res.status(400).json({ message: 'Nome, email e mensagem são obrigatórios' });
+    return res.status(400).json({ message: 'Nome, email e mensagem são obrigatórios' })
   }
 
   const transporter = nodemailer.createTransport({

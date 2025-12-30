@@ -22,7 +22,6 @@ export default function Cozinha() {
                 console.error(error)
             }
         }
-
         carregarProdutos()
 
         return () => { isMounted = false }

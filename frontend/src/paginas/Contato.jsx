@@ -22,7 +22,6 @@ export default function Contato() {
   });
 };
 
-
   const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -39,23 +38,18 @@ export default function Contato() {
 
   } catch (error) {
     console.error(error);
-    setStatus(error.response?.data?.error || "Falha ao enviar a mensagem. Tente novamente.");
+    setStatus(error.response?.data?.error || "Falha ao enviar a mensagem. Tente novamente.")
   }
-};
+}
 
 
   return (
     <div className="mt-[30px]">
-      <p className="text-center font-semibold text-[23px] mt-[40px]">
-        Entre em contato
-      </p>
-      <p className="text-center mx-[40px] mb-[20px] text-fontGray">
-        Faça perguntas e nos ajude a melhorar nossos serviços.
-      </p>
-
+      <p className="text-center font-semibold text-[23px] mt-[30px]">Entre em contato</p>
+      <p className="text-center mx-[40px] text-[15px] mb-[20px] text-fontGray">Faça perguntas e nos ajude a melhorar nossos serviços.</p>
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[15px]">
         <div>
-          <label className="font-semibold">Seu nome*</label>
+          <label className="font-semibold">Nome</label>
           <Input
             name="name"
             value={formData.name}
@@ -63,17 +57,14 @@ export default function Contato() {
             placeholder="Abc"
           />
         </div>
-
         <div>
-          <label className="font-semibold">Email*</label>
+          <label className="font-semibold">Email</label>
           <Input
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="abc@gmail.com"
-          />
+            placeholder="abc@gmail.com"/>
         </div>
-
         <div>
           <label className="font-semibold">Assunto</label>
           <Input
@@ -85,22 +76,18 @@ export default function Contato() {
         </div>
 
         <div className="flex flex-col">
-          <label className="font-semibold">Mensagem*</label>
+          <label className="font-semibold">Mensagem</label>
           <textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
             placeholder="Escreva sua mensagem aqui"
             rows="6"
-            className="border-[1px] pl-[10px] pt-[5px] mt-[5px] rounded-[5px] w-[300px]"
+            className="border-[1px] pl-[10px] pt-[5px] mt-[5px] rounded-[5px] w-[350px]"
           />
         </div>
-
-        <button className="w-[310px] h-[50px] text-white bg-highlightGreen">
-          Enviar
-        </button>
+        <button className="w-[350px] h-[50px] rounded-[15px] font-semibold text-white bg-amareloPrincipal">Enviar</button>
       </form>
-
       {status && <p className="text-center mt-2">{status}</p>}
 
       <Credibilidade />

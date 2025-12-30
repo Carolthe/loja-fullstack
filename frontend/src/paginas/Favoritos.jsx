@@ -34,9 +34,7 @@ export default function Favoritos() {
           Aqui estão os produtos que você marcou como favoritos.
         </p>
         {favoritos.length === 0 ? (
-          <p className="text-center mt-[20px] text-fontGray">
-            Nenhum favorito ainda.
-          </p>
+          <p className="text-center mt-[20px] text-fontGray">Nenhum favorito ainda.</p>
         ) : (
           <div className="mt-[20px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
             {favoritos.map((produto) => (

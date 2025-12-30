@@ -86,64 +86,43 @@ export default function Localizacao() {
     <div className="mt-[0px]">
       <div className="flex flex-col items-center">
         <p className="font-semibold text-greenMain text-center mt-[30px] mb-[10px]">
-          Local de Entrega
-        </p>
-
+          Local de Entrega</p>
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[30px]">
           <div>
             <label className="font-semibold">País / Região</label>
-            <Input
-              placeholder="País"
+            <Input placeholder="País"
               value={pais}
-              onChange={(e) => setPais(e.target.value)}
-            />
+              onChange={(e) => setPais(e.target.value)}/>
           </div>
-
           <div>
             <label className="font-semibold">Endereço da Rua</label>
-            <Input
-              placeholder="Rua"
+            <Input placeholder="Rua"
               value={rua}
-              onChange={(e) => setRua(e.target.value)}
-            />
+              onChange={(e) => setRua(e.target.value)}/>
           </div>
-
           <div>
             <label className="font-semibold">Cidade</label>
-            <Input
-              placeholder="Cidade"
+            <Input placeholder="Cidade"
               value={cidade}
-              onChange={(e) => setCidade(e.target.value)}
-            />
+              onChange={(e) => setCidade(e.target.value)}/>
           </div>
-
           <div>
             <label className="font-semibold">Código Postal</label>
-            <Input
-              placeholder="CEP"
+            <Input laceholder="CEP"
               value={cep}
-              onChange={(e) => setCep(e.target.value)}
-            />
+              onChange={(e) => setCep(e.target.value)}/>
           </div>
-
           <div>
             <label className="font-semibold">Informação Adicional</label>
-            <Input
-              placeholder="Informação adicional"
+            <Input placeholder="Informação adicional"
               value={infoAdicional}
-              onChange={(e) => setInfoAdicional(e.target.value)}
-            />
+              onChange={(e) => setInfoAdicional(e.target.value)}/>
           </div>
-
-          <button
-            type="submit"
-            className="bg-orangeMain rounded-[15px] px-[40px] py-[15px] text-white"
-          >
-            Ir Para Pagamento
+          <button type="submit"
+            className="bg-orangeMain rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
           </button>
         </form>
       </div>
-
       <Credibilidade />
       <Newsletter />
       <ScrollToTop />

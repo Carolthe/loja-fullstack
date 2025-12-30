@@ -42,8 +42,7 @@ const produtosFiltrados = produtos.filter(produto => {
 
   return (
     <div>
-      {/* Barra de busca */}
-      <div className="bg-[#5769a9] w-full h-[75px] flex justify-center items-center shadow-md">
+      <div className="bg-[#5769a9] pt-[8px] w-full h-[75px] flex justify-center items-center shadow-md">
   <div className="relative w-[90%] max-w-[320px]">
     <input
       type="text"

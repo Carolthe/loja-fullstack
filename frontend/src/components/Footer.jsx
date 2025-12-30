@@ -46,7 +46,7 @@ export default function Footer() {
                 </div>
             </div>
             <div>
-                <p className="flex items-center  justify-center text-[14px] my-[10px] ml-[5%] md:text-[16px] md:mb-[2%] ">&copy; 2025 <RiHome2Line className="ml-[4px]" /> Homehaven. Todos os direitos reservados.</p>
+                <p className="flex items-center  justify-center text-[12px] my-[10px] ml-[5%] md:text-[16px] md:mb-[2%] ">&copy; 2025 Homehaven. Todos os direitos reservados.</p>
             </div>
         </>
     )

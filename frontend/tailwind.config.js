@@ -12,7 +12,7 @@ export default {
         highlightGreen: '#3cac8c',
         fontGray: '#6B7280',
         azulEscuro: '#003F62',
-        amareloPrincipal: '#EAB308',
+        amareloPrincipal: '#ffbd59',
         azulPrincipal: '#5769a9'
       },
     },

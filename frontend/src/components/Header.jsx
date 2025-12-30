@@ -40,9 +40,9 @@ export default function Header() {
   }, [usuario]);
 
   return (
-    <div className="fixed z-50 flex items-center justify-between px-[28px] bg-azulPrincipal w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
+    <div className="fixed z-50 flex items-center justify-between px-[16px] bg-[#445594] w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
       <Navbar />
-      <Link to="/" className="flex items-center">
+      <Link to="/" className="flex items-center gap-[8px]">
         <LiaHomeSolid className="text-[18px] md:text-[40px]" />
         <p className="text-[14px] md:text-[25px]">HOMEHAVEN</p>
       </Link>
@@ -51,7 +51,7 @@ export default function Header() {
         <p>Minhas Encomendas</p>
         <p>Contactar</p>
       </div>
-      <div className="flex items-center text-[22px]">
+      <div className="flex items-center gap-[6px] text-[22px]">
         {usuario ? (
           <Link to="/perfil">
             <LiaUserSolid />
@@ -62,7 +62,7 @@ export default function Header() {
           </Link>
         )}
         <Link to="/favoritos" className="relative">
-          <LiaHeart className="mr-[5px]" />
+          <LiaHeart className="" />
           {favCount > 0 && (
             <span className="absolute -top-2 -right-[3px] bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
               {favCount}

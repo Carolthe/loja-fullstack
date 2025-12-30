@@ -40,14 +40,16 @@ export default function Home() {
     <div className="bg-[#EDEEF7]">
       <div className="relative">
         <img src={home} alt="Home" className="" />
-        <div className="absolute inset-0 mt-[150px] text-center text-[#ffffffaf] px-4">
-          <p className="text-[30px] font-semibold">Loja HomeHaven</p>
-          <p className="mt-1 ">
+        <div className="absolute inset-0 mt-[145px] text-center px-4">
+          <p className="text-[26px] font-semibold text-[#ffffff]">Loja HomeHaven</p>
+          <p className="mt-1 text-[15px] text-gray-200">
             Não perca a oportunidade de ter conforto e elegancia em cada canto da sua casa
           </p>
-          <button className="mt-6 px-6 py-2 border-[1px] border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
+          <Link to="/produtos">
+          <button className="mt-[18px] px-[20px] py-[10px] border-[1px] text-[14px] text-white border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
             Ver Produtos
           </button>
+          </Link>
         </div>
       </div>
       <div className="text-center items-center flex flex-col justify-center">
@@ -74,11 +76,9 @@ export default function Home() {
           ))
         )}
       </div>
-
       {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
-        <button
-          className="border-[1px] font-medium bg-amareloPrincipal text-white text-sm rounded-full w-[105px] h-[45px]"
+        <button className="border-[1px] font-medium bg-amareloPrincipal text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}> Ver Mais</button>
       </div>
 
