@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   return (
-    <div className="bg-[#EDEEF7]">
+    <div className="bg-cor-de-fundo">
       <div className="relative">
         <img src={home} alt="Home" className="" />
         <div className="absolute inset-0 mt-[145px] text-center px-4">
@@ -56,7 +56,7 @@ export default function Home() {
         <h3 className="mt-[px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
           Produtos em Destaque
         </h3>
-        <p className="w-[310px] text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
+        <p className="px-4.5 text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
           Compre nossos produtos mais vendidos e tenha certeza de qualidade!
         </p>
       </div>
@@ -78,7 +78,7 @@ export default function Home() {
       </div>
       {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
-        <button className="border-[1px] font-medium bg-amareloPrincipal text-white text-sm rounded-full w-[105px] h-[45px]"
+        <button className="border-[1px] font-medium bg-amarelo-principal text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}> Ver Mais</button>
       </div>
 

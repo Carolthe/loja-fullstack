@@ -17,7 +17,7 @@ export default function DetalheProdutos() {
                 <p className="text-[22px] font-semibold mt-[15px]">{produto.title}</p>
                 <p className="text-[22px]">Descrição competa sobre o produto</p>
                 <p className="text-[20px]"><span className="line-through text-[16px] ">52,00 €</span> {produto.price.toFixed(2).replace(".", ",")}€ </p>
-                <p className="text-highlightGreen my-[5px]">Envio Gratuito para este artigo</p>
+                <p className="text-verde my-[5px]">Envio Gratuito para este artigo</p>
                 <p className="font-semibold mb-[3px]">Opção:</p>
                 <div className="flex gap-[5px]">
                     <div className="bg-blue-800 rounded-full w-[20px] h-[20px]" ></div>

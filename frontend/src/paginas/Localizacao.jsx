@@ -119,7 +119,7 @@ export default function Localizacao() {
               onChange={(e) => setInfoAdicional(e.target.value)}/>
           </div>
           <button type="submit"
-            className="bg-orangeMain rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
+            className="bg-laranja rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
           </button>
         </form>
       </div>

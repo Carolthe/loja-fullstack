@@ -51,7 +51,7 @@ export default function Navbar() {
         <li>
           <button
             onClick={() => setOpenCategorias(!openCategorias)}
-            className="flex items-center justify-between w-full hover:text-greenMain"
+            className="flex items-center justify-between w-full hover:text-azul-principal"
           >
             Categorias
             <ChevronDown

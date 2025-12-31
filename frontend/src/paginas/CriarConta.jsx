@@ -41,24 +41,24 @@ export default function CriarConta() {
           onSubmit={handleRegister}>
           <div>
             <label className="font-medium">Nome Inteiro</label>
-            <Input value={nome} onChange={(e) => setNome(e.target.value)} />
+            <Input value={nome} placeholder="nome" onChange={(e) => setNome(e.target.value)} />
           </div>
           <div>
             <label className="font-medium">E-mail</label>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div>
             <label className="font-medium">Senha</label>
-            <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+            <Input type="password" placeholder="senha" value={senha} onChange={(e) => setSenha(e.target.value)} />
           </div>
           <div>
             <label className="font-medium">Confirmar a Senha</label>
-            <Input type="password" value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} />
+            <Input type="password" placeholder="senha" value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} />
           </div>
-          <button type="submit" className="w-[300px] py-3 bg-amareloPrincipal text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
+          <button type="submit" className="w-[300px] py-3 bg-amarelo-principal font-semibold text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
         </form>
         <p className="text-center text-sm text-gray-600 pb-6">Eu já tenho uma conta?{" "}
-          <Link to="/login" className="text-azulPrincipal font-medium hover:underline">Login</Link>
+          <Link to="/login" className="text-azul-principal font-medium hover:underline">Login</Link>
         </p>
       </div>
     </div>

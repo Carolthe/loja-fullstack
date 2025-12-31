@@ -40,7 +40,7 @@ export default function Header() {
   }, [usuario]);
 
   return (
-    <div className="fixed z-50 flex items-center justify-between px-[16px] bg-[#445594] w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
+    <div className="fixed z-50 flex items-center justify-between px-[16px] bg-azul-principal w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
       <Navbar />
       <Link to="/" className="flex items-center gap-[8px]">
         <LiaHomeSolid className="text-[18px] md:text-[40px]" />
@@ -72,7 +72,7 @@ export default function Header() {
         <Link to="/carrinho" className="relative">
           <LiaShoppingBagSolid />
           {cartCount > 0 && (
-            <span className="absolute -top-2 -right-[9px] bg-orangeMain text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+            <span className="absolute -top-2 -right-[9px] bg-laranja text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
               {cartCount}
             </span>
           )}

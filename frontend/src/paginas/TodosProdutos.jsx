@@ -49,9 +49,9 @@ const produtosFiltrados = produtos.filter(produto => {
       placeholder="O que você está procurando?"
       value={busca}
       onChange={(e) => setBusca(e.target.value)}
-      className="w-full h-[45px] pl-12 rounded-full border border-gray-300 text-sm text-gray-700 placeholder-gray-400 focus:outline-none"
+      className="w-full h-[45px] pl-12 rounded-full border border-gray-300 text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
     />
-    <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-greenMain text-lg" />
+    <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-azul-principal text-lg" />
   </div>
 </div>
 
@@ -83,7 +83,7 @@ const produtosFiltrados = produtos.filter(produto => {
         </div>
       )}
 
-      <p className="text-fontGray ml-[10px]">Bem-vindo / Todos os Produtos </p>
+      <p className="text-font-cinza ml-[10px]">Bem-vindo / Todos os Produtos </p>
 
       {produtosFiltrados.length === 0 ? (
         <p className="mx-3">Nenhum produto encontrado.</p>

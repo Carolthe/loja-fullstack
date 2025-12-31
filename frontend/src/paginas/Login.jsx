@@ -37,19 +37,19 @@ export default function Login() {
                     onSubmit={handleLogin}>
                     <div className="mt-[35px]">
                         <label className="font-semibold">Seu E-mail</label>
-                        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Input value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="mt-[20px]">
                         <label className="font-semibold">Sua Senha</label>
-                        <Input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
+                        <Input placeholder="senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
-                    <button className="w-[300px] h-[45px] mt-[25px] bg-amareloPrincipal text-white text-[19px] rounded-md">Login</button>
+                    <button className="w-75 h-[45px] mt-[25px] bg-amarelo-principal font-semibold text-white text-[19px] rounded-md">Login</button>
                     <Link to="/password-recovery">
-                    <p className="mt-[15px] text-fontGray">Recuperar a Senha</p>
+                    <p className="mt-3.75 text-azul-principal">Recuperar a Senha</p>
                     </Link>
-                    <div className="mt-[150px] mb-6">
+                    <div className="mt-37.5 mb-6">
                         <Link to="/createAccount">
-                            <p>Não tenho uma conta?{" "}<span className="text-azulPrincipal font-semibold">Inscreva-se</span></p>
+                            <p>Não tenho uma conta?{" "}<span className="text-azul-principal font-semibold">Inscreva-se</span></p>
                         </Link>
                     </div>
                 </form>

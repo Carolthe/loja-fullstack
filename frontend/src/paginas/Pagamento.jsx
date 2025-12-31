@@ -46,7 +46,7 @@ export default function Pagamento() {
         <p className="font-semibold text-greenMain text-center mt-[25px]">
           Métodos de Pagamento
         </p>
-        <p className="text-fontGray">
+        <p className="text-font-cinza">
           Todas as transações são seguras e criptografadas.
         </p>
 

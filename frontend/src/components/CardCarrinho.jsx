@@ -32,14 +32,14 @@ export default function CardCarrinho({ product, atualizarCarrinho }) {
   }
 
   return (
-    <div className="flex mx-[15px] my-[25px]">
+    <div className="flex mx-[15px]  my-[25px]">
       <img className="w-[120px]" src={product.imagem} alt={product.nome} />
       <div className="ml-[10px] w-full">
         <div className="flex justify-between">
           <p className="font-semibold">{product.nome}</p>
           <p className="text-sm">R$ {Number(product.preco).toFixed(2).replace(".", ",")}</p>
         </div>
-        <p className="text-fontGray mt-[5px]">Breve descrição</p>
+        <p className="text-font-cinza mt-[5px]">Breve descrição</p>
         <div className="flex justify-between mt-[10px]">
           <div className="flex items-center gap-[10px]">
             <button

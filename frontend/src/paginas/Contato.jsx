@@ -46,7 +46,7 @@ export default function Contato() {
   return (
     <div className="mt-[30px]">
       <p className="text-center font-semibold text-[23px] mt-[30px]">Entre em contato</p>
-      <p className="text-center mx-[40px] text-[15px] mb-[20px] text-fontGray">Faça perguntas e nos ajude a melhorar nossos serviços.</p>
+      <p className="text-center mx-[40px] text-[15px] mb-[20px] text-font-cinza">Faça perguntas e nos ajude a melhorar nossos serviços.</p>
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[15px]">
         <div>
           <label className="font-semibold">Nome</label>
@@ -83,10 +83,18 @@ export default function Contato() {
             onChange={handleChange}
             placeholder="Escreva sua mensagem aqui"
             rows="6"
-            className="border-[1px] pl-[10px] pt-[5px] mt-[5px] rounded-[5px] w-[350px]"
+            className="w-[350px] px-3 border border-gray-300 rounded-md
+                    text-gray-800
+                    placeholder-gray-400
+                    focus:outline-none
+                    focus:border-[#5769a9]
+                    focus:ring-2
+                    focus:ring-[#5769a9]/30
+                    transition
+                    duration-200"
           />
         </div>
-        <button className="w-[350px] h-[50px] rounded-[15px] font-semibold text-white bg-amareloPrincipal">Enviar</button>
+        <button className="w-[350px] h-[50px] rounded-[15px] font-semibold text-white bg-amarelo-principal">Enviar</button>
       </form>
       {status && <p className="text-center mt-2">{status}</p>}
 

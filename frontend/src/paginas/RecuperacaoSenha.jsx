@@ -45,7 +45,7 @@ export default function RecuperacaoSenha() {
               onChange={(e) => setEmailInput(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-greenMain"/>
             <button onClick={solicitarLink}
-              className="w-full py-3 bg-amareloPrincipal text-white font-semibold rounded-lg hover:bg-yellow-400 transition">Enviar link</button>
+              className="w-full py-3 bg-amarelo-principal text-white font-semibold rounded-lg hover:bg-yellow-400 transition">Enviar link</button>
             <Link to="/login" className="text-sm text-gray-500 text-center hover:underline mt-2"> Voltar para o login </Link>
           </div>
         )}

@@ -1,3 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+@theme {
+    --font-sans: "Montserrat", sans-serif;
+    
+    --color-laranja: #e36c14;
+    --color-verde: #3cac8c;
+    --color-font-cinza: #6B7280;
+    --color-azul-escuro: #003F62;
+    --color-amarelo-principal: #ffbd59;
+    --color-azul-principal: #5769a9;
+    --color-cor-de-fundo: #f8f9ff;
+}

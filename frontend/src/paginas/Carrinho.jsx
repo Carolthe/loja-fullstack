@@ -58,11 +58,11 @@ export default function Carrinho() {
     <div className="mt-[30px] ">
       <VerProdutos />
       <p className="text-[23px] text-center font-semibold">Seus Produtos</p>
-      <div className="flex justify-between mx-[20px] my-[15px] text-sm text-fontGray">
+      <div className="flex justify-between mx-[20px] my-[15px] text-sm text-font-cinza">
         <p>PRODUTOS <span>({totalItens})</span></p>
         <p>TOTAL <span>({total.toFixed(2).replace(".", ",")})</span></p>
       </div>
-      <hr />
+  <hr className="border-t border-gray-400/20" />
       {carrinho.length === 0 ? (
         <p className="text-center my-[20px]">Seu carrinho está vazio</p>
       ) : (
@@ -74,18 +74,18 @@ export default function Carrinho() {
           />
         ))
       )}
-      <hr />
-      {/* Mostrar botões somente se houver itens no carrinho */}
+    <hr className="border-t border-gray-400/20" />
       {carrinho.length > 0 && (
         <div className="flex flex-col items-center mt-[30px]">
-          <p className="mb-[20px] font-semibold">Total:<span className="text-fontGray ml-[20px]">
+          <p className="mb-[20px] font-semibold">Total:<span className="text-font-cinza ml-[20px]">
           {total.toFixed(2).replace(".", ",")} $</span></p>
+          
           {/* Só deixa finalizar compra se estiver logado */}
           <Link to="/dadosLocalizacao">
-            <button className="w-[310px] h-[50px] text-white bg-amareloPrincipal font-semibold rounded-[15px]">Finalizar Compra</button>
+            <button className="w-[310px] h-[50px] text-white bg-amarelo-principal font-semibold rounded-[15px]">Finalizar Compra</button>
           </Link>
           <button
-            className=" text-azulEscuro mt-[30px] text-[15px] underline"
+            className=" text-azul-escuro mt-[30px] text-[15px] underline"
             onClick={limparCarrinho}> Limpar o Carrinho </button>
         </div>
       )}

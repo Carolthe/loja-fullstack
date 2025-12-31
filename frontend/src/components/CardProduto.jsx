@@ -96,19 +96,19 @@ export default function CardProduto({ id, imgProduct, title, price }) {
       </div>
       <div className="pt-[5px] flex flex-col md:pt-[10px]">
         <h2 className="pl-[5px] text-lg font-semibold text-gray-800">{title}</h2>
-        <p className="pl-[5px] text-fontGray text-sm">Breve descrição do produto</p>
+        <p className="pl-[5px] text-font-cinza text-sm">Breve descrição do produto</p>
         <div className="flex justify-between items-center px-[5px] md:py-[8px]">
           <p className="text-lg font-bold text-gray-900">
             R$ {price.toFixed(2).replace(".", ",")}
           </p>
           <div className="flex items-center gap-1">
             <FaStar className="text-yellow-400" />
-            <p className="text-sm text-fontGray">4.8</p>
+            <p className="text-sm text-font-cinza">4.8</p>
           </div>
         </div>
 
         <button
-          className="mt-[5px] w-full  bg-amareloPrincipal font-semibold text-white py-2 rounded-[15px] transition hover:bg-green-600"
+          className="mt-[5px] w-full  bg-amarelo-principal font-semibold text-white py-2 rounded-[15px] transition hover:bg-green-600"
           onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>

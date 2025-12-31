@@ -15,8 +15,8 @@ export default function Perfil() {
       <div className="w-full max-w-md py-[40px] px-[18px] bg-white rounded-2xl shadow-md">
 
         {/* HEADER */}
-        <div className="flex items-center gap-4 border-b pb-4">
-          <div className="w-14 h-14 rounded-full bg-azulEscuro text-white flex items-center justify-center text-xl font-semibold">
+        <div className="flex items-center gap-4 border-b border-black/10 pb-4">
+          <div className="w-14 h-14 rounded-full bg-azul-escuro text-white flex items-center justify-center text-xl font-semibold">
             {usuario?.nome?.charAt(0)}
           </div>
 
@@ -51,7 +51,7 @@ export default function Perfil() {
             onClick={handleLogout}
             className="
               w-full
-              bg-amareloPrincipal 
+              bg-amarelo-principal 
           
               text-white
               py-2
