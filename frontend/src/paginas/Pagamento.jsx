@@ -11,13 +11,15 @@ export default function Pagamento() {
   const [metodo, setMetodo] = useState("multibanco"); // "multibanco" ou "mbway"
   const [phone, setPhone] = useState(""); // só para MB WAY
   const [loading, setLoading] = useState(false);
+  const [paymentReference, setPaymentReference] = useState(null);
+  const [status, setStatus] = useState(null);
+
 
   const handleCheckout = async () => {
     setLoading(true);
     try {
       const payload = {
         amount: 59.90,
-        cliente: "João Silva",
         metodo,
       };
 
@@ -31,6 +33,14 @@ export default function Pagamento() {
       );
 
       setPaymentData(response.data.data); // atualiza estado com dados do pagamento
+
+      setPaymentData(response.data.data);
+      if (metodo === "mbway") {
+        setPaymentReference(response.data.data.reference);
+        setStatus("pending"); // status inicial
+      }
+
+
       console.log("Pagamento criado:", response.data);
     } catch (error) {
       console.error("Erro ao criar pagamento:", error.response?.data || error.message);
@@ -42,24 +52,24 @@ export default function Pagamento() {
 
   return (
     <>
-      <div className="flex flex-col items-center mt-[20px]">
-        <p className="font-semibold text-greenMain text-center mt-[25px]">
+      <div className="flex flex-col items-center mt-[20px] ">
+        <p className="font-semibold text-center mt-[25px]">
           Métodos de Pagamento
         </p>
-        <p className="text-font-cinza">
+        <p className="text-font-cinza mx-[10px] text-center">
           Todas as transações são seguras e criptografadas.
         </p>
 
         {/* Seleção de método */}
         <div className="mt-4 flex gap-4">
           <button
-            className={metodo === "multibanco" ? "bg-greenMain text-white px-4 py-2" : "px-4 py-2"}
+            className={metodo === "multibanco" ? "bg-verde text-white px-4 py-2" : "px-4 py-2"}
             onClick={() => setMetodo("multibanco")}
           >
             Multibanco
           </button>
           <button
-            className={metodo === "mbway" ? "bg-greenMain text-white px-4 py-2" : "px-4 py-2"}
+            className={metodo === "mbway" ? "bg-verde text-white px-4 py-2" : "px-4 py-2"}
             onClick={() => setMetodo("mbway")}
           >
             MB WAY
@@ -100,7 +110,7 @@ export default function Pagamento() {
               <strong>Referência:</strong> {paymentData.reference}
             </p>
             <p>
-              <strong>Montante:</strong> {paymentData.amount}€
+              <strong>Montante:</strong> {Number(paymentData.amount).toFixed(2)}€
             </p>
 
             {metodo === "multibanco" && (

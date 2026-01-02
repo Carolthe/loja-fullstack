@@ -5,6 +5,11 @@ import api from "../../services/api.js";
 import CardProduto from "../../components/CardProduto.jsx";
 import Credibilidade from "../../components/Credibilidade.jsx";
 import CardBannerCategoria from "../../components/CardBannerCategoria.jsx";
+import sala from "../../imagensCategorias/sala.png"
+import banheiro from "../../imagensCategorias/banheiro.png"
+import escritorio from "../../imagensCategorias/escritorio.png"
+import cozinha from "../../imagensCategorias/cozinha.png"
+
 
 export default function Quarto() {
     const [produtos, setProdutos] = useState([])
@@ -29,8 +34,14 @@ export default function Quarto() {
 
     return (
         <div className="mt-[30px]">
-          <CardBannerCategoria titulo="Cate" />
-
+        
+          <CardBannerCategoria />
+        <div className="flex justify-around mx-[35px] pt-[20px]">
+          <img className="w-[30px] h-[30px]" src={sala} />
+          <img className="w-[30px] h-[30px]" src={escritorio} />
+          <img className="w-[30px] h-[30px]" src={banheiro} />
+          <img className="w-[30px] h-[30px]" src={cozinha} />
+        </div>
                {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (

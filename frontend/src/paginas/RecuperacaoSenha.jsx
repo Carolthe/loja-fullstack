@@ -64,7 +64,7 @@ export default function RecuperacaoSenha() {
               onChange={(e) => setConfSenha(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-greenMain"/>
             <button onClick={resetarSenha}
-              className="w-full py-3 bg-greenMain text-white font-semibold rounded-lg hover:bg-green-600 transition"> Alterar senha </button>
+              className="w-full py-3 bg-verde text-white font-semibold rounded-lg hover:bg-green-600 transition"> Alterar senha </button>
             <Link
               to="/login"
               className="text-sm text-gray-500 text-center hover:underline mt-2"

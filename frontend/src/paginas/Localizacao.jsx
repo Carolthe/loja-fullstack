@@ -85,7 +85,7 @@ export default function Localizacao() {
   return (
     <div className="mt-[0px]">
       <div className="flex flex-col items-center">
-        <p className="font-semibold text-greenMain text-center mt-[30px] mb-[10px]">
+        <p className="font-semibold text-verde text-center mt-[30px] mb-[10px]">
           Local de Entrega</p>
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[30px]">
           <div>
@@ -119,7 +119,7 @@ export default function Localizacao() {
               onChange={(e) => setInfoAdicional(e.target.value)}/>
           </div>
           <button type="submit"
-            className="bg-laranja rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
+            className="bg-amarelo-principal font-semibold rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
           </button>
         </form>
       </div>

@@ -74,84 +74,189 @@ var SDK = /** @class */ (function () {
         this.core.setServer(url, variables);
     };
     /**
-     * Creates Multibanco payment references:
-     * - with or without payment deadline
-     * - define an amount or an interval with max/min amounts to receive the payment
-     * - may choose if the references allow only 1 or more that 1 payment
+     * Use this service to create Split-payments referentes for Multibanco or MB WAY payment
+     * requests.
      *
-     * @summary Multibanco
+     * @summary Split-Payments
+     * @throws FetchError<401, types.SplitPaymentsResponse401> 401
      */
-    SDK.prototype.multibanco = function (body) {
-        return this.core.fetch('/multibanco/create', 'post', body);
+    SDK.prototype.splitPayments = function (body, metadata) {
+        return this.core.fetch('/v1/split-payments/{payment-method}', 'post', body, metadata);
     };
     /**
-     * Creates MB WAY payment requests.
+     * Use this request to create Debit Direct Authorizations. This request will create an
+     * Authorization PDF with a reference number (authorizationId) , which will be sent to the
+     * debtor's email.
+     *
+     * @summary Direct Debit Authorization
+     * @throws FetchError<401, types.DirectDebitAuthorizationResponse401> 401
+     */
+    SDK.prototype.directDebitAuthorization = function (body) {
+        return this.core.fetch('/v1.02/directdebit/authorization', 'post', body);
+    };
+    /**
+     * Use this request to create a manual debit request for a Direct Debit Authorization
+     *
+     * @summary Direct Debit Payment
+     * @throws FetchError<401, types.DirectDebitPaymentResponse401> 401
+     */
+    SDK.prototype.directDebitPayment = function (body, metadata) {
+        return this.core.fetch('/v1.02/directdebit/payment/{reference}', 'post', body, metadata);
+    };
+    /**
+     * Creates an url to a secure form where the customer may finish the Credit Card payment.
+     *
+     * Supports 3D Secure Technology.
+     *
+     * @summary Credit Card
+     * @throws FetchError<401, types.CreditCardResponse401> 401
+     */
+    SDK.prototype.creditCard = function (body) {
+        return this.core.fetch('/v1.02/creditcard/create', 'post', body);
+    };
+    /**
+     * Creates a request to allow the customer to pay using CofidisPay service.
+     *
+     * @summary CofidisPay
+     * @throws FetchError<400, types.CofidisPayResponse400> 400
+     * @throws FetchError<401, types.CofidisPayResponse401> 401
+     */
+    SDK.prototype.cofidisPay = function (body) {
+        return this.core.fetch('/v1.02/cofidis/create', 'post', body);
+    };
+    /**
+     * Creates Apple Pay payment request.
+     *
+     * @summary Apple Pay
+     * @throws FetchError<400, types.ApplePayResponse400> 400
+     */
+    SDK.prototype.applePay = function (body) {
+        return this.core.fetch('/v1.02/euapplepay/create', 'post', body);
+    };
+    /**
+     * Polish Payment Method. Creates a request that redirects the payer to an external form to
+     * pay with P24.
+     *
+     * @summary P24
+     * @throws FetchError<400, types.P24Response400> 400
+     * @throws FetchError<401, types.P24Response401> 401
+     */
+    SDK.prototype.p24 = function (body) {
+        return this.core.fetch('/v1/p24/create', 'post', body);
+    };
+    /**
+     * Creates a request to allow the customer to pay using Santander Consumer service.
+     *
+     * @summary Santander Consumer
+     * @throws FetchError<401, types.SantanderConsumerResponse401> 401
+     */
+    SDK.prototype.santanderConsumer = function (body) {
+        return this.core.fetch('/v1.02/santander/create', 'post', body);
+    };
+    /**
+     * Creates an url to a secure form where the customer may finish the Credit Card
+     * recurrency. Supports 3D Secure Technology.
+     *
+     * @summary Credit Card - Recurrence Authorization
+     * @throws FetchError<400, types.CreditCardRecurrenceAuthorizationResponse400> 400
+     */
+    SDK.prototype.creditCardRecurrenceAuthorization = function (body) {
+        return this.core.fetch('/v1.02/creditcard/subscription', 'post', body);
+    };
+    /**
+     * Creates a Credit Card Recurrent MIT (Merchant initiated transaction) payment after a
+     * sucessful authorization.
+     *
+     * @summary Credit Card - Recurrence Payment
+     * @throws FetchError<400, types.CreditCardRecurrencePaymentResponse400> 400
+     */
+    SDK.prototype.creditCardRecurrencePayment = function (body, metadata) {
+        return this.core.fetch('/v1.02/creditcard/payment/{recurrentID}', 'post', body, metadata);
+    };
+    /**
+     * Creates MB WAY payment requests. (The customer have 5 minutes to execute the payment
+     * after receiving the payment notification via MBWAY app.)
      *
      * @summary MB WAY
+     * @throws FetchError<401, types.MbwayResponse401> 401
      */
-    SDK.prototype.mbWay = function (body) {
-        return this.core.fetch('/mbway/create', 'post', body);
+    SDK.prototype.mbway = function (body) {
+        return this.core.fetch('/v1.02/mbway/create', 'post', body);
     };
     /**
-     * Creates Payshop payment references.
+     * Creates a request to allow the customer to pay using PayByLink.
      *
-     * These references are paid in cash on a large Portuguese network.
-     *
-     * @summary Payshop
+     * @summary PayByLink
+     * @throws FetchError<401, types.PaybylinkResponse401> 401
      */
-    SDK.prototype.payshop = function (body) {
-        return this.core.fetch('/payshop/create', 'post', body);
+    SDK.prototype.paybylink = function (body) {
+        return this.core.fetch('/v1.02/paybylink/create', 'post', body);
     };
     /**
-     * Creates Paysafecard payment references.
+     * Creates a request to allow the customer to pay using PayByLink.
      *
-     * @summary Paysafecard
+     * @summary PayByLink QR Code
+     * @throws FetchError<401, types.PaybylinkQrcodeResponse401> 401
      */
-    SDK.prototype.paysafecard = function (body) {
-        return this.core.fetch('/paysafecard/create', 'post', body);
+    SDK.prototype.paybylinkQrcode = function (body) {
+        return this.core.fetch('/v1.02/paybylink/qrcode', 'post', body);
     };
     /**
-     * Creates a url to a secure form where the customer may finish the Credit Card payment.
-     * Uses 3D Secure Technology.
+     * Creates a request to allow the client to check the installment options available using
+     * Floa Pay service for that amount and country.
      *
-     * @summary Credit Card 3DS
+     * @summary Floa Pay - Simulation
+     * @throws FetchError<400, types.FloaPaySimulationResponse400> 400
      */
-    SDK.prototype.creditCard3ds = function (body) {
-        return this.core.fetch('/cc/form', 'post', body);
+    SDK.prototype.floaPaySimulation = function (body) {
+        return this.core.fetch('/v1.02/floa/simulate', 'post', body);
     };
     /**
-     * Check the status of a reference on Eupago.
+     * Creates a request to allow the customer to pay using Floa Pay service.
      *
-     * @summary Reference Information
+     * @summary Floa - Payment
+     * @throws FetchError<400, types.FloaCreateResponse400> 400
      */
-    SDK.prototype.referenceInformation = function (body) {
-        return this.core.fetch('/multibanco/info', 'post', body);
+    SDK.prototype.floaCreate = function (body) {
+        return this.core.fetch('/v1.02/floa/create', 'post', body);
     };
     /**
-     * Creates MB WAY Meal Passes payment requests.
+     * Creates an url to a secure form where the customer may finish the Bizum payment.
+     * Supports 3D Secure Technology.
      *
-     * @summary MB WAY Meal Passes
+     * @summary Bizum
+     * @throws FetchError<401, types.BizumResponse401> 401
      */
-    SDK.prototype.mbWayMealPasses = function (body) {
-        return this.core.fetch('/mbway_refeicao/create', 'post', body);
+    SDK.prototype.bizum = function (body) {
+        return this.core.fetch('/v1.02/bizum/create', 'post', body);
     };
     /**
-     * Creates Multibanco payment references with a deadline, using check-digit. These
-     * references will only accept a single payment in a specific amount until they exceed
-     * their deadline.
+     * Creates Pix payment requests. (The customer have to execute the payment after receiving
+     * the payment notification via Pix app.)
      *
-     * @summary Multibanco DPG
+     * @summary EuroPix
+     * @throws FetchError<401, types.EuropixResponse401> 401
      */
-    SDK.prototype.multibancoDpg = function (body) {
-        return this.core.fetch('/multibanco/apg', 'post', body);
+    SDK.prototype.europix = function (body) {
+        return this.core.fetch('/v1.02/pix/create', 'post', body);
     };
     /**
-     * Creates MB WAY payment requests.
+     * Creates Google Pay payment request.
      *
-     * @summary MB WAY (COPY)
+     * @summary Google Pay
+     * @throws FetchError<401, types.GooglePayResponse401> 401
      */
-    SDK.prototype.mbWayCopy = function (body) {
-        return this.core.fetch('/mbway/create (COPY)', 'post', body);
+    SDK.prototype.googlePay = function (body) {
+        return this.core.fetch('/v1.02/googlepay/create', 'post', body);
+    };
+    /**
+     * Creates Pagaqui payment requests.
+     *
+     * @summary Pagaqui
+     * @throws FetchError<401, types.PagaquiResponse401> 401
+     */
+    SDK.prototype.pagaqui = function (body) {
+        return this.core.fetch('/v1.02/pagaqui/create', 'post', body);
     };
     return SDK;
 }());

@@ -1,123 +1,116 @@
-// routes/pagamento.js
 const express = require("express");
-const axios = require("axios");
-const eupago = require("@api/eupago")
-
+const eupago = require("@api/eupago");
 const router = express.Router();
 
 /**
- * Criar pagamento no Eupago
- * Aceita Multibanco e MB WAY
+ * CRIAR PAGAMENTO (MULTIBANCO OU MB WAY)
  */
 router.post("/create", async (req, res) => {
-    
-   const response = await eupago.multibanco({
-    chave: "demo-b290-6d99-6cf0-931",
-    valor: "23.4",
-    per_dup: "0"
-   }).then(data => console.log(data))
-   res.status(201).send(response)
+   try {
+      const { amount, metodo, phone } = req.body;
+
+      if (!amount || amount <= 0) {
+         return res.status(400).json({ error: "Valor inválido" });
+      }
+
+      let result;
+
+      //     if (metodo === "multibanco") {
+      //   // Criar pagamento Multibanco
+      //   result = await eupago.multibanco({
+      //     chave: process.env.EUPAGO_API_KEY,
+      //     valor: amount.toFixed(2).toString(), // importante: enviar como string
+      //     per_dup: "0",
+      //   });
+
+      //   console.log("Result Multibanco:", result);
+
+      // Ajuste importante: acessar result.data
+    //  const mbResult = result.data;
+
+   //    return res.json({
+   //       success: true,
+   //       data: {
+   //          entity: mbResult.entidade,
+   //          reference: mbResult.referencia,
+   //          amount: mbResult.valor,
+   //       },
+   //    });
+   // }
+
+if (metodo === "mbway") {
+      if (!phone) {
+         return res.status(400).json({ error: "Telefone obrigatório" });
+      }
+
+      result = await eupago.mbway({
+         chave: process.env.EUPAGO_API_KEY,
+         valor: amount.toFixed(2).toString(),
+         telemovel: phone,
+         descricao: "Pagamento loja",
+      });
+
+      const mbwayResult = result.data;
+
+      return res.json({
+         success: true,
+         data: {
+            checkout_url: mbwayResult.url,
+            reference: mbwayResult.reference, // importante para status/polling
+         },
+      });
+   }
 
 
+   return res.status(400).json({ error: "Método inválido" });
+
+} catch (err) {
+   console.error("Erro ao criar pagamento Eupago:", err);
+   res.status(500).json({ error: "Erro ao criar pagamento" });
+}
 });
 
-// /**
-//  * CALLBACK (WEBHOOK) DO EUPAGO
-//  * Quando o pagamento for confirmado, o Eupago envia uma notificação aqui
-//  */
-// router.post("/callback", (req, res) => {
-//   const dados = req.body;
+/**
+ * CONSULTAR STATUS DO PAGAMENTO
+ */
+router.get("/status/:reference", async (req, res) => {
+   try {
+      const { reference } = req.params;
 
-//   console.log("📌 Pagamento confirmado no Eupago:", dados);
+      if (!reference) return res.status(400).json({ error: "Referência obrigatória" });
 
-//   // Aqui você deve:
-//   // - atualizar tabela de compras no banco
-//   // - marcar pedido como pago
-//   // - enviar email ou notificação para o cliente, etc.
+      const status = await eupago.status({
+         chave: process.env.EUPAGO_API_KEY,
+         referencia: reference,
+      });
 
-//   res.status(200).send("OK"); // obrigatório para o Eupago aceitar o callback
-// });
-
-module.exports = router;
+      // status pode ser: 'paid', 'pending', 'canceled', etc
+      res.json({ success: true, status });
+   } catch (err) {
+      console.error("Erro ao consultar status Eupago:", err);
+      res.status(500).json({ error: "Erro ao consultar status do pagamento" });
+   }
+});
 
 /**
- * Criar pagamento no Eupago
- * Aceita Multibanco e MB WAY
+ * CALLBACK EUPAGO (obrigatório)
+ * Recebe notificações de pagamento e deve atualizar o status no DB
  */
-// router.post("/create", async (req, res) => {
-//   try {
-//     const { amount, cliente, metodo, phone } = req.body;
+router.post("/callback", async (req, res) => {
+   try {
+      const { referencia, estado, metodo, valor } = req.body;
 
-//     // 🔹 Validação mínima
-//     if (!amount || amount <= 0) {
-//       return res.status(400).json({ error: "Amount inválido" });
-//     }
+      console.log("📌 CALLBACK EUPAGO recebido:", req.body);
 
-//     if (!cliente || typeof cliente !== "string") {
-//       return res.status(400).json({ error: "Cliente inválido" });
-//     }
+      // Aqui você pode atualizar o status no seu banco de dados
+      // Exemplo fictício:
+      // await db.pagamentos.update({ referencia }, { status: estado });
 
-//     if (!["mbway", "multibanco"].includes(metodo)) {
-//       return res.status(400).json({ error: "Método inválido" });
-//     }
+      res.status(200).send("OK");
+   } catch (err) {
+      console.error("Erro no callback Eupago:", err);
+      res.status(500).send("Erro no callback");
+   }
+});
 
-//     let payload = {
-//       amount,
-//       description: `Compra de ${cliente}`,
-//       entity: process.env.EUPAGO_ENTIDADE,
-//     };
-
-//     // 🔹 Se for MB WAY
-//     if (metodo === "mbway") {
-//       if (!phone) {
-//         return res.status(400).json({ error: "Telefone obrigatório para MB WAY" });
-//       }
-//       payload.method = "mbway";
-//       payload.phone = phone; // número do cliente
-//     }
-
-//     // 🔹 Se for MULTIBANCO
-//     if (metodo === "multibanco") {
-//       payload.method = "multibanco";
-//       payload.reference = null; // Eupago gera referência automaticamente
-//     }
-
-//     // 🔹 Chamada à API Eupago
-//     const response = await axios.post(
-//       "https://sandbox.eupago.pt/checkout/api/v1/payments",
-//       payload,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${process.env.EUPAGO_API_KEY}`,
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     // 🔹 Resposta formatada para frontend
-//     res.json({
-//       success: true,
-//       data: response.data,
-//     });
-//   } catch (error) {
-//     console.error("Erro ao criar pagamento Eupago:", error.response?.data || error.message);
-//     res.status(500).json({ error: "Erro ao criar pagamento Eupago" });
-//   }
-// });
-
-// /**
-//  * CALLBACK (WEBHOOK) DO EUPAGO
-//  * Quando o pagamento for confirmado, o Eupago envia uma notificação aqui
-//  */
-// router.post("/callback", (req, res) => {
-//   const dados = req.body;
-
-//   console.log("📌 Pagamento confirmado no Eupago:", dados);
-
-//   // Aqui você deve:
-//   // - atualizar tabela de compras no banco
-//   // - marcar pedido como pago
-//   // - enviar email ou notificação para o cliente, etc.
-
-//   res.status(200).send("OK"); // obrigatório para o Eupago aceitar o callback
-// });
+module.exports = router;

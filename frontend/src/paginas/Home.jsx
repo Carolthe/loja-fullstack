@@ -78,7 +78,7 @@ export default function Home() {
       </div>
       {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
-        <button className="border-[1px] font-medium bg-amarelo-principal text-white text-sm rounded-full w-[105px] h-[45px]"
+        <button className="border-[1px] font-bold bg-amarelo-principal text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}> Ver Mais</button>
       </div>
 

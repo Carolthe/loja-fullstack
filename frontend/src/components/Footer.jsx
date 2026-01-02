@@ -6,7 +6,7 @@ export default function Footer() {
     return (
         <footer className="bg-[#5769a9] text-white">
             {/* Conteúdo principal */}
-            <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+            <div className="max-w-6xl mx-auto px-6 py-[28px] grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
 
                 {/* Logo e contato */}
                 <div className="flex flex-col items-center md:items-start gap-3">
