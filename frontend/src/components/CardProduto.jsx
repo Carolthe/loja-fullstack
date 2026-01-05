@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-export default function CardProduto({ id, imgProduct, title, price }) {
+export default function CardProduto({ id, imgProduct, title, descricaoProduto, price }) {
   const navigate = useNavigate();
   const [isFavorited, setIsFavorited] = useState(false);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -79,7 +79,7 @@ export default function CardProduto({ id, imgProduct, title, price }) {
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
       <div className="relative">
         <Link to="/productsDetails"
-        state={{ id, imgProduct, title, price }}>
+        state={{ id, imgProduct, title, price, descricaoProduto }}>
           <img className="w-full h-[180px] object-cover rounded-t-2xl md:h-[280px]"
             src={imgProduct}
             alt={title}/>
@@ -96,10 +96,10 @@ export default function CardProduto({ id, imgProduct, title, price }) {
       </div>
       <div className="pt-[5px] flex flex-col md:pt-[10px]">
         <h2 className="pl-[5px] text-lg font-semibold text-gray-800">{title}</h2>
-        <p className="pl-[5px] text-font-cinza text-sm">Breve descrição do produto</p>
+        <p className="pl-[5px] text-font-cinza text-sm">{descricaoProduto}</p>
         <div className="flex justify-between items-center px-[5px] md:py-[8px]">
           <p className="text-lg font-bold text-gray-900">
-            R$ {price.toFixed(2).replace(".", ",")}
+            € {price.toFixed(2).replace(".", ",")}
           </p>
           <div className="flex items-center gap-1">
             <FaStar className="text-yellow-400" />

@@ -13,6 +13,7 @@ import quarto from "../imagensCategorias/quarto.png"
 import cozinha from "../imagensCategorias/cozinha.png";
 import banheiro from "../imagensCategorias/banheiro.png";
 import escritorio from "../imagensCategorias/escritorio.png";
+import CarrinhoVazio from "../components/CarrinhoVazio";
 
 
 export default function Home() {
@@ -63,7 +64,7 @@ export default function Home() {
       {/* 🔹 Produtos ordenados por preço */}
       <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
         {produtos.length === 0 ? (
-          <p>Nenhum produto encontrado.</p>
+         <CarrinhoVazio text="Nenhum Produto Encontrado" />
         ) : (
           produtos.map((produto) => (
             <CardProduto
@@ -71,6 +72,7 @@ export default function Home() {
               id={produto.id_produto}
               imgProduct={produto.imagem}
               title={produto.nome}
+              descricaoProduto={produto.descricao}
               price={parseFloat(produto.preco)}
             />
           ))

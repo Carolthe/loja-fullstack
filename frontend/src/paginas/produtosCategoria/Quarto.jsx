@@ -33,15 +33,15 @@ export default function Quarto() {
 
 
     return (
-        <div className="mt-[30px]">
-        
-          <CardBannerCategoria />
-        <div className="flex justify-around mx-[35px] pt-[20px]">
+        <div >
+           <div className="my-[30px] flex justify-around mx-[35px] pt-[20px]">
           <img className="w-[30px] h-[30px]" src={sala} />
           <img className="w-[30px] h-[30px]" src={escritorio} />
           <img className="w-[30px] h-[30px]" src={banheiro} />
           <img className="w-[30px] h-[30px]" src={cozinha} />
         </div>
+          {/* <CardBannerCategoria /> */}
+     
                {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (

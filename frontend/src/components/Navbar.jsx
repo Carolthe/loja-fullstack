@@ -43,7 +43,7 @@ export default function Navbar() {
 
         <li>
           <Link to="/produtos" onClick={closeMenu} className="hover:text-verde">
-            All Products
+            Todos os Produtos
           </Link>
         </li>
 
@@ -95,25 +95,25 @@ export default function Navbar() {
 
         <li>
           <Link to="/carrinho" onClick={closeMenu} className="hover:text-verde">
-            Cart
+            Carrinho
           </Link>
         </li>
 
         <li>
           <Link to="/favoritos" onClick={closeMenu} className="hover:text-verde">
-            Favourites
+            Favoritos
           </Link>
         </li>
 
         <li>
           <Link to="/pedidos" onClick={closeMenu} className="hover:text-verde">
-            My Orders
+            Minhas Compras
           </Link>
         </li>
 
         <li>
           <Link to="/contato" onClick={closeMenu} className="hover:text-verde">
-            Contact
+            Contatos
           </Link>
         </li>
       </ul>

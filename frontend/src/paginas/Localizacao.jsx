@@ -33,7 +33,7 @@ export default function Localizacao() {
         const res = await api.get(`/localizacao/${userId}`);
         const data = res.data;
 
-        if (data.localizacao) {
+        if (data.localizacao  ) {
           setJaExiste(true);
           setPais(data.localizacao.pais);
           setRua(data.localizacao.rua);
@@ -74,7 +74,7 @@ export default function Localizacao() {
         return;
       }
 
-      alert(res.data.message);
+      //alert(res.data.message);
       navigate("/pagamento");
     } catch (err) {
       console.error("Erro ao salvar localização:", err);

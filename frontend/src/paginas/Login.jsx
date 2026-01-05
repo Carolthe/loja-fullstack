@@ -43,7 +43,7 @@ export default function Login() {
                         <label className="font-semibold">Sua Senha</label>
                         <Input placeholder="senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
-                    <button className="w-75 h-[45px] mt-[25px] bg-amarelo-principal font-semibold text-white text-[19px] rounded-md">Login</button>
+                    <button className="w-75 h-[45px] mt-[25px] bg-amarelo-principal font-bold text-white text-[19px] rounded-md">Login</button>
                     <Link to="/password-recovery">
                     <p className="mt-3.75 text-azul-principal">Recuperar a Senha</p>
                     </Link>

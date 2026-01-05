@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import Credibilidade from "../components/Credibilidade";
 import VerProdutos from "../components/VerProdutos";
+import CarrinhoVazio from "../components/CarrinhoVazio";
+import { toast, ToastContainer } from "react-toastify";
+
 
 export default function Carrinho() {
   const [carrinho, setCarrinho] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   // Impede acesso sem login
   useEffect(() => {
     if (!usuario) {
-      alert("Você precisa estar logado para acessar o carrinho.");
-      navigate("/login");
+ toast.error("Você precisa estar logado para adicionar produtos ao carrinho.");      
     }
   }, []);
 
@@ -64,7 +66,7 @@ export default function Carrinho() {
       </div>
   <hr className="border-t border-gray-400/20" />
       {carrinho.length === 0 ? (
-        <p className="text-center my-[20px]">Seu carrinho está vazio</p>
+         <CarrinhoVazio text="Carrinho Vazio" />
       ) : (
         carrinho.map((product) => (
           <CardCarrinho
@@ -89,6 +91,15 @@ export default function Carrinho() {
             onClick={limparCarrinho}> Limpar o Carrinho </button>
         </div>
       )}
+      <ToastContainer 
+        position="bottom-center" 
+        autoClose={3000} 
+        hideProgressBar={false} 
+        newestOnTop={false} 
+        closeOnClick 
+        pauseOnHover
+        draggable
+      />
       <Credibilidade />
       <ScrollToTop />
       <Footer />

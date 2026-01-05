@@ -5,6 +5,7 @@ import ScrollToTop from "../components/ScrollToTop.jsx";
 import VerProdutos from "../components/VerProdutos.jsx";
 import api from "../services/api.js";
 import { useState, useEffect } from "react";
+import CarrinhoVazio from "../components/CarrinhoVazio.jsx";
 
 export default function Favoritos() {
   const [favoritos, setFavoritos] = useState([]);
@@ -34,7 +35,8 @@ export default function Favoritos() {
           Aqui estão os produtos que você marcou como favoritos.
         </p>
         {favoritos.length === 0 ? (
-          <p className="text-center mt-[20px] text-font-cinza">Nenhum favorito ainda.</p>
+          // <p className="text-center mt-[20px] text-font-cinza">Nenhum favorito ainda.</p>
+         <CarrinhoVazio text="Favoritos Vazio" />
         ) : (
           <div className="mt-[20px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
             {favoritos.map((produto) => (

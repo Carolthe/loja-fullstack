@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import api from '../services/api';
 import CardProduto from "../components/CardProduto";
 import Credibilidade from "../components/Credibilidade";
+import CarrinhoVazio from "../components/CarrinhoVazio";
 
 export default function TodosProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -86,7 +87,7 @@ const produtosFiltrados = produtos.filter(produto => {
       <p className="text-font-cinza ml-[10px]">Bem-vindo / Todos os Produtos </p>
 
       {produtosFiltrados.length === 0 ? (
-        <p className="mx-3">Nenhum produto encontrado.</p>
+         <CarrinhoVazio text="Nenhum Produto Encontrado" />
       ) : (
         <div className="mt-[10px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
           {produtosFiltrados.map((produto) => (

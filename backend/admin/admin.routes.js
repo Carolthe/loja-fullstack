@@ -12,11 +12,11 @@ const uploadsRoutes = require("./routes/Uploads.route");
 const authRoutes = require("./routes/Auth.route");
 
 router.use("/auth", authRoutes);
-router.use("/produtos", authMiddleware, produtosRoutes);
-router.use("/categorias", authMiddleware, categoriasRoutes);
-router.use("/usuarios", authMiddleware, usuariosRoutes);
-router.use("/newsletters", authMiddleware, newslettersRoutes);
-router.use("/contatos", authMiddleware, contatosRoutes);
-router.use("/uploads", authMiddleware, uploadsRoutes);
+router.use("/produtos", produtosRoutes);
+router.use("/categorias", categoriasRoutes);
+router.use("/usuarios", usuariosRoutes);
+router.use("/newsletters", newslettersRoutes);
+router.use("/contatos", contatosRoutes);
+router.use("/uploads", uploadsRoutes);
 
 module.exports = router;

@@ -44,29 +44,12 @@ export default function Footer() {
                             Redes Sociais
                         </h3>
 
-                        <div className="flex gap-3">
-                            <a
-                                href="#"
-                                className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"
-                            >
-                                <FaWhatsapp />
-                            </a>
-
-                            <a
-                                href="https://www.instagram.com/homehavenliving/?next=%2F"
-                                target="blank"
-                                className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"
-                            >
-                                <FaInstagram />
-                            </a>
-
-                            <a
-                                href="https://www.facebook.com/profile.php?id=61580030390813"
-                                target="blank"
-                                className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"
-                            >
-                                <FaFacebook />
-                            </a>
+                        <div className="flex mt-[15px] justify-center gap-3">
+                            <a href="#" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaWhatsapp /></a>
+                            <a href="https://www.instagram.com/homehavenliving/?next=%2F"
+                                target="blank" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaInstagram /></a>
+                            <a href="https://www.facebook.com/profile.php?id=61580030390813"
+                                target="blank" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaFacebook /></a>
                         </div>
                     </div>
                 </div>

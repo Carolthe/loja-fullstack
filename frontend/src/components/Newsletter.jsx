@@ -25,7 +25,7 @@ export default function Newsletter() {
     }
 
     return (
-        <section className="w-full py-16">
+        <section className="w-full  pb-[50px]">
             <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 text-center">
 
                 <h4 className="text-xl font-semibold text-[#5769a9] mb-2">
