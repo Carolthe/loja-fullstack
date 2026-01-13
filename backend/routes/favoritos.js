@@ -1,14 +1,14 @@
 //modulos importados
 const express = require('express');
 const router = express.Router();
-const pool = require('../models/db');
+const ligacao = require('../models/db');
 
 // Adiciona produto aos favoritos
 router.post('/', async (req, res) => {
   const { id_usuario, id_produto } = req.body;
 
   try {
-    const [existing] = await pool.query(
+    const [existing] = await ligacao.query(
       'SELECT * FROM favoritos WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'Produto já está nos favoritos!' });
     }
 
-    await pool.query(
+    await ligacao.query(
       'INSERT INTO favoritos (id_usuario, id_produto) VALUES (?, ?)',
       [id_usuario, id_produto]
     );
@@ -34,7 +34,7 @@ router.get('/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;
 
   try {
-    const [rows] = await pool.query(
+    const [rows] = await ligacao.query(
       `SELECT p.* FROM produtos p
        JOIN favoritos f ON p.id_produto = f.id_produto
        WHERE f.id_usuario = ?`,
@@ -53,7 +53,7 @@ router.delete('/:id_usuario/:id_produto', async (req, res) => {
   const { id_usuario, id_produto } = req.params;
 
   try {
-    await pool.query(
+    await ligacao.query(
       'DELETE FROM favoritos WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );

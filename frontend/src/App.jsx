@@ -18,11 +18,19 @@ import Banheiro from './paginas/produtosCategoria/Banheiro'
 import Escritorio from './paginas/produtosCategoria/Escritorio'
 import RecuperacaoSenha from './paginas/RecuperacaoSenha'
 import Quarto from './paginas/produtosCategoria/Quarto'
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Router>
       <Header />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
       <div className="pt-[50px]">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,15 +42,15 @@ function App() {
           <Route path='/dadosLocalizacao' element={<Localizacao />} />
           <Route path='/login' element={<Login />} />
           <Route path='/createAccount' element={<CriarConta />} />
-          <Route path='/quarto' element={<Quarto/> } />
+          <Route path='/quarto' element={<Quarto />} />
           <Route path='/sala' element={<Sala />} />
           <Route path='/cozinha' element={<Cozinha />} />
           <Route path='/banheiro' element={<Banheiro />} />
           <Route path='/escritorio' element={<Escritorio />} />
           <Route path='/productsDetails' element={<DetalheProdutos />} />
-          <Route path='/password-recovery' element={<RecuperacaoSenha/>} />
-          <Route path='/perfil' element={<Perfil/>} />
-          <Route path='/pagamento' element={<Pagamento/>} />
+          <Route path='/password-recovery' element={<RecuperacaoSenha />} />
+          <Route path='/perfil' element={<Perfil />} />
+          <Route path='/pagamento' element={<Pagamento />} />
         </Routes>
       </div>
     </Router>

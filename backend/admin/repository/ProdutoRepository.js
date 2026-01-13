@@ -1,7 +1,7 @@
 // @ts-check
 
 const Produto = require("../Interfaces/ProdutoInterface");
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const LogError = require("../utils/LogError");
 const InternalServerError = require("../errors/InternalServerError");
 
@@ -13,7 +13,7 @@ class ProdutoRepository {
    */
   async listarProdutos(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_produto, nome, preco, estoque FROM produtos WHERE nome LIKE ? LIMIT ? OFFSET ?`,
         [`${busca}%`, limite, (pagina - 1) * limite]
       );
@@ -39,7 +39,7 @@ class ProdutoRepository {
    */
   async obterProdutoPorId(id) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_produto, nome, descricao, preco, imagem, estoque, data_criacao FROM produtos WHERE id_produto = ?`,
         [id]
       );
@@ -63,7 +63,7 @@ class ProdutoRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [result] = await pool.query(
+      const [result] = await ligacao.query(
         `INSERT INTO produtos (nome, descricao, preco, imagem, estoque)
      VALUES (?, ?, ?, ?, ?)`,
         [
@@ -93,7 +93,7 @@ class ProdutoRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [updated] = await pool.query(
+      const [updated] = await ligacao.query(
         `UPDATE produtos SET nome = ?, descricao = ?, preco = ?, imagem = ?, estoque = ? WHERE id_produto = ?`,
         [
           produto.nome,
@@ -123,7 +123,7 @@ class ProdutoRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [removed] = await pool.query(
+      const [removed] = await ligacao.query(
         `DELETE FROM produtos WHERE id_produto = ?`,
         [id]
       );
@@ -139,7 +139,7 @@ class ProdutoRepository {
 
   async contarProdutos(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT COUNT(*) as total FROM produtos WHERE nome LIKE ?`,
         [`${busca}%`]
       );

@@ -1,7 +1,7 @@
 //modulos importados
 const express = require('express')
 const router = express.Router()
-const pool = require('../models/db')
+const ligacao = require('../models/db')
 
 // Rota para cadastrar na newsletter
 router.post('/', async (req, res) => {
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
 // Verifica se o email já está cadastrado
         const emailLower = email.toLowerCase()
 
-        const [existing] = await pool.query(
+        const [existing] = await ligacao.query(
             'SELECT * FROM newsletter WHERE email = ?',
             [emailLower]
         )
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
             return res.status(400).json({error: 'Email já inscrito na newsletter'})
         }
 //Insere na base de dados
-        await pool.query(
+        await ligacao.query(
             'INSERT INTO newsletter (nome, email) VALUES (?, ?)',
             [nome, emailLower]
         )

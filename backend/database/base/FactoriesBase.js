@@ -16,16 +16,16 @@ class FactoryBase {
     tableName;
 
     /**
-     * @type {import('mysql2/promise').Pool|null}
+     * @type {import('mysql2/promise').ligacao|null}
      */
-    pool;
+    ligacao;
 
     faker;
 
     _quantity = 1;
 
     constructor() {
-        this.pool = mysql.createPool({
+        this.ligacao = mysql.createPool({
             host: process.env.DB_HOST,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
@@ -58,14 +58,14 @@ class FactoryBase {
             const values = Object.values(data);
             const query = `INSERT INTO ${this.tableName} (${columns}) VALUES (${placeholders})`;
             try {
-                await this.pool?.query(query, values);
+                await this.ligacao?.query(query, values);
             } catch (error) {
                 continue;
             }
         }
 
         console.log(`✅ Inserção concluída em "${this.tableName}".`);
-        await this.pool?.end();
+        await this.ligacao?.end();
     }
 }
 

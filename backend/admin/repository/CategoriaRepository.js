@@ -1,7 +1,7 @@
 // @ts-check
 
 const Categoria = require("../Interfaces/CategoriaInterface");
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const LogError = require("../utils/LogError");
 const InternalServerError = require("../errors/InternalServerError");
 
@@ -13,7 +13,7 @@ class CategoriaRepository {
    */
   async listarCategorias(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_categoria, nome FROM categorias WHERE nome LIKE ? LIMIT ? OFFSET ?`,
         [`${busca}%`, limite, (pagina - 1) * limite]
       );
@@ -39,7 +39,7 @@ class CategoriaRepository {
    */
   async obterCategoriaPorId(id) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_categoria, nome FROM categorias WHERE id_categoria = ?`,
         [id]
       );
@@ -63,7 +63,7 @@ class CategoriaRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [result] = await pool.query(
+      const [result] = await ligacao.query(
         `INSERT INTO categorias (nome) VALUES (?)`,
         [categoria.nome]
       );
@@ -86,7 +86,7 @@ class CategoriaRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [updated] = await pool.query(
+      const [updated] = await ligacao.query(
         `UPDATE categorias SET nome = ? WHERE id_categoria = ?`,
         [categoria.nome, categoria.id_categoria]
       );
@@ -109,7 +109,7 @@ class CategoriaRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [removed] = await pool.query(
+      const [removed] = await ligacao.query(
         `DELETE FROM categorias WHERE id_categoria = ?`,
         [id]
       );
@@ -125,7 +125,7 @@ class CategoriaRepository {
 
   async contarCategorias(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT COUNT(*) as total FROM categorias WHERE nome LIKE ?`,
         [`${busca}%`]
       );

@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function CardProduto({ id, imgProduct, title, descricaoProduto, price }) {
   const navigate = useNavigate();
@@ -30,8 +31,13 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   // Alterna o estado do favorito
   async function handleFavoritar() {
     if (!usuario) {
-      alert("Você precisa estar logado para favoritar produtos!");
-      return navigate("/login");
+      toast.info("Você precisa estar logado para favoritar produtos");
+      //alert("Você precisa estar logado para favoritar produtos");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2400);
+
+      return
     }
 
     try {
@@ -39,6 +45,9 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
         // Remover dos favoritos
         await api.delete(`/favoritos/${usuario.id_usuario}/${id}`);
         setIsFavorited(false);
+        toast.error("Produto removido dos favoritos")
+        
+
       } else {
         // Adicionar aos favoritos
         await api.post("/favoritos", {
@@ -46,18 +55,25 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
           id_produto: id,
         });
         setIsFavorited(true);
+        toast.info("Produto adicionado aos favoritos")
+        
+
       }
     } catch (error) {
       console.error("Erro ao atualizar favorito:", error);
-      alert("Erro ao atualizar favorito.");
     }
   }
 
   // Adicionar ao carrinho
   async function adicionarCarrinho() {
     if (!usuario) {
-      alert("Você precisa estar logado para adicionar produtos ao carrinho!");
-      return navigate("/login");
+      //alert("Você precisa estar logado para adicionar produtos ao carrinho");
+      toast.info("Você precisa estar logado para adicionar produtos ao carrinho")
+      setTimeout(() => {
+        navigate("/login");
+      }, 2400);
+
+      return
     }
 
     try {
@@ -67,8 +83,8 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
         quantidade: 1,
       });
 
-      alert(`"${title}" foi adicionado ao carrinho!`);
-      setTimeout(() => navigate("/carrinho"), 400);
+      toast.info(`"${title}" foi adicionado ao carrinho`);
+
     } catch (error) {
       console.error("Erro ao adicionar produto ao carrinho:", error);
       alert(error.response?.data?.error || "Erro ao adicionar produto ao carrinho.");
@@ -76,13 +92,13 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[160px] md:w-[280px] mb-5">
       <div className="relative">
         <Link to="/productsDetails"
-        state={{ id, imgProduct, title, price, descricaoProduto }}>
+          state={{ id, imgProduct, title, price, descricaoProduto }}>
           <img className="w-full h-[180px] object-cover rounded-t-2xl md:h-[280px]"
             src={imgProduct}
-            alt={title}/>
+            alt={title} />
         </Link>
         {/* Botão de favoritos */}
         <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-100 transition"
@@ -112,6 +128,15 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
           onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>
+      {/* <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      /> */}
     </div>
   );
 }

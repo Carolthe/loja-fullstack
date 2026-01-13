@@ -1,5 +1,5 @@
 // @ts-check
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const InternalServerError = require("../errors/InternalServerError");
 const UnauthorizedError = require("../errors/UnauthorizedError");
 const Usuario = require("../Interfaces/UsuarioInterface");
@@ -8,7 +8,7 @@ const LogError = require("../utils/LogError");
 class AuthRepository {
   async getUserByEmail(email) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         "SELECT * FROM usuarios WHERE email = ?",
         [email]
       );
@@ -27,7 +27,7 @@ class AuthRepository {
    */
   async createUser(user) {
     try {
-      const result = await pool.query(
+      const result = await ligacao.query(
         "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)",
         [user.nome, user.email, user.senha]
       );

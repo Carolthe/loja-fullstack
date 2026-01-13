@@ -3,109 +3,50 @@ const axios = require("axios");
 const router = express.Router();
 
 /**
- * CRIAR PAGAMENTO (MULTIBANCO OU MB WAY)
+ * CRIAR PAGAMENTO MULTIBANCO
  */
 router.post("/create", async (req, res) => {
   try {
-    const { amount, metodo, phone } = req.body;
+    const { amount } = req.body;
 
     if (!amount || Number(amount) <= 0) {
       return res.status(400).json({ error: "Valor inválido" });
     }
 
-    // =========================
-    // MULTIBANCO
-    // =========================
-    if (metodo === "multibanco") {
-      const response = await axios.post(
-        "https://sandbox.eupago.pt/clientes/rest_api/multibanco/create",
-        {
-          chave: process.env.EUPAGO_API_KEY,
-          valor: Number(amount).toFixed(2), // string numérica
-          per_dup: 0,
+    const response = await axios.post(
+      "https://sandbox.eupago.pt/clientes/rest_api/multibanco/create",
+      {
+        chave: process.env.EUPAGO_API_KEY,
+        valor: Number(amount).toFixed(2),
+        per_dup: 0,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        {
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-        }
-      );
-
-      const data = response.data;
-
-      if (!data.entidade || !data.referencia) {
-        return res.status(500).json({
-          error: "Resposta inválida da Eupago (Multibanco)",
-          debug: data,
-        });
       }
+    );
 
-      return res.json({
-        success: true,
-        data: {
-          entity: data.entidade,
-          reference: data.referencia,
-          amount: data.valor,
-        },
+    const data = response.data;
+
+    if (!data.entidade || !data.referencia) {
+      return res.status(500).json({
+        error: "Resposta inválida da Eupago",
+        debug: data,
       });
     }
 
-    // =========================
-    // MB WAY
-    // =========================
-    if (metodo === "mbway") {
-      if (!phone) {
-        return res.status(400).json({ error: "Telefone obrigatório" });
-      }
-
-      const apiKey = `ApiKey ${process.env.EUPAGO_API_KEY}`;
-
-      const response = await axios.post(
-        "https://sandbox.eupago.pt/api/v1.02/mbway/create",
-        {
-          payment: {
-            amount: { currency: "EUR", value: Number(amount).toFixed(2) },
-            identifier: `Pagamento-${Date.now()}`,
-            successUrl: "https://sua-loja.com/success",
-            failUrl: "https://sua-loja.com/fail",
-            backUrl: "https://sua-loja.com/back",
-            lang: "PT",
-            customerPhone: phone,
-            countryCode: "+351",
-          },
-          customer: {
-            notify: true,
-            email: "cliente@email.com",
-          },
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: apiKey,
-          },
-        }
-      );
-
-      const data = response.data;
-
-      if (!data.referencia) {
-        return res.status(500).json({
-          error: "Resposta inválida da Eupago (MB WAY)",
-          debug: data,
-        });
-      }
-
-      return res.json({
-        success: true,
-        data: {
-          reference: data.referencia,
-          checkout_url: data.url || null,
-        },
-      });
-    }
-
-    return res.status(400).json({ error: "Método inválido" });
+    return res.json({
+      success: true,
+      data: {
+        entity: data.entidade,
+        reference: data.referencia,
+        amount: data.valor,
+      },
+    });
   } catch (err) {
-    console.error("Erro ao criar pagamento Eupago:", err.response?.data || err.message);
+    console.error("Erro ao criar pagamento Multibanco:", err.response?.data || err.message);
     res.status(500).json({ error: "Erro ao criar pagamento" });
   }
 });
@@ -117,7 +58,9 @@ router.get("/status/:reference", async (req, res) => {
   try {
     const { reference } = req.params;
 
-    if (!reference) return res.status(400).json({ error: "Referência obrigatória" });
+    if (!reference) {
+      return res.status(400).json({ error: "Referência obrigatória" });
+    }
 
     const response = await axios.post(
       "https://sandbox.eupago.pt/clientes/rest_api/status",
@@ -126,13 +69,17 @@ router.get("/status/:reference", async (req, res) => {
         referencia: reference,
       },
       {
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
       }
     );
 
-    const status = response.data;
-
-    return res.json({ success: true, status });
+    return res.json({
+      success: true,
+      status: response.data,
+    });
   } catch (err) {
     console.error("Erro ao consultar status Eupago:", err.response?.data || err.message);
     res.status(500).json({ error: "Erro ao consultar status do pagamento" });
@@ -140,15 +87,15 @@ router.get("/status/:reference", async (req, res) => {
 });
 
 /**
- * CALLBACK EUPAGO (obrigatório)
+ * CALLBACK EUPAGO
  */
 router.post("/callback", async (req, res) => {
   try {
-    const { referencia, estado, metodo, valor } = req.body;
+    console.log("CALLBACK EUPAGO *pagamento recebido*:", req.body);
 
-    console.log("📌 CALLBACK EUPAGO recebido:", req.body);
+    const { referencia, estado, valor } = req.body;
 
-    // Aqui você pode atualizar o status no seu banco de dados
+    // Exemplo:
     // await db.pagamentos.update({ referencia }, { status: estado });
 
     res.status(200).send("OK");

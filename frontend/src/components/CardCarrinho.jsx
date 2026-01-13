@@ -39,7 +39,7 @@ export default function CardCarrinho({ product, atualizarCarrinho }) {
           <p className="font-semibold">{product.nome}</p>
           <p className="text-sm">R$ {Number(product.preco).toFixed(2).replace(".", ",")}</p>
         </div>
-        <p className="text-font-cinza mt-[5px]">Breve descrição</p>
+        <p className="text-font-cinza mt-[5px]">{product.descricao}</p>
         <div className="flex justify-between mt-[10px]">
           <div className="flex items-center gap-[10px]">
             <button

@@ -8,12 +8,12 @@ require('dotenv').config();
  */
 class MigrationsBase {
   /**
-   * @type {import("mysql2/promise").Pool|null}
+   * @type {import("mysql2/promise").ligacao|null}
    */
-  pool;
+  ligacao;
 
   constructor() {
-    this.pool = mysql.createPool({
+    this.ligacao = mysql.createPool({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,

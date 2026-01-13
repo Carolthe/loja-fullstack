@@ -4,7 +4,7 @@ const MigrationsBase = require("../base/MigrationsBase");
 
 class CreateNewsletterMigration extends MigrationsBase {
     async up() {
-        await this.pool?.query(`
+        await this.ligacao?.query(`
             CREATE TABLE newsletters (
                 id_newsletter INT AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL,
@@ -15,7 +15,7 @@ class CreateNewsletterMigration extends MigrationsBase {
     }
 
     async down() {
-        await this.pool?.query(`DROP TABLE IF EXISTS newsletters;`);
+        await this.ligacao?.query(`DROP TABLE IF EXISTS newsletters;`);
     }
 }
 

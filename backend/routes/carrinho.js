@@ -1,7 +1,7 @@
 // módulos importados
 const express = require('express');
 const router = express.Router();
-const pool = require('../models/db');
+const ligacao = require('../models/db');
 
 // Adicionar produto ao carrinho
 router.post('/', async (req, res) => {
@@ -9,20 +9,20 @@ router.post('/', async (req, res) => {
 
   try {
     // Verifica se o produto já está no carrinho
-    const [rows] = await pool.query(
+    const [rows] = await ligacao.query(
       'SELECT * FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
 
     if (rows.length > 0) {
       // Atualiza quantidade se já existir
-      await pool.query(
+      await ligacao.query(
         'UPDATE carrinho SET quantidade = quantidade + ? WHERE id_usuario = ? AND id_produto = ?',
         [quantidade || 1, id_usuario, id_produto]
       );
     } else {
       // Insere novo produto
-      await pool.query(
+      await ligacao.query(
         'INSERT INTO carrinho (id_usuario, id_produto, quantidade) VALUES (?, ?, ?)',
         [id_usuario, id_produto, quantidade || 1]
       );
@@ -40,7 +40,7 @@ router.get('/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;
 
   try {
-    const [rows] = await pool.query(
+    const [rows] = await ligacao.query(
       `SELECT p.*, c.quantidade
        FROM carrinho c
        JOIN produtos p ON c.id_produto = p.id_produto
@@ -59,7 +59,7 @@ router.put('/:id_usuario/:id_produto/add', async (req, res) => {
   const { id_usuario, id_produto } = req.params;
 
   try {
-    await pool.query(
+    await ligacao.query(
       'UPDATE carrinho SET quantidade = quantidade + 1 WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
@@ -77,7 +77,7 @@ router.put('/:id_usuario/:id_produto/remove', async (req, res) => {
 
   try {
     // Verifica quantidade atual
-    const [rows] = await pool.query(
+    const [rows] = await ligacao.query(
       'SELECT quantidade FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
@@ -87,14 +87,14 @@ router.put('/:id_usuario/:id_produto/remove', async (req, res) => {
     }
 
     if (rows[0].quantidade <= 1) {
-      await pool.query(
+      await ligacao.query(
         'DELETE FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
         [id_usuario, id_produto]
       );
       return res.json({ message: 'Produto removido do carrinho' });
     }
 
-    await pool.query(
+    await ligacao.query(
       'UPDATE carrinho SET quantidade = quantidade - 1 WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
@@ -111,7 +111,7 @@ router.delete('/:id_usuario/:id_produto', async (req, res) => {
   const { id_usuario, id_produto } = req.params;
 
   try {
-    const [result] = await pool.query(
+    const [result] = await ligacao.query(
       'DELETE FROM carrinho WHERE id_usuario = ? AND id_produto = ?',
       [id_usuario, id_produto]
     );
@@ -132,7 +132,7 @@ router.delete('/:id_usuario', async (req, res) => {
   const { id_usuario } = req.params;
 
   try {
-    await pool.query('DELETE FROM carrinho WHERE id_usuario = ?', [id_usuario]);
+    await ligacao.query('DELETE FROM carrinho WHERE id_usuario = ?', [id_usuario]);
     res.json({ message: 'Carrinho limpo com sucesso!' });
   } catch (error) {
     console.error('Erro ao limpar carrinho:', error);

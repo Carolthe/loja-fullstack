@@ -3,6 +3,8 @@ import logotipo from "../imgMobile/logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api"
+import { toast, ToastContainer } from "react-toastify";
+
 
 export default function Login() {
     const [email, setEmail] = useState("")
@@ -13,12 +15,16 @@ export default function Login() {
         e.preventDefault()
         try {
             const res = await api.post("/users/login", { email, senha })
-            alert("Login realizado com sucesso")
+            toast.info("Login realizado com sucesso")
 
             //Guarda o usuário logado temporariamente
             localStorage.setItem("usuario", JSON.stringify(res.data.usuario))
 
-            navigate("/")
+            setTimeout(() => {
+        navigate("/");
+      }, 2400);
+
+      return
         } catch (error) {
             alert(error.response?.data?.error || "Erro ao fazer login")
         }
@@ -43,9 +49,9 @@ export default function Login() {
                         <label className="font-semibold">Sua Senha</label>
                         <Input placeholder="senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} />
                     </div>
-                    <button className="w-75 h-[45px] mt-[25px] bg-amarelo-principal font-bold text-white text-[19px] rounded-md">Login</button>
+                    <button className="w-75 h-[55px] mt-[25px] bg-amarelo-principal font-bold text-white text-[21px] rounded-[15px]">Login</button>
                     <Link to="/password-recovery">
-                    <p className="mt-3.75 text-azul-principal">Recuperar a Senha</p>
+                        <p className="mt-3.75 text-azul-principal">Recuperar a Senha</p>
                     </Link>
                     <div className="mt-37.5 mb-6">
                         <Link to="/createAccount">
@@ -54,6 +60,15 @@ export default function Login() {
                     </div>
                 </form>
             </div>
+            {/* <ToastContainer
+                position="bottom-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnHover
+                draggable
+            /> */}
         </div>
     )
 }

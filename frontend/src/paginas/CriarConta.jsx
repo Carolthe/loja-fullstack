@@ -55,7 +55,7 @@ export default function CriarConta() {
             <label className="font-medium">Confirmar a Senha</label>
             <Input type="password" placeholder="senha" value={confirmaSenha} onChange={(e) => setConfirmaSenha(e.target.value)} />
           </div>
-          <button type="submit" className="w-[300px] py-3 bg-amarelo-principal font-semibold text-white rounded-xl hover:bg-orange-400 transition">Inscrever-se</button>
+          <button type="submit" className="w-[300px] py-3 bg-amarelo-principal font-bold text-[20px] text-white rounded-[15px] hover:bg-orange-400 transition">Inscrever-se</button>
         </form>
         <p className="text-center text-sm text-gray-600 pb-6">Eu já tenho uma conta?{" "}
           <Link to="/login" className="text-azul-principal font-medium hover:underline">Login</Link>

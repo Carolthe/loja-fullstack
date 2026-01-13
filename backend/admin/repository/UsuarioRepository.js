@@ -1,7 +1,7 @@
 // @ts-check
 
 const Usuario = require("../Interfaces/UsuarioInterface");
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const InternalServerError = require("../errors/InternalServerError");
 const LogError = require("../utils/LogError");
 
@@ -13,7 +13,7 @@ class UsuarioRepository {
    */
   async listarUsuarios(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios WHERE nome LIKE ? LIMIT ? OFFSET ?`,
         [`${busca}%`, limite, (pagina - 1) * limite]
       );
@@ -39,7 +39,7 @@ class UsuarioRepository {
    */
   async obterUsuarioPorId(id) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_usuario, nome, email, senha, data_criacao FROM usuarios WHERE id_usuario = ?`,
         [id]
       );
@@ -63,7 +63,7 @@ class UsuarioRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [removed] = await pool.query(
+      const [removed] = await ligacao.query(
         `DELETE FROM usuarios WHERE id_usuario = ?`,
         [id]
       );
@@ -79,7 +79,7 @@ class UsuarioRepository {
 
   async contarUsuarios(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT COUNT(*) as total FROM usuarios WHERE nome LIKE ?`,
         [`${busca}%`]
       );

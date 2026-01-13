@@ -96,6 +96,7 @@ const produtosFiltrados = produtos.filter(produto => {
               id={produto.id_produto} 
               imgProduct={produto.imagem}
               title={produto.nome} 
+              descricaoProduto={produto.descricao}
               price={parseFloat(produto.preco)}
             />
           ))}

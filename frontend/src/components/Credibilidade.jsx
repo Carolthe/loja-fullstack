@@ -30,7 +30,7 @@ export default function Credibilidade() {
   ];
 
   return (
-    <section className="w-full mt-[50px] mb-[40px]">
+    <section className="w-full mt-[30px] mb-[40px]">
       {/* NÃO use overflow-hidden aqui */}
       <div
         className="

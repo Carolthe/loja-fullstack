@@ -1,7 +1,7 @@
 // @ts-check
 
 const Contato = require("../Interfaces/ContatoInterface");
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const InternalServerError = require("../errors/InternalServerError");
 const LogError = require("../utils/LogError");
 
@@ -13,7 +13,7 @@ class ContatoRepository {
    */
   async listarContatos(pagina, limite) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_contato, nome, email FROM contatos LIMIT ? OFFSET ?`,
         [limite, (pagina - 1) * limite]
       );
@@ -39,7 +39,7 @@ class ContatoRepository {
    */
   async obterContatoPorId(id) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_contato, nome, email, mensagem FROM contatos WHERE id_contato = ?`,
         [id]
       );
@@ -63,7 +63,7 @@ class ContatoRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [removed] = await pool.query(
+      const [removed] = await ligacao.query(
         `DELETE FROM contatos WHERE id_contato = ?`,
         [id]
       );

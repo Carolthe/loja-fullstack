@@ -71,8 +71,8 @@ export default function Home() {
               key={produto.id_produto}
               id={produto.id_produto}
               imgProduct={produto.imagem}
-              title={produto.nome}
               descricaoProduto={produto.descricao}
+              title={produto.nome}
               price={parseFloat(produto.preco)}
             />
           ))

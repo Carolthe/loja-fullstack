@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../models/db');
+const ligacao = require('../models/db');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
@@ -12,11 +12,11 @@ require('dotenv').config();
 router.post('/register', async (req, res) => {
     const { nome, email, senha } = req.body;
     try {
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        const [rows] = await ligacao.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length > 0) return res.status(400).json({ error: 'Email já cadastrado' });
 
         const senhaHash = await bcrypt.hash(senha, 10);
-        await pool.query('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', [nome, email, senhaHash]);
+        await ligacao.query('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)', [nome, email, senhaHash]);
 
         res.status(201).json({ message: 'Usuário registrado com sucesso!' });
     } catch (error) {
@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { email, senha } = req.body;
     try {
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        const [rows] = await ligacao.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length === 0) return res.status(401).json({ error: 'Email não encontrado' });
 
         const usuario = rows[0];
@@ -59,13 +59,13 @@ router.post('/login', async (req, res) => {
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     try {
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);
+        const [rows] = await ligacao.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length === 0) return res.status(200).json({ message: 'Se o e-mail existir, um link foi enviado.' });
 
         const token = crypto.randomBytes(32).toString('hex');
         const expiry = new Date(Date.now() + 3600000).toISOString().slice(0, 19).replace('T', ' ');
 
-        await pool.query('UPDATE usuarios SET reset_token = ?, reset_expires = ? WHERE email = ?', [token, expiry, email]);
+        await ligacao.query('UPDATE usuarios SET reset_token = ?, reset_expires = ? WHERE email = ?', [token, expiry, email]);
 
         const resetLink = `${process.env.FRONTEND_URL}/password-recovery?token=${token}&email=${encodeURIComponent(email)}`;
         console.log("Link de reset (dev):", resetLink);
@@ -98,7 +98,7 @@ router.post('/forgot-password', async (req, res) => {
 router.post('/reset-password', async (req, res) => {
     const { email, token, senha } = req.body;
     try {
-        const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ? AND reset_token = ?', [email, token]);
+        const [rows] = await ligacao.query('SELECT * FROM usuarios WHERE email = ? AND reset_token = ?', [email, token]);
         if (rows.length === 0) return res.status(400).json({ error: 'Token inválido' });
 
         const usuario = rows[0];
@@ -107,7 +107,7 @@ router.post('/reset-password', async (req, res) => {
         }
 
         const senhaHash = await bcrypt.hash(senha, 10);
-        await pool.query('UPDATE usuarios SET senha = ?, reset_token = NULL, reset_expires = NULL WHERE email = ?', [senhaHash, email]);
+        await ligacao.query('UPDATE usuarios SET senha = ?, reset_token = NULL, reset_expires = NULL WHERE email = ?', [senhaHash, email]);
 
         res.json({ message: 'Senha alterada com sucesso!' });
     } catch (error) {

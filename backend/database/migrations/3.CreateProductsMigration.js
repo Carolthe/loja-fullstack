@@ -4,7 +4,7 @@ const MigrationsBase = require("../base/MigrationsBase");
 
 class CreateUserMigration extends MigrationsBase {
     async up() {
-        await this.pool?.query(`
+        await this.ligacao?.query(`
             CREATE TABLE IF NOT EXISTS produtos (
                 id_produto INT AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(150) NOT NULL,
@@ -18,7 +18,7 @@ class CreateUserMigration extends MigrationsBase {
     }
 
     async down() {
-        await this.pool?.query(`DROP TABLE IF EXISTS produtos;`);
+        await this.ligacao?.query(`DROP TABLE IF EXISTS produtos;`);
     }
 }
 

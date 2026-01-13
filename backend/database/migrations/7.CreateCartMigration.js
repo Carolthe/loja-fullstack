@@ -4,7 +4,7 @@ const MigrationsBase = require("../base/MigrationsBase");
 
 class CreateCartMigration extends MigrationsBase {
     async up() {
-        await this.pool?.query(`
+        await this.ligacao?.query(`
             CREATE TABLE IF NOT EXISTS carrinho (
                 id_carrinho INT AUTO_INCREMENT PRIMARY KEY,
                 id_usuario INT,
@@ -19,7 +19,7 @@ class CreateCartMigration extends MigrationsBase {
     }
 
     async down() {
-        await this.pool?.query(`DROP TABLE IF EXISTS carrinho;`);
+        await this.ligacao?.query(`DROP TABLE IF EXISTS carrinho;`);
     }
 }
 

@@ -83,9 +83,9 @@ export default function Localizacao() {
   }
 
   return (
-    <div className="mt-[0px]">
+    <div className="mt-[10px]">
       <div className="flex flex-col items-center">
-        <p className="font-semibold text-verde text-center mt-[30px] mb-[10px]">
+        <p className="font-semibold text-azul-escuro text-[20px] text-center mt-[40px] mb-[20px]">
           Local de Entrega</p>
         <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[30px]">
           <div>
@@ -108,7 +108,7 @@ export default function Localizacao() {
           </div>
           <div>
             <label className="font-semibold">Código Postal</label>
-            <Input laceholder="CEP"
+            <Input placeholder="CEP"
               value={cep}
               onChange={(e) => setCep(e.target.value)}/>
           </div>
@@ -119,7 +119,7 @@ export default function Localizacao() {
               onChange={(e) => setInfoAdicional(e.target.value)}/>
           </div>
           <button type="submit"
-            className="bg-amarelo-principal font-semibold rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
+            className="bg-amarelo-principal font-bold rounded-[15px] px-[40px] py-[15px] text-white">Ir Para Pagamento
           </button>
         </form>
       </div>

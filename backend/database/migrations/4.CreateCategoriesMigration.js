@@ -4,7 +4,7 @@ const MigrationsBase = require("../base/MigrationsBase");
 
 class CreateCategoriesMigration extends MigrationsBase {
     async up() {
-        await this.pool?.query(`
+        await this.ligacao?.query(`
             CREATE TABLE IF NOT EXISTS categorias (
                 id_categoria INT AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(100) NOT NULL
@@ -13,7 +13,7 @@ class CreateCategoriesMigration extends MigrationsBase {
     }
 
     async down() {
-        await this.pool?.query(`DROP TABLE IF EXISTS categorias;`);
+        await this.ligacao?.query(`DROP TABLE IF EXISTS categorias;`);
     }
 }
 

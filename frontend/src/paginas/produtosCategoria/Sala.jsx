@@ -6,6 +6,11 @@ import CardProduto from "../../components/CardProduto.jsx";
 import Credibilidade from "../../components/Credibilidade.jsx";
 //import CategoryDescription from "../components/CategoryDescription.jsx";
 //import salaLogo from "../logoCategory/salaLogo.jpeg"
+import { Link } from "react-router-dom";
+import quarto2 from "../../imagensCategorias/quarto2.png"
+import banheiro2 from "../../imagensCategorias/banheiro2.png"
+import escritorio2 from "../../imagensCategorias/escritorio2.png"
+import cozinha2 from "../../imagensCategorias/cozinha2.png"
 
 export default function Sala() {
     const [produtos, setProdutos] = useState([])
@@ -28,9 +33,21 @@ export default function Sala() {
     }, [categoriaId])
 
     return (
-        <div className="mt-[30px]">
-            {/* <CategoryDescription img={salaLogo} /> */}
-
+        <div >
+          <div className="my-[30px] flex justify-around mx-[35px] pt-[20px]">
+                <Link to="/quarto">
+                    <img className="w-[30px] h-[30px]" src={quarto2} />
+                </Link>
+                <Link to="/escritorio">
+                    <img className="w-[30px] h-[30px]" src={escritorio2} />
+                </Link>
+                <Link to="/banheiro">
+                    <img className="w-[30px] h-[30px]" src={banheiro2} />
+                </Link>
+                <Link to="/cozinha">
+                    <img className="w-[30px] h-[30px]" src={cozinha2} />
+                </Link>
+            </div>
             {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (
@@ -40,6 +57,7 @@ export default function Sala() {
                             key={produto.id_produto}
                             id={produto.id_produto}
                             title={produto.nome}
+                            descricaoProduto={produto.descricao}
                             price={parseFloat(produto.preco)}
                             imgProduct={produto.imagem}
                         />

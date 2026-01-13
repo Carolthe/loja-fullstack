@@ -1,7 +1,7 @@
 //modulos importados
 const express = require('express');
 const router = express.Router();
-const pool = require('../models/db');
+const ligacao = require('../models/db');
 
 // Adiciona a localização do cliente a base de dados 
 router.post('/:id_usuario', async (req, res) => {
@@ -9,7 +9,7 @@ router.post('/:id_usuario', async (req, res) => {
     const { pais, cidade, rua, cep, info_adicional } = req.body;
 
     try {
-        const [rows] = await pool.query(
+        const [rows] = await ligacao.query(
             'SELECT * FROM localizacao WHERE id_usuario = ?',
             [userId]
         );
@@ -18,7 +18,7 @@ router.post('/:id_usuario', async (req, res) => {
             return res.status(400).json({ error: "Localização já existe. Use PUT para atualizar." });
         }
 
-        await pool.query(
+        await ligacao.query(
             `INSERT INTO localizacao (id_usuario, pais, cidade, rua, cep, info_adicional)
              VALUES (?, ?, ?, ?, ?, ?)`,
             [userId, pais, cidade, rua, cep, info_adicional]
@@ -44,7 +44,7 @@ router.put('/:id_usuario', async (req, res) => {
             WHERE id_usuario = ?
         `;
 
-        const [result] = await pool.query(sql, [pais, cidade, rua, cep, info_adicional, userId]);
+        const [result] = await ligacao.query(sql, [pais, cidade, rua, cep, info_adicional, userId]);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ error: "Localização não encontrada." });
@@ -63,7 +63,7 @@ router.get('/:id_usuario', async (req, res) => {
     const userId = req.params.id_usuario;
 
     try {
-        const [rows] = await pool.query(
+        const [rows] = await ligacao.query(
             'SELECT * FROM localizacao WHERE id_usuario = ?',
             [userId]
         );

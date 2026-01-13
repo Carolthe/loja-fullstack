@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import api from "../../services/api.js";
 import CardProduto from "../../components/CardProduto.jsx";
 import Credibilidade from "../../components/Credibilidade.jsx";
+import { Link } from "react-router-dom";
+import quarto2 from "../../imagensCategorias/quarto2.png"
+import sala2 from "../../imagensCategorias/sala2.png"
+import escritorio2 from "../../imagensCategorias/escritorio2.png"
+import cozinha2 from "../../imagensCategorias/cozinha2.png"
+
+
 
 export default function Banheiro() {
     const [produtos, setProdutos] = useState([])
@@ -27,25 +34,40 @@ export default function Banheiro() {
     }, [categoriaId])
 
     return (
-        <div className="mt-[30px]">
+        <div>
             {/* <DescricaoCategoria img={banheiroLogo} /> */}
 
+            <div className="my-[30px] flex justify-around mx-[35px] pt-[20px]">
+                <Link to="/quarto">
+                    <img className="w-[30px] h-[30px]" src={quarto2} />
+                </Link>
+                <Link to="/escritorio">
+                    <img className="w-[30px] h-[30px]" src={escritorio2} />
+                </Link>
+                <Link to="/sala">
+                    <img className="w-[30px] h-[30px]" src={sala2} />
+                </Link>
+                <Link to="/cozinha">
+                    <img className="w-[30px] h-[30px]" src={cozinha2} />
+                </Link>
+            </div>
             {produtos.length === 0 ? (
                 <p>Nenhum produto encontrado.</p>
             ) : (
                 <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (
-                        <CardProduto 
+                        <CardProduto
                             key={produto.id_produto}
                             id={produto.id_produto}
                             title={produto.nome}
+                            descricaoProduto={produto.descricao}
                             price={parseFloat(produto.preco)}
                             imgProduct={produto.imagem}
                         />
                     ))}
                 </div>
             )}
-            <Credibilidade/>
+            <Credibilidade />
             <ScrollToTop />
             <Footer />
         </div>

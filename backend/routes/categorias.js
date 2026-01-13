@@ -1,11 +1,11 @@
 //modulos importados
 const express = require('express')
 const router = express.Router()
-const pool = require("../models/db")
+const ligacao = require("../models/db")
 
 router.get('/', async(req, res) =>{
     try{
-        const [rows] = await pool.query('SELECT * FROM categorias')
+        const [rows] = await ligacao.query('SELECT * FROM categorias')
         res.json(rows)
     }catch (error){
         console.error(error)
@@ -18,8 +18,8 @@ router.get('/:id_categoria/produtos', async (req, res) => {
     const {id_categoria} = req.params
 
     try{
-        const [rows] = await pool.query(
-            `SELECT p.id_produto, p.nome, p.preco, p.imagem
+        const [rows] = await ligacao.query(
+            `SELECT p.id_produto, p.nome, p.preco, p.imagem, p.descricao
             FROM produtos p JOIN produtos_categorias pc ON p.id_produto = pc.id_produto
             WHERE pc.id_categoria = ?`,
             [id_categoria]

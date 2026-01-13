@@ -1,7 +1,7 @@
 // @ts-check
 
 const Newsletter = require("../Interfaces/NewsletterInterface");
-const pool = require("../../models/db");
+const ligacao = require("../../models/db");
 const LogError = require("../utils/LogError");
 const InternalServerError = require("../errors/InternalServerError");
 
@@ -13,7 +13,7 @@ class NewsletterRepository {
    */
   async listarNewsletters(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_newsletter, nome, email FROM newsletters WHERE nome LIKE ? LIMIT ? OFFSET ?`,
         [`${busca}%`, limite, (pagina - 1) * limite]
       );
@@ -39,7 +39,7 @@ class NewsletterRepository {
    */
   async obterNewsletterPorId(id) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT id_newsletter, nome, email, data_inscricao FROM newsletters WHERE id_newsletter = ?`,
         [id]
       );
@@ -63,7 +63,7 @@ class NewsletterRepository {
       /**
        * @type {[import("mysql2/promise").ResultSetHeader, import("mysql2/promise").FieldPacket[]]}
        */
-      const [removed] = await pool.query(
+      const [removed] = await ligacao.query(
         `DELETE FROM newsletters WHERE id_newsletter = ?`,
         [id]
       );
@@ -79,7 +79,7 @@ class NewsletterRepository {
 
   async contarNewsletters(pagina, limite, busca) {
     try {
-      const [rows] = await pool.query(
+      const [rows] = await ligacao.query(
         `SELECT COUNT(*) as total FROM newsletters WHERE nome LIKE ?`,
         [`${busca}%`]
       );

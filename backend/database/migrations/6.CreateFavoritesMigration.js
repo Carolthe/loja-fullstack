@@ -4,7 +4,7 @@ const MigrationsBase = require("../base/MigrationsBase");
 
 class CreateFavoritesMigration extends MigrationsBase {
     async up() {
-        await this.pool?.query(`
+        await this.ligacao?.query(`
             CREATE TABLE IF NOT EXISTS favoritos (
                 id_favorito INT AUTO_INCREMENT PRIMARY KEY,
                 id_usuario INT,
@@ -18,7 +18,7 @@ class CreateFavoritesMigration extends MigrationsBase {
     }
 
     async down() {
-        await this.pool?.query(`DROP TABLE IF EXISTS favoritos;`);
+        await this.ligacao?.query(`DROP TABLE IF EXISTS favoritos;`);
     }
 }
 

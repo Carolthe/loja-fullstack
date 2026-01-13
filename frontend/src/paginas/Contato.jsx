@@ -16,31 +16,31 @@ export default function Contato() {
   const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.value
-  });
-};
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.message) {
-    setStatus("Por favor, preencha todos os campos obrigatórios!");
-    return;
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("Por favor, preencha todos os campos");
+      return;
+    }
+
+    try {
+      await api.post("/contact", formData);
+
+      setStatus("Mensagem enviada com sucesso!");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+
+    } catch (error) {
+      console.error(error);
+      setStatus(error.response?.data?.error || "Falha ao enviar a mensagem. Tente novamente.")
+    }
   }
-
-  try {
-    await api.post("/contact", formData);
-
-    setStatus("Mensagem enviada com sucesso!");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-
-  } catch (error) {
-    console.error(error);
-    setStatus(error.response?.data?.error || "Falha ao enviar a mensagem. Tente novamente.")
-  }
-}
 
 
   return (
@@ -54,7 +54,7 @@ export default function Contato() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Abc"
+            placeholder="nome"
           />
         </div>
         <div>
@@ -63,7 +63,7 @@ export default function Contato() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="abc@gmail.com"/>
+            placeholder="email" />
         </div>
         <div>
           <label className="font-semibold">Assunto</label>
@@ -94,10 +94,13 @@ export default function Contato() {
                     duration-200"
           />
         </div>
-        <button className="w-[350px] h-[50px] rounded-[15px] font-semibold text-white bg-amarelo-principal">Enviar</button>
+        <button className="w-[350px] h-[50px] rounded-[15px] text-[19px] font-bold text-white bg-amarelo-principal">Enviar</button>
       </form>
-      {status && <p className="text-center mt-2">{status}</p>}
-
+      {status && (
+        <p className="mt-3 text-center text-sm font-semibold bg-blue-50 px-4 py-2 rounded-lg border border-blue-300 animate-shake">
+        {status}
+        </p>
+      )}
       <Credibilidade />
       <ScrollToTop />
       <Footer />

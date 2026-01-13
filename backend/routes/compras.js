@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../models/db');
+const ligacao = require('../models/db');
 
 // FINALIZAR COMPRA
 router.post('/finalizar', async (req, res) => {
@@ -8,7 +8,7 @@ router.post('/finalizar', async (req, res) => {
 
   try {
     // 1. Buscar itens do carrinho
-    const [carrinho] = await pool.query(
+    const [carrinho] = await ligacao.query(
       `SELECT c.*, p.preco
        FROM carrinho c
        JOIN produtos p ON c.id_produto = p.id_produto
@@ -27,7 +27,7 @@ router.post('/finalizar', async (req, res) => {
     );
 
     // 3. Criar pedido
-    const [pedido] = await pool.query(
+    const [pedido] = await ligacao.query(
       `INSERT INTO pedidos (id_usuario, total)
        VALUES (?, ?)`,
       [id_usuario, total]
@@ -37,7 +37,7 @@ router.post('/finalizar', async (req, res) => {
 
     // 4. Inserir itens do pedido
     for (const item of carrinho) {
-      await pool.query(
+      await ligacao.query(
         `INSERT INTO pedido_itens
           (id_pedido, id_produto, quantidade, preco_unitario)
          VALUES (?, ?, ?, ?)`,
@@ -46,7 +46,7 @@ router.post('/finalizar', async (req, res) => {
     }
 
     // 5. Limpar o carrinho
-    await pool.query(`DELETE FROM carrinho WHERE id_usuario = ?`, [id_usuario]);
+    await ligacao.query(`DELETE FROM carrinho WHERE id_usuario = ?`, [id_usuario]);
 
     res.json({ message: "Compra finalizada com sucesso!", id_pedido });
 
