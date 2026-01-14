@@ -34,7 +34,7 @@ export default function Home() {
   }, [limite]); // sempre que o limite mudar, recarrega
 
   function verMais() {
-    setLimite(prev => prev + 6); // carrega +6 a cada clique
+    setLimite(prev => prev + 6);
   }
 
   return (
@@ -43,13 +43,10 @@ export default function Home() {
         <img src={home} alt="Home" className="" />
         <div className="absolute inset-0 mt-[145px] text-center px-4">
           <p className="text-[26px] font-semibold text-[#ffffff]">Loja HomeHaven</p>
-          <p className="mt-1 text-[15px] text-gray-200">
-            Não perca a oportunidade de ter conforto e elegancia em cada canto da sua casa
-          </p>
+          <p className="mt-1 text-[15px] text-gray-200">Não perca a oportunidade de ter conforto e elegancia em cada canto da sua casa</p>
           <Link to="/produtos">
-          <button className="mt-[18px] px-[20px] py-[10px] border-[1px] text-[14px] text-white border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">
-            Ver Produtos
-          </button>
+            <button className="mt-[18px] px-[20px] py-[10px] border-[1px] text-[14px] text-white border-white text-whiterounded hover:bg-[#5769a9] hover:text-white transition">Ver Produtos
+            </button>
           </Link>
         </div>
       </div>
@@ -64,7 +61,7 @@ export default function Home() {
       {/* 🔹 Produtos ordenados por preço */}
       <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
         {produtos.length === 0 ? (
-         <CarrinhoVazio text="Nenhum Produto Encontrado" />
+          <CarrinhoVazio text="Nenhum Produto Encontrado" />
         ) : (
           produtos.map((produto) => (
             <CardProduto
@@ -78,13 +75,11 @@ export default function Home() {
           ))
         )}
       </div>
-      {/* BOTÃO VER MAIS */}
       <div className="flex justify-center my-[40px]">
         <button className="border-[1px] font-bold bg-amarelo-principal text-white text-sm rounded-full w-[105px] h-[45px]"
           onClick={verMais}> Ver Mais</button>
       </div>
 
-      {/* Categorias */}
       <p className="mt-[30px] mb-[25px] text-center flex flex-col text-[22px] font-semibold">
         Categorias Disponíveis
       </p>

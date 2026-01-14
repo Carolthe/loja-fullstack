@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../services/api";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 
 export default function CardProduto({ id, imgProduct, title, descricaoProduto, price }) {
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   async function handleFavoritar() {
     if (!usuario) {
       toast.info("Você precisa estar logado para favoritar produtos");
-      //alert("Você precisa estar logado para favoritar produtos");
       setTimeout(() => {
         navigate("/login");
       }, 2400);
@@ -67,7 +66,6 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   // Adicionar ao carrinho
   async function adicionarCarrinho() {
     if (!usuario) {
-      //alert("Você precisa estar logado para adicionar produtos ao carrinho");
       toast.info("Você precisa estar logado para adicionar produtos ao carrinho")
       setTimeout(() => {
         navigate("/login");
@@ -87,12 +85,12 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
 
     } catch (error) {
       console.error("Erro ao adicionar produto ao carrinho:", error);
-      alert(error.response?.data?.error || "Erro ao adicionar produto ao carrinho.");
+      toast.error(error.response?.data?.error || "Erro ao adicionar produto ao carrinho.");
     }
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[160px] md:w-[280px] mb-5">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
       <div className="relative">
         <Link to="/productsDetails"
           state={{ id, imgProduct, title, price, descricaoProduto }}>
@@ -100,7 +98,6 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
             src={imgProduct}
             alt={title} />
         </Link>
-        {/* Botão de favoritos */}
         <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow-md hover:bg-red-100 transition"
           onClick={handleFavoritar}>
           {isFavorited ? (
@@ -122,21 +119,10 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
             <p className="text-sm text-font-cinza">4.8</p>
           </div>
         </div>
-
-        <button
-          className="mt-[5px] w-full  bg-amarelo-principal font-semibold text-white py-2 rounded-[15px] transition hover:bg-green-600"
+        <button className="mt-[5px] w-full  bg-amarelo-principal font-semibold text-white py-2 rounded-[15px] transition hover:bg-green-600"
           onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>
-      {/* <ToastContainer
-        position="bottom-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        pauseOnHover
-        draggable
-      /> */}
     </div>
   );
 }

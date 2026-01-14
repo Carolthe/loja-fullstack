@@ -1,1 +1,0 @@
-- Criar função de filtrar

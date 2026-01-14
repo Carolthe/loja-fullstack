@@ -3,7 +3,7 @@ import logotipo from "../imgMobile/logotipo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api"
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 
 
 export default function Login() {
@@ -17,7 +17,6 @@ export default function Login() {
             const res = await api.post("/users/login", { email, senha })
             toast.info("Login realizado com sucesso")
 
-            //Guarda o usuário logado temporariamente
             localStorage.setItem("usuario", JSON.stringify(res.data.usuario))
 
             setTimeout(() => {
@@ -26,7 +25,7 @@ export default function Login() {
 
       return
         } catch (error) {
-            alert(error.response?.data?.error || "Erro ao fazer login")
+            toast.info(error.response?.data?.error || "Erro ao fazer login")
         }
     }
 
@@ -60,15 +59,6 @@ export default function Login() {
                     </div>
                 </form>
             </div>
-            {/* <ToastContainer
-                position="bottom-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                pauseOnHover
-                draggable
-            /> */}
         </div>
     )
 }

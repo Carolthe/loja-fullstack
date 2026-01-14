@@ -7,10 +7,11 @@ import CardProduto from "../components/CardProduto";
 import Credibilidade from "../components/Credibilidade";
 import CarrinhoVazio from "../components/CarrinhoVazio";
 
+
 export default function TodosProdutos() {
   const [produtos, setProdutos] = useState([]);
   const [busca, setBusca] = useState("");
-  const [precoMax, setPrecoMax] = useState(400); // valor máximo selecionado pelo usuário
+  const [precoMax, setPrecoMax] = useState(900);
   const [showFiltro, setShowFiltro] = useState(false);
 
   useEffect(() => {
@@ -26,20 +27,19 @@ export default function TodosProdutos() {
   }, []);
 
 const produtosFiltrados = produtos.filter(produto => {
+  
   const nomeMatch = produto.nome.toLowerCase().includes(busca.toLowerCase());
+  
   const preco = parseFloat(produto.preco);
 
-  // Se o filtro NÃO estiver aberto, mostrar tudo
   if (!showFiltro) {
     return nomeMatch;
   }
 
-  // Se o filtro estiver aberto, aplicar o filtro de preço
   const precoMatch = preco >= precoMax - 10 && preco <= precoMax;
 
   return nomeMatch && precoMatch;
 });
-
 
   return (
     <div>
@@ -56,20 +56,12 @@ const produtosFiltrados = produtos.filter(produto => {
   </div>
 </div>
 
-      {/* Botões filtro + contagem de produtos */}
       <div className="mb-[10px] flex">
-        <button
-          className="w-[50%] h-10 border border-gray-300 text-gray-400 hover:bg-gray-100 transition"
-          onClick={() => setShowFiltro(!showFiltro)}
-        >
-          Filtro
-        </button>
-        <button className="w-[50%] h-10 border border-gray-300 text-gray-500 text-sm">
-          para casa <span className="text-gray-400">| {produtosFiltrados.length} Produtos</span>
-        </button>
+        <button className="w-[50%] h-10 border border-gray-300 text-gray-400 hover:bg-gray-100 transition"
+          onClick={() => setShowFiltro(!showFiltro)}>Filtro </button>
+        <button className="w-[50%] h-10 border border-gray-300 text-gray-500 text-sm"> para casa <span className="text-gray-400">| {produtosFiltrados.length} Produtos</span></button>
       </div>
 
-      {/* Slider único de preço minimalista */}
       {showFiltro && (
         <div className="flex flex-col mx-3 mb-4 gap-1">
           <label className="text-sm text-gray-600">Preço Máximo: R$ {precoMax}</label>
@@ -91,18 +83,15 @@ const produtosFiltrados = produtos.filter(produto => {
       ) : (
         <div className="mt-[10px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
           {produtosFiltrados.map((produto) => (
-            <CardProduto
-              key={produto.id_produto}
+            <CardProduto key={produto.id_produto}
               id={produto.id_produto} 
               imgProduct={produto.imagem}
               title={produto.nome} 
               descricaoProduto={produto.descricao}
-              price={parseFloat(produto.preco)}
-            />
+              price={parseFloat(produto.preco)} />
           ))}
         </div>
       )}
-
       <Credibilidade />
       <ScrollToTop />
       <Footer />

@@ -50,49 +50,35 @@ export default function Contato() {
       <form onSubmit={handleSubmit} className="flex flex-col items-center gap-[15px]">
         <div>
           <label className="font-semibold">Nome</label>
-          <Input
-            name="name"
+          <Input name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="nome"
-          />
+            placeholder="nome"/>
         </div>
         <div>
           <label className="font-semibold">Email</label>
-          <Input
-            name="email"
+          <Input name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="email" />
         </div>
         <div>
           <label className="font-semibold">Assunto</label>
-          <Input
-            name="subject"
+          <Input name="subject"
             value={formData.subject}
             onChange={handleChange}
-            placeholder="Sobre o que gostaria de falar?"
-          />
+            placeholder="Sobre o que gostaria de falar?"/>
         </div>
 
         <div className="flex flex-col">
           <label className="font-semibold">Mensagem</label>
-          <textarea
-            name="message"
+          <textarea name="message"
             value={formData.message}
             onChange={handleChange}
             placeholder="Escreva sua mensagem aqui"
             rows="6"
-            className="w-[350px] px-3 border border-gray-300 rounded-md
-                    text-gray-800
-                    placeholder-gray-400
-                    focus:outline-none
-                    focus:border-[#5769a9]
-                    focus:ring-2
-                    focus:ring-[#5769a9]/30
-                    transition
-                    duration-200"
-          />
+            className="w-[350px] px-3 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400
+                    focus:outline-none focus:border-[#5769a9] focus:ring-2 focus:ring-[#5769a9]/30 transitionduration-200"/>
         </div>
         <button className="w-[350px] h-[50px] rounded-[15px] text-[19px] font-bold text-white bg-amarelo-principal">Enviar</button>
       </form>

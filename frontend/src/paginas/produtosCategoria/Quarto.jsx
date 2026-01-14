@@ -10,6 +10,7 @@ import banheiro2 from "../../imagensCategorias/banheiro2.png"
 import escritorio2 from "../../imagensCategorias/escritorio2.png"
 import cozinha2 from "../../imagensCategorias/cozinha2.png"
 import { Link } from "react-router-dom";
+import CarrinhoVazio from "../../components/CarrinhoVazio.jsx";
 
 
 export default function Quarto() {
@@ -52,7 +53,7 @@ export default function Quarto() {
          {/* <CardBannerCategoria /> */}
 
             {produtos.length === 0 ? (
-                <p>Nenhum produto encontrado.</p>
+                <CarrinhoVazio text="Nenhum Produto Encontrado" />
             ) : (
                 <div className="mx-[10px] mt-[20px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (

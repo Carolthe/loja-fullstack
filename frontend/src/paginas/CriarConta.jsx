@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import { useState } from "react";
 import api from "../services/api";
 import { SlArrowLeft } from "react-icons/sl";
+import { toast} from "react-toastify";
 
 export default function CriarConta() {
   const [nome, setNome] = useState("")
@@ -15,15 +16,15 @@ export default function CriarConta() {
     e.preventDefault()
 
     if (senha !== confirmaSenha) {
-      alert("As senhas não coicidem")
+      toast.info("As senhas não coicidem")
       return
     }
     try {
       await api.post("/users/register", { nome, email, senha })
-      alert("Cadastro realizado com sucesso!")
+      toast.info("Cadastro realizado com sucesso!")
       navigate("/login")
     } catch (error) {
-      alert(error.response?.data?.error || "Erro ao registrar")
+      toast.info(error.response?.data?.error || "Erro ao registrar")
     }
   }
 

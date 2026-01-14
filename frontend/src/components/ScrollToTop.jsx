@@ -27,14 +27,9 @@ export default function ScrollToTop() {
   return (
     <>
       {visible && (
-        <button
-          onClick={scrollToTop}
-          className="
-            fixed bottom-6 right-6 z-50
-            bg-white text-azul-principal p-[10px] rounded-full shadow-lg
-            hover:bg-[#e4e3e3] transition">
-          <FaArrowUp />
-        </button>
+        <button onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 bg-white text-azul-principal p-[10px] rounded-full shadow-lg hover:bg-[#e4e3e3] transition">
+          <FaArrowUp /></button>
       )}
     </>
   );

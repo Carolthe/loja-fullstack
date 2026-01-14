@@ -31,47 +31,25 @@ export default function Credibilidade() {
 
   return (
     <section className="w-full mt-[30px] mb-[40px]">
-      {/* NÃO use overflow-hidden aqui */}
       <div
-        className="
-          flex gap-6
-          overflow-x-auto
-          snap-x snap-mandatory
-          scroll-smooth
-          px-[7.5vw]
-          scroll-px-[7.5vw]
-        "
-      >
-        {items.map((it, idx) => (
-          <div
-            key={idx}
-            className="
-              flex flex-col items-center justify-center text-center
-              flex-shrink-0
-              w-[85vw]
-              snap-center
-              text-[#363E7A]
-            "
-          >
-            {it.icon}
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-[7.5vw] scroll-px-[7.5vw]">
+        {items.map((item, index) => (
+          <div key={index}
+            className="flex flex-col items-center justify-center text-center flex-shrink-0 w-[85vw] snap-center text-[#363E7A]">
+            {item.icon}
+            
+            <p className="mt-2 font-semibold">{item.title}</p>
+            <p className="mt-1 leading-tight">{item.desc}</p>
 
-            <p className="mt-2 font-semibold">{it.title}</p>
-            <p className="mt-1 leading-tight">{it.desc}</p>
-
-            {/* indicadores */}
             <div className="flex gap-[8px] mt-[20px]">
-              {items.map((_, j) => (
-                <span
-                  key={j}
+              {items.map((_, indexCirculo) => (
+                <span key={indexCirculo}
                   className={`w-[5px] h-[5px] rounded-full ${
-                    j === idx ? "bg-slate-400" : "bg-slate-200"
-                  }`}
-                />
+                    indexCirculo === index ? "bg-slate-400" : "bg-slate-200"}`}/>
               ))}
             </div>
           </div>
         ))}
       </div>
     </section>
-  );
-}
+  )}

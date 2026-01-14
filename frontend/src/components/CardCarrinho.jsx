@@ -1,5 +1,6 @@
 import { FiTrash2 } from "react-icons/fi";
 import api from "../services/api";
+import { toast} from "react-toastify";
 
 export default function CardCarrinho({ product, atualizarCarrinho }) {
   const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -21,7 +22,8 @@ export default function CardCarrinho({ product, atualizarCarrinho }) {
     }
   }
   async function removerDoCarrinho() {
-    if (!window.confirm(`Remover ${product.nome}?`)) return;
+    //if (!window.confirm(`Remover ${product.nome}?`)) return;
+    toast.info(`Produto ${product.nome} removido do carrinho.`);
 
     try {
       await api.delete(`/carrinho/${usuario.id_usuario}/${product.id_produto}`);

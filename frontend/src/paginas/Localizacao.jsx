@@ -5,7 +5,8 @@ import Newsletter from "../components/Newsletter";
 import ScrollToTop from "../components/ScrollToTop";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api"; // seu axios já configurado
+import api from "../services/api";
+import { toast} from "react-toastify";
 
 export default function Localizacao() {
   const navigate = useNavigate();
@@ -23,8 +24,11 @@ export default function Localizacao() {
   // Carregar localização existente
   useEffect(() => {
     if (!userId) {
-      alert("Você precisa estar logado.");
-      navigate("/login");
+      toast.info("Você precisa estar logado.");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2400);
+    
       return;
     }
 
@@ -49,12 +53,12 @@ export default function Localizacao() {
     carregarLocalizacao();
   }, [userId, navigate]);
 
-  // Enviar formulário
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (!pais || !rua || !cidade || !cep) {
-      alert("Preencha todos os campos obrigatórios!");
+      toast.error("Preencha todos os campos obrigatórios");
+      
       return;
     }
 
@@ -74,11 +78,16 @@ export default function Localizacao() {
         return;
       }
 
-      //alert(res.data.message);
-      navigate("/pagamento");
+      toast.info(res.data.message);
+      setTimeout(() => {
+        navigate("/pagamento");
+      }, 2400);
+
+
     } catch (err) {
       console.error("Erro ao salvar localização:", err);
-      alert("Erro ao salvar localização");
+
+      toast.error("Erro ao salvar localização");
     }
   }
 

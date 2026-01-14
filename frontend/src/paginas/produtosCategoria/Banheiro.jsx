@@ -9,7 +9,7 @@ import quarto2 from "../../imagensCategorias/quarto2.png"
 import sala2 from "../../imagensCategorias/sala2.png"
 import escritorio2 from "../../imagensCategorias/escritorio2.png"
 import cozinha2 from "../../imagensCategorias/cozinha2.png"
-
+import CarrinhoVazio from "../../components/CarrinhoVazio.jsx";
 
 
 export default function Banheiro() {
@@ -27,7 +27,6 @@ export default function Banheiro() {
                 console.error(error)
             }
         }
-
         carregarProdutos()
 
         return () => { isMounted = false }
@@ -35,8 +34,6 @@ export default function Banheiro() {
 
     return (
         <div>
-            {/* <DescricaoCategoria img={banheiroLogo} /> */}
-
             <div className="my-[30px] flex justify-around mx-[35px] pt-[20px]">
                 <Link to="/quarto">
                     <img className="w-[30px] h-[30px]" src={quarto2} />
@@ -52,7 +49,7 @@ export default function Banheiro() {
                 </Link>
             </div>
             {produtos.length === 0 ? (
-                <p>Nenhum produto encontrado.</p>
+                <CarrinhoVazio text="Nenhum Produto Encontrado" />
             ) : (
                 <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (

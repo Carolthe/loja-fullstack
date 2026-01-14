@@ -14,7 +14,6 @@ export default function Perfil() {
     <div className="flex pt-[180px] justify-center px-4">
       <div className="w-full max-w-md py-[40px] px-[18px] bg-white rounded-2xl shadow-md">
 
-        {/* HEADER */}
         <div className="flex items-center gap-4 border-b border-black/10 pb-4">
           <div className="w-14 h-14 rounded-full bg-azul-escuro text-white flex items-center justify-center text-xl font-semibold">
             {usuario?.nome?.charAt(0)}
@@ -24,15 +23,12 @@ export default function Perfil() {
             <h1 className="text-lg font-semibold text-gray-800">
               {usuario?.nome}
             </h1>
-            <p className="text-sm text-gray-500">
-              Perfil do usuário
-            </p>
+            <p className="text-sm text-gray-500">Perfil do usuário</p>
           </div>
         </div>
 
-        {/* INFORMAÇÕES */}
         <div className="mt-6 space-y-[10px] text-sm text-gray-700">
-          <div className="">
+          <div >
             <span className="text-gray-500 pr-[15px]">Nome</span>
             <span className="font-medium">{usuario?.nome}</span>
           </div>
@@ -45,25 +41,10 @@ export default function Perfil() {
           )}
         </div>
 
-        {/* AÇÕES */}
         <div className="mt-8">
           <button
             onClick={handleLogout}
-            className="
-              w-full
-              bg-amarelo-principal
-              text-white
-              py-2
-              rounded-lg
-              font-bold
-              text-[19px]
-              transition-colors
-            "
-          >
-            Terminar sessão
-          </button>
-        </div>
-
+            className="w-full bg-amarelo-principal text-white py-2 rounded-lg font-bold text-[19px] transition-colors">Terminar sessão</button></div>
       </div>
     </div>
   )

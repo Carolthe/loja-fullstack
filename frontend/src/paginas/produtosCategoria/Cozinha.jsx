@@ -11,6 +11,7 @@ import quarto2 from "../../imagensCategorias/quarto2.png"
 import sala2 from "../../imagensCategorias/sala2.png"
 import escritorio2 from "../../imagensCategorias/escritorio2.png"
 import banheiro2 from "../../imagensCategorias/banheiro2.png"
+import CarrinhoVazio from "../../components/CarrinhoVazio.jsx";
 
 
 export default function Cozinha() {
@@ -51,7 +52,7 @@ export default function Cozinha() {
             {/* <CategoryDescription img={cozinhaLogo} /> */}
 
             {produtos.length === 0 ? (
-                <p>Nenhum produto encontrado.</p>
+                <CarrinhoVazio text="Nenhum Produto Encontrado" />
             ) : (
                 <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
                     {produtos.map((produto) => (

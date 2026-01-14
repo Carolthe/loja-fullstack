@@ -24,13 +24,11 @@ function App() {
   return (
     <Router>
       <Header />
-      <ToastContainer
-        position="bottom-center"
+      <ToastContainer position="bottom-center"
         autoClose={3000}
         closeOnClick
         pauseOnHover
-        draggable
-      />
+        draggable/>
       <div className="pt-[50px]">
         <Routes>
           <Route path="/" element={<Home />} />
