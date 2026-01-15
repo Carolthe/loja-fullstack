@@ -24,7 +24,6 @@ app.use("/api/contact", require("./routes/contato"))
 app.use("/api/localizacao", require("./routes/localizacao"))
 app.use("/api/compras", require("./routes/compras"))
 app.use("/api/pagamento", require("./routes/pagamento"))
-app.use("/admin", require("./admin/admin.routes"))
 app.use("/public", express.static("public"))
 
 // servidor
