@@ -39,7 +39,7 @@ export default function Carrinho() {
   return (
     <div className="mt-[30px]">
       <VerProdutos />
-      <p className="text-[23px] text-center font-semibold">Seus Produtos</p>
+      <p className="text-[22px] text-center font-semibold">Seus Produtos</p>
       <div className="flex justify-between mx-[20px] my-[15px] text-sm text-font-cinza">
         <p>PRODUTOS <span>({totalItens})</span></p>
         <p>TOTAL <span>({total.toFixed(2).replace(".", ",")})</span></p>
