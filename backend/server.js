@@ -2,12 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-const pool = require("./database"); // Importa o pool da Railway
+const pool = require("./models/db"); // Importa o pool da Railway
 
 const app = express();
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL],
+  origin: [process.env.FRONTEND_URL],
   credentials: true
 }));
 app.use(express.json());
