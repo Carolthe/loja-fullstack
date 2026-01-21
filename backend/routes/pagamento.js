@@ -2,9 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 
-/**
- * CRIAR PAGAMENTO MULTIBANCO
- */
+//Cria pagamento Multibanco
 router.post("/create", async (req, res) => {
   try {
     const { amount } = req.body;
@@ -51,9 +49,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-/**
- * CONSULTAR STATUS DO PAGAMENTO
- */
+// Consulta status do pagamento
 router.get("/status/:reference", async (req, res) => {
   try {
     const { reference } = req.params;

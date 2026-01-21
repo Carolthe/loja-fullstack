@@ -7,7 +7,7 @@ router.post('/finalizar', async (req, res) => {
   const { id_usuario } = req.body;
 
   try {
-    // 1. Buscar itens do carrinho
+    //  Buscar itens do carrinho
     const [carrinho] = await ligacao.query(
       `SELECT c.*, p.preco
        FROM carrinho c
@@ -20,13 +20,13 @@ router.post('/finalizar', async (req, res) => {
       return res.status(400).json({ error: "Carrinho vazio" });
     }
 
-    // 2. Calcular total
+    // Calcular total
     const total = carrinho.reduce(
       (acumulador, item) => acumulador + item.preco * item.quantidade,
       0
     );
 
-    // 3. Criar pedido
+    // Criar pedido
     const [pedido] = await ligacao.query(
       `INSERT INTO pedidos (id_usuario, total)
        VALUES (?, ?)`,
@@ -35,7 +35,7 @@ router.post('/finalizar', async (req, res) => {
 
     const id_pedido = pedido.insertId;
 
-    // 4. Inserir itens do pedido
+    //  Inserir itens do pedido
     for (const item of carrinho) {
       await ligacao.query(
         `INSERT INTO pedido_itens
@@ -45,7 +45,7 @@ router.post('/finalizar', async (req, res) => {
       );
     }
 
-    // 5. Limpar o carrinho
+    // Limpar o carrinho
     await ligacao.query(`DELETE FROM carrinho WHERE id_usuario = ?`, [id_usuario]);
 
     res.json({ message: "Compra finalizada com sucesso!", id_pedido });
