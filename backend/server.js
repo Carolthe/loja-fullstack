@@ -3,6 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 require("dotenv").config()
+const pool = require("./database") // IMPORTA O POOL DO MYSQL
 
 const app = express()
 
@@ -26,8 +27,15 @@ app.use("/api/compras", require("./routes/compras"))
 app.use("/api/pagamento", require("./routes/pagamento"))
 app.use("/public", express.static("public"))
 
-// servidor
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`)
+// rota de teste da conexão com banco
+app.get("/health/db", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT 1")
+    res.json({ status: "ok", db: "connected" })
+  } catch (err) {
+    res.status(500).json({ status: "error", error: err.message })
+  }
 })
+
+// ⚠️ Para Vercel, exporte o app
+module.exports = app
