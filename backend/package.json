@@ -13,7 +13,6 @@
     "migrate:rollback": "node ./database/scripts/migrateRollback.js",
     "seed": "node ./database/scripts/seed.js"
   },
- 
   "keywords": [],
   "author": "",
   "license": "ISC",
