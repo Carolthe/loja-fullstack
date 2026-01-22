@@ -36,7 +36,8 @@ export default function Sala() {
 
     return (
         <div >
-          <div className="my-[30px] flex justify-around mx-[35px] pt-[20px]">
+             <h1 className="mt-[40px] text-center font-semibold text-[20px]">Produtos para Sala</h1>
+          <div className="mb-[30px] flex justify-around mx-[35px] pt-[20px]">
                 <Link to="/quarto">
                     <img className="w-[30px] h-[30px]" src={quarto2} />
                 </Link>

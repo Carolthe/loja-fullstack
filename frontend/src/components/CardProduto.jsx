@@ -90,7 +90,7 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[180px] md:w-[280px] mb-5">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 w-[160px] md:w-[280px] mb-5">
       <div className="relative">
         <Link to="/productsDetails"
           state={{ id, imgProduct, title, price, descricaoProduto }}>
@@ -119,7 +119,7 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
             <p className="text-sm text-font-cinza">4.8</p>
           </div>
         </div>
-        <button className="mt-[5px] w-full  bg-amarelo-principal font-semibold text-white py-2 rounded-[15px] transition hover:bg-green-600"
+        <button className="mt-[5px] w-full  bg-amarelo-principal font-semibold text-white py-2 rounded-[15px] transition hover:bg-yellow-600 "
           onClick={adicionarCarrinho}>Add ao Carrinho
         </button>
       </div>

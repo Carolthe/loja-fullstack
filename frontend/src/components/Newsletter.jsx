@@ -33,7 +33,7 @@ export default function Newsletter() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <Input value={nome} onChange={(e) => setNome(e.target.value)} type="text" placeholder="Seu nome" />
                     <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Seu e-mail"/>
-                    <button type="submit" className="mt-2 h-[50px] rounded-md bg-[#5769a9] text-white font-semibold hover:bg-[#46589a] transitionnduration-200">Inscrever-se</button>
+                    <button type="submit" className="w-[330px] mt-2 h-[50px] rounded-md bg-[#5769a9] text-white font-semibold hover:bg-[#46589a] transitionnduration-200">Inscrever-se</button>
                 </form>
                 <p className="text-xs text-gray-400 mt-4">Prometemos não enviar spam. Caso queira cancelar, mande uma resposta escrito (Cancelar).</p>
             </div>

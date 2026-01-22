@@ -77,10 +77,10 @@ export default function Contato() {
             onChange={handleChange}
             placeholder="Escreva sua mensagem aqui"
             rows="6"
-            className="w-[350px] px-3 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400
+            className="w-[330px] px-3 border border-gray-300 rounded-md text-gray-800 placeholder-gray-400
                     focus:outline-none focus:border-[#5769a9] focus:ring-2 focus:ring-[#5769a9]/30 transitionduration-200"/>
         </div>
-        <button className="w-[350px] h-[50px] rounded-[15px] text-[19px] font-bold text-white bg-amarelo-principal">Enviar</button>
+        <button className="w-[330px] h-[50px] rounded-[15px] text-[19px] font-bold text-white bg-amarelo-principal">Enviar</button>
       </form>
       {status && (
         <p className="mt-3 text-center text-sm font-semibold bg-blue-50 px-4 py-2 rounded-lg border border-blue-300 animate-shake">
