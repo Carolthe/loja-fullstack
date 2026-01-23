@@ -33,7 +33,7 @@ export default function RecuperacaoSenha() {
   }
 
   return (
-    <div className=" flex justify-center mt-[250px] bg-gray-50">
+    <div className=" flex justify-center mt-[200px] bg-gray-50">
       <div className="bg-white rounded-2xl shadow-lg w-[350px] p-6 sm:w-[400px]">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           {step === 1 ? "Recuperar senha" : "Nova senha"}</h2>
@@ -62,7 +62,7 @@ export default function RecuperacaoSenha() {
               onChange={(e) => setConfSenha(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-greenMain focus:border-greenMain" />
             <button onClick={resetarSenha}
-              className="w-full py-3 bg-verde text-white font-semibold rounded-lg hover:bg-green-600 transition"> Alterar senha </button>
+              className="w-full py-3 bg-azul-principal text-white font-semibold rounded-lg hover:bg-azul-escuro transition"> Alterar senha </button>
             <Link to="/login"
               className="text-sm text-gray-500 text-center hover:underline mt-2" > Voltar para o login</Link></div>
         )}

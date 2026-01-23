@@ -28,7 +28,7 @@ export default function Newsletter() {
     return (
         <section className="w-full  pb-[50px]">
             <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 text-center">
-                <h4 className="text-xl font-semibold text-[#5769a9] mb-2"> Inscreva-se na nossa Newsletter</h4>
+                <h4 className="text-xl font-semibold text-azul-principal mb-2"> Inscreva-se na nossa Newsletter</h4>
                 <p className="text-gray-500 text-sm mb-6"> Receba inspirações, novidades e ofertas exclusivas diretamente no seu e-mail.</p>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <Input value={nome} onChange={(e) => setNome(e.target.value)} type="text" placeholder="Seu nome" />

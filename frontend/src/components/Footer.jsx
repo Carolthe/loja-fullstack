@@ -31,7 +31,7 @@ export default function Footer() {
                             <a href="#" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaWhatsapp /></a>
                             <a href="https://www.instagram.com/homehavenliving/?next=%2F"
                                 target="blank" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaInstagram /></a>
-                            <a href="https://www.facebook.com/profile.php?id=61580030390813"
+                            <a href="https://www.facebook.com/profile.php?id=61579923056048"
                                 target="blank" className="w-9 h-9 flex items-center justify-center bg-white text-[#5769a9] rounded-full hover:scale-105 transition"><FaFacebook /></a>
                         </div>
                     </div>
