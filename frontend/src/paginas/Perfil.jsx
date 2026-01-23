@@ -11,7 +11,7 @@ export default function Perfil() {
   }
 
   return (
-    <div className="flex pt-[180px] justify-center px-4">
+    <div className="flex pt-[120px] justify-center px-4">
       <div className="w-full max-w-md py-[40px] px-[18px] bg-white rounded-2xl shadow-md">
 
         <div className="flex items-center gap-4 border-b border-black/10 pb-4">
@@ -44,7 +44,7 @@ export default function Perfil() {
         <div className="mt-8">
           <button
             onClick={handleLogout}
-            className="w-full bg-amarelo-principal text-white py-2 rounded-lg font-bold text-[19px] transition-colors">Terminar sessão</button></div>
+            className="w-full h-[50px] bg-amarelo-principal text-white py-2 rounded-lg font-bold text-[19px] transition-colors">Terminar sessão</button></div>
       </div>
     </div>
   )
