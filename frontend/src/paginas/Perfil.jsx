@@ -11,7 +11,7 @@ export default function Perfil() {
   }
 
   return (
-    <div className="flex pt-[120px] justify-center px-4">
+    <div className="flex pt-[90px] justify-center px-4">
       <div className="w-full max-w-md py-[40px] px-[18px] bg-white rounded-2xl shadow-md">
 
         <div className="flex items-center gap-4 border-b border-black/10 pb-4">
