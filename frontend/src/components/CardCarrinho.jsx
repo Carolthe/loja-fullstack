@@ -23,7 +23,7 @@ export default function CardCarrinho({ product, atualizarCarrinho }) {
   }
   async function removerDoCarrinho() {
     //if (!window.confirm(`Remover ${product.nome}?`)) return;
-    toast.info(`Produto ${product.nome} removido do carrinho.`);
+    toast.success(`Produto ${product.nome} removido do carrinho.`);
 
     try {
       await api.delete(`/carrinho/${usuario.id_usuario}/${product.id_produto}`);

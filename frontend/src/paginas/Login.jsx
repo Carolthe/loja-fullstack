@@ -15,17 +15,17 @@ export default function Login() {
         e.preventDefault()
         try {
             const res = await api.post("/users/login", { email, senha })
-            toast.info("Login realizado com sucesso")
+            toast.success("Login realizado com sucesso")
 
             localStorage.setItem("usuario", JSON.stringify(res.data.usuario))
 
             setTimeout(() => {
         navigate("/");
-      }, 2400);
+      }, 2100);
 
       return
         } catch (error) {
-            toast.info(error.response?.data?.error || "Erro ao fazer login")
+            toast.error(error.response?.data?.error || "Erro ao fazer login")
         }
     }
 

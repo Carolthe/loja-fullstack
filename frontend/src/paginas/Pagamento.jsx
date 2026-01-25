@@ -15,7 +15,7 @@ export default function Pagamento() {
   useEffect(() => {
     async function criarPagamento() {
       if (total <= 0) {
-        alert("Seu carrinho está vazio!");
+        alert("Seu carrinho está vazio.");
         setLoading(false);
         return;
       }
@@ -37,7 +37,7 @@ export default function Pagamento() {
           "Erro ao criar pagamento:",
           error.response?.data || error.message
         );
-        alert("Erro ao criar pagamento. Veja o console para detalhes.");
+        alert("Pagamento em produção.");
       } finally {
         setLoading(false);
       }

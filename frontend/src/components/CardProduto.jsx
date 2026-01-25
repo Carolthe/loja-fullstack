@@ -31,10 +31,10 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   // Alterna o estado do favorito
   async function handleFavoritar() {
     if (!usuario) {
-      toast.info("Você precisa estar logado para favoritar produtos");
+      toast.error("Você precisa estar logado para favoritar produtos");
       setTimeout(() => {
         navigate("/login");
-      }, 2400);
+      }, 2000);
 
       return
     }
@@ -54,7 +54,7 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
           id_produto: id,
         });
         setIsFavorited(true);
-        toast.info("Produto adicionado aos favoritos")
+        toast.success("Produto adicionado aos favoritos")
         
 
       }
@@ -66,10 +66,10 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
   // Adicionar ao carrinho
   async function adicionarCarrinho() {
     if (!usuario) {
-      toast.info("Você precisa estar logado para adicionar produtos ao carrinho")
+      toast.error("Você precisa estar logado para adicionar produtos ao carrinho")
       setTimeout(() => {
         navigate("/login");
-      }, 2400);
+      }, 2100);
 
       return
     }
@@ -81,7 +81,7 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
         quantidade: 1,
       });
 
-      toast.info(`"${title}" foi adicionado ao carrinho`);
+      toast.success(`"${title}" foi adicionado ao carrinho`);
 
     } catch (error) {
       console.error("Erro ao adicionar produto ao carrinho:", error);

@@ -17,7 +17,7 @@ export default function RecuperacaoSenha() {
       await api.post('/users/forgot-password', { email: emailInput });
       toast.info("Se o e-mail existir, você receberá instruções para recuperar a senha.");
     } catch {
-      toast.info("Erro ao solicitar link.");
+      toast.error("Erro ao solicitar link.");
     }
   }
 
@@ -25,10 +25,10 @@ export default function RecuperacaoSenha() {
     if (senha !== confSenha) return toast.error("Senhas não são iguais");
     try {
       await api.post("/users/reset-password", { email, token, senha });
-      toast.info("Senha alterada com sucesso");
+      toast.success("Senha alterada com sucesso");
       window.location.href = "/login";
     } catch {
-      toast.info("Erro ao resetar senha.");
+      toast.error("Erro ao resetar senha.");
     }
   }
 

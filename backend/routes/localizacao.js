@@ -15,7 +15,7 @@ router.post('/:id_usuario', async (req, res) => {
         );
 
         if (rows.length > 0) {
-            return res.status(400).json({ error: "Localização já existe. Use PUT para atualizar." });
+            return res.status(400).json({ error: "Localização já existe. Atualizar." });
         }
 
         await ligacao.query(
@@ -50,7 +50,7 @@ router.put('/:id_usuario', async (req, res) => {
             return res.status(404).json({ error: "Localização não encontrada." });
         }
 
-        res.json({ message: "Localização atualizada com sucesso!" });
+        res.json({ message: "Localização OK!" });
 
     } catch (err) {
         console.error(err);

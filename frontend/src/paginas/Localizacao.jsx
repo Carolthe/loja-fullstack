@@ -24,10 +24,10 @@ export default function Localizacao() {
   // Carregar localização existente
   useEffect(() => {
     if (!userId) {
-      toast.info("Você precisa estar logado.");
+      toast.error("Você precisa estar logado.");
       setTimeout(() => {
         navigate("/login");
-      }, 2400);
+      }, 2100);
     
       return;
     }
@@ -81,7 +81,7 @@ export default function Localizacao() {
       toast.info(res.data.message);
       setTimeout(() => {
         navigate("/pagamento");
-      }, 2400);
+      }, 2100);
 
 
     } catch (err) {
