@@ -81,7 +81,7 @@ export default function CardProduto({ id, imgProduct, title, descricaoProduto, p
         quantidade: 1,
       });
 
-      toast.success(`"${title}" foi adicionado ao carrinho`);
+      toast.success(`${title} foi adicionado ao carrinho`);
 
     } catch (error) {
       console.error("Erro ao adicionar produto ao carrinho:", error);
