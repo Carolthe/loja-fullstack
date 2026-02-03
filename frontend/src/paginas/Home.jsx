@@ -14,7 +14,7 @@ import cozinha from "../imagensCategorias/cozinha.png";
 import banheiro from "../imagensCategorias/banheiro.png";
 import escritorio from "../imagensCategorias/escritorio.png";
 import CarrinhoVazio from "../components/CarrinhoVazio";
-
+import homeDesktop from "../imgDesktop/homeDesktop.jpg";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([]);
@@ -40,7 +40,8 @@ export default function Home() {
   return (
     <div className="bg-cor-de-fundo">
       <div className="relative">
-        <img src={home} alt="Home" className="" />
+        <img src={home} alt="Home" className="block md:hidden" />
+        <img src={homeDesktop} alt="Home" className="hidden md:block w-full" />
         <div className="absolute inset-0 mt-[145px] text-center px-4">
           <p className="text-[26px] font-semibold text-[#ffffff]">Loja HomeHaven</p>
           <p className="mt-1 text-[15px] text-gray-200">Não perca a oportunidade de ter conforto e elegancia em cada canto da sua casa</p>
@@ -51,15 +52,15 @@ export default function Home() {
         </div>
       </div>
       <div className="text-center items-center flex flex-col justify-center">
-        <h3 className="mt-[px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[35px] md:font-bold md:mb-[2px]">
+        <h3 className="mt-[px] mb-[5px] text-[22px] font-semibold md:mt-[50px] md:text-[30px] md:font-bold md:mb-[2px]">
           Produtos em Destaque
         </h3>
-        <p className="px-4.5 text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[18px]">
+        <p className="px-4.5 text-zinc-600 mb-[15px] md:w-[900px] md:mb-[50px] md:text-[16px]">
           Compre nossos produtos mais vendidos e tenha certeza de qualidade!
         </p>
       </div>
       {/* 🔹 Produtos ordenados por preço */}
-      <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]">
+      <div className="mx-[10px] flex justify-center flex-wrap gap-[10px] md:mx-[250px] md:gap-x-[35px]">
         {produtos.length === 0 ? (
           <CarrinhoVazio text="Nenhum Produto Encontrado" />
         ) : (
@@ -84,7 +85,7 @@ export default function Home() {
         Categorias Disponíveis
       </p>
 
-      <div className="flex overflow-x-auto gap-[25px] mx-[20px]">
+      <div className="flex overflow-x-auto md:justify-center gap-[25px] mx-[20px]">
         <Link to="/quarto">
           <CardCategoria imgCategory={quarto} tituloCategory="Quarto" />
         </Link>

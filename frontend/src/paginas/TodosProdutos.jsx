@@ -43,14 +43,14 @@ const produtosFiltrados = produtos.filter(produto => {
 
   return (
     <div>
-      <div className="bg-[#5769a9] pt-[8px] w-full h-[75px] flex justify-center items-center shadow-md">
+      <div className="bg-[#5769a9] pt-[8px] w-full h-[75px] flex justify-center items-center shadow-md md:h-[100px] ">
   <div className="relative w-[90%] max-w-[320px]">
     <input
       type="text"
       placeholder="O que você está procurando?"
       value={busca}
       onChange={(e) => setBusca(e.target.value)}
-      className="w-full h-[45px] pl-12 rounded-full border border-gray-300 text-sm text-gray-600 placeholder-gray-400 focus:outline-none"
+      className="w-full h-[45px] pl-12 rounded-full border border-gray-300 text-sm text-gray-600 placeholder-gray-400 focus:outline-none "
     />
     <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-azul-principal text-lg" />
   </div>
@@ -76,12 +76,12 @@ const produtosFiltrados = produtos.filter(produto => {
         </div>
       )}
 
-      <p className="text-font-cinza ml-[10px]">Bem-vindo / Todos os Produtos </p>
+      <p className="text-font-cinza ml-[10px] md:ml-[50px] ">Bem-vindo / Todos os Produtos </p>
 
       {produtosFiltrados.length === 0 ? (
          <CarrinhoVazio text="Nenhum Produto Encontrado" />
       ) : (
-        <div className="mt-[10px] mx-[10px] flex justify-center flex-wrap gap-[10px]">
+        <div className="mt-[10px] mx-[10px] flex justify-center flex-wrap gap-[10px] md:mx-[100px] md:mt-[30px] md:gap-[35px] md:mb-[50px]">
           {produtosFiltrados.map((produto) => (
             <CardProduto key={produto.id_produto}
               id={produto.id_produto} 

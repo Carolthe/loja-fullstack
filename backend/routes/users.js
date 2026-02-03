@@ -54,7 +54,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
 // Solicitar link de recuperação de senha
 router.post('/forgot-password', async (req, res) => {
     const { email } = req.body;

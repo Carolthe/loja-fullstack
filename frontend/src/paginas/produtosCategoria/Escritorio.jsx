@@ -38,8 +38,8 @@ export default function Escritorio() {
         <div>
             {/* <CategoryDescription img={escritorioLogo} />
              */}
-              <h1 className="mt-[40px] text-center font-semibold text-[20px]">Produtos para Escritório</h1>
-            <div className="mb-[30px] flex justify-around mx-[35px] pt-[20px]">
+              <h1 className="mt-[40px] text-center font-semibold text-[20px] md:text-[25px]">Produtos para Escritório</h1>
+            <div className="mb-[30px] flex justify-around mx-[35px] pt-[20px] md:mx-[500px]">
                 <Link to="/sala">
                     <img className="w-[30px] h-[30px]" src={sala2} />
                 </Link>
@@ -56,7 +56,7 @@ export default function Escritorio() {
             {produtos.length === 0 ? (
                 <CarrinhoVazio text="Nenhum Produto Encontrado" />
             ) : (
-                <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px]" >
+                <div className="mx-[10px] mt-[15px] flex justify-center flex-wrap gap-[10px] md:gap-[35px] md:mx-[150px] md:mb-[60px]" >
                     {produtos.map((produto) => (
                         <CardProduto
                             key={produto.id_produto}

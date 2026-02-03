@@ -26,16 +26,16 @@ export default function Newsletter() {
     }
 
     return (
-        <section className="w-full  pb-[50px]">
-            <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 text-center">
+        <section className="w-full md:mt-[45px] pb-[50px]">
+            <div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 text-center ">
                 <h4 className="text-xl font-semibold text-azul-principal mb-2"> Inscreva-se na nossa Newsletter</h4>
-                <p className="text-gray-500 text-sm mb-6"> Receba inspirações, novidades e ofertas exclusivas diretamente no seu e-mail.</p>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <p className="text-gray-500 text-sm mb-6 md:mx-[20px]"> Receba inspirações, novidades e ofertas exclusivas diretamente no seu e-mail.</p>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:items-center">
                     <Input value={nome} onChange={(e) => setNome(e.target.value)} type="text" placeholder="Seu nome" />
                     <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Seu e-mail"/>
-                    <button type="submit" className="w-[330px] mt-2 h-[50px] rounded-md bg-[#5769a9] text-white font-semibold hover:bg-[#46589a] transitionnduration-200">Inscrever-se</button>
+                    <button type="submit" className="w-[330px] md:flex md:justify-center md:items-center mt-2 h-[50px] rounded-md bg-[#5769a9] text-white font-semibold hover:bg-[#46589a] transitionnduration-200 md:w-[500px]">Inscrever-se</button>
                 </form>
-                <p className="text-xs text-gray-400 mt-4">Prometemos não enviar spam. Caso queira cancelar, mande uma resposta escrito (Cancelar).</p>
+                <p className="text-xs text-gray-400 mt-4 md:mx-[20px]">Prometemos não enviar spam. Caso queira cancelar, mande uma resposta escrito (Cancelar).</p>
             </div>
         </section>
     )

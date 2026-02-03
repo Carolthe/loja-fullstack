@@ -10,7 +10,6 @@ if (!process.env.MYSQL_PUBLIC_URL) {
 // Lê a URL do Railway
 const dbUrl = new URL(process.env.MYSQL_PUBLIC_URL);
 
-
 // Cria pool de conexões
 const pool = mysql.createPool({
   host: dbUrl.hostname,           // host do banco

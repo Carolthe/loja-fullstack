@@ -30,7 +30,7 @@ export default function Credibilidade() {
   ];
 
   return (
-    <section className="w-full mt-[30px] mb-[40px]">
+    <section className="block md:hidden w-full mt-[30px] mb-[40px]">
       <div
         className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-[7.5vw] scroll-px-[7.5vw]">
         {items.map((item, index) => (

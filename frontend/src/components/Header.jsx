@@ -40,16 +40,17 @@ export default function Header() {
   }, [usuario]);
 
   return (
-    <div className="fixed z-50 flex items-center justify-between px-[16px] bg-azul-principal w-[100vw] md:w-[100%] h-[65px] text-white md:px-[60px] md:h-[75px]">
+    <div className="fixed z-50 flex items-center justify-between px-[16px] bg-azul-principal w-[100vw]  h-[65px] text-white md:px-[70px] md:h-[65px]">
       <Navbar />
       <Link to="/" className="flex items-center gap-[8px]">
-        <LiaHomeSolid className="text-[18px] md:text-[40px]" />
-        <p className="text-[14px] md:text-[25px]">HOMEHAVEN</p>
+        <LiaHomeSolid className="text-[18px] md:text-[20px]" />
+        <p className="text-[14px] md:text-[15px]">HOMEHAVEN</p>
       </Link>
-      <div className="md:flex md:gap-[30px] hidden">
-        <p>Todos os Produtos</p>
-        <p>Minhas Encomendas</p>
-        <p>Contactar</p>
+      <div className="md:flex md:gap-[30px] hidden md:text-[15px]">
+        <Link to="/">Início</Link>
+        <Link to="/produtos">Produtos</Link>
+        <Link to="/pedidos">Minhas Encomendas</Link>
+        <Link to="/contato">Contacto</Link>
       </div>
       <div className="flex items-center gap-[6px] text-[22px]">
         {usuario ? (
