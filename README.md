@@ -2,7 +2,7 @@
 
 # Loja FullStack
 
-HomeHaven Loja Online de Produtos para casa, frontend feito em React com TailwindCSS e backend feito com Node.js/Express e banco de dados relacional, foi utilizado também encripitação de senha com bycript, autenticação através do token JWT e envio de e-mail com nodeemail.
+Loja online de produtos para casa, com frontend desenvolvido em React e TailwindCSS, e backend em Node.js com Express, utilizando banco de dados relacional. O projeto conta com criptografia de senhas com bcrypt, autenticação via tokens JWT e envio de e-mails utilizando Nodemailer.
 
 Link do projeto: [loja online](https://loja-fullstack-ll32.vercel.app/)
 
